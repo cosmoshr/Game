@@ -1,12 +1,11 @@
 {
   "name": "base_game",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "repository": "https://github.com/cosmoshr/Base-Game",
-  "license": "GPL3",
+  "license": "GPL-3.0-or-later",
   "description": "The base game repository",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint src --fix",
     "stylelint": "stylelint src/sass/**/*.scss",
     "lint": "yarn eslint && yarn stylelint",
@@ -14,12 +13,12 @@
     "serve": "webpack-dev-server -d --progress --color --config config/webpack.dev.js --host 0.0.0.0"
   },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "breakpoint-sass": "^2.7.1",
     "global": "^4.3.2",
-    "pixi.js": "^5.0.0"
+    "pixi.js": "^5.0.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/core": "^7.0.0-beta.49",
     "@babel/preset-env": "^7.0.0-beta.49",
     "autoprefixer": "^8.6.2",
