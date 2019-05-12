@@ -1,11 +1,9 @@
 import { Loader, Sprite } from 'pixi.js'
 
 export default class extends Sprite {
-  constructor(x, y, type, size, id) {
+  constructor(x, y, type, size) {
     const assetName = `Planets_${type}`
     super(Loader.shared.resources[assetName].texture)
-
-    this.id = id
 
     this.width = size
     this.height = size

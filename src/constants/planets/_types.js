@@ -1,4 +1,5 @@
 export default [
   'Habitital_Planet',
-  'Rocky'
+  'Rocky',
+  'Gas'
 ]

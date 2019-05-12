@@ -1,6 +1,5 @@
 import planets from '../constants/planets/_types'
 import resources from '../constants/resources/_types'
-import stars from '../constants/stars/_types'
 
 const texturePrefix = 'assets/img'
 
@@ -22,12 +21,24 @@ resources.forEach(element => {
   textures.push(texture)
 })
 
-stars.forEach(element => {
+/* stars.forEach(element => {
   const texture = {
     name: `Stars_${element}`,
     url: `${texturePrefix}/Stars/${element}.png`
   }
   textures.push(texture)
+}) */
+
+//! Probibly could be improved somehow
+textures.push({
+  name: 'Atmosphere',
+  url: `${texturePrefix}/Atmosphere1.svg`
+})
+
+//! Temprary code
+textures.push({
+  name: 'Stars_Sun',
+  url: `${texturePrefix}/stars/Sun1.png`
 })
 
 export default textures

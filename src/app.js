@@ -1,14 +1,26 @@
+/* eslint-disable */
 import { onDragStart, onDragMove, onDragEnd } from './handlers/movement'
 
-import Generator from './generator'
+import Generator from './generator/generator.worker'
+import Star from './classes/star'
+import Planet from './classes/planet';
 
 export default class {
   constructor(app) {
     this.app = app
 
-    // eslint-disable-next-line no-unused-vars
-    console.log('Gen')
-    this.generator = new Generator(app)
+    // ! Test
+    let test = new Star(100, 100, 50)
+    let test2 = new Planet(100, 50, "Rocky", 50)
+    console.log(test)
+    this.app.stage.addChild(test)
+    this.app.stage.addChild(test2)
+    const generator = new Generator()
+    generator.postMessage(0)
+    generator.onmessage = (e) => {
+      console.log(e.data)
+      console.log("End")
+    }
 
     this.initMovment()
   }

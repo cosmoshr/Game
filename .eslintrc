@@ -15,7 +15,10 @@
     }
   },
   "rules": {
+    "no-plusplus": 0,
+    "one-var": 0,
     "linebreak-style": 0,
+    "no-mixed-operators": 0,
     "semi": ["error", "never"],
     "comma-dangle": ["error", "never"],
     "no-restricted-globals": "off",
