@@ -33,8 +33,8 @@ export default class {
 
     this.generatePlanets()
   }
+  // eslint-disable-next-line class-methods-use-this
   generateType() {
-    this.useless = 1
     const types = []
     let type
 

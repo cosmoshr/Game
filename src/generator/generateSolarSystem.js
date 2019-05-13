@@ -5,7 +5,7 @@ const solarSystems = []
 export default (worldSize, maxSolarSystemSize, minSolarSystemSize, solarSystemSpacing) => {
   const maxSolarSystems = Math.floor((worldSize.width * worldSize.height) / ((maxSolarSystemSize + solarSystemSpacing) ** 2))
   const maxSSSqu = maxSolarSystems ** 1.5
-  console.log(maxSolarSystems)
+
   for (let i = 0; i < maxSSSqu; i++) {
     const solarSystem = Math.floor(Math.random() * (maxSolarSystemSize - minSolarSystemSize)) + minSolarSystemSize
     const solarSystemPos = { x: Math.floor(Math.random() * worldSize.width), y: Math.floor(worldSize.height * Math.random()) }

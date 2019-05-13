@@ -1,5 +1,6 @@
-import { Loader, Container, Sprite } from 'pixi.js'
+import { Loader, Container, Sprite, Texture } from 'pixi.js'
 
+// eslint-disable-next-line no-unused-vars
 class Atmosphere extends Sprite {
   constructor(x, y, r) {
     super(Loader.shared.resources.Atmosphere.texture)
@@ -16,11 +17,15 @@ class Atmosphere extends Sprite {
 
 class SunCenter extends Sprite {
   constructor(x, y, r) {
-    super(Loader.shared.resources.Stars_Sun.texture)
+    const texture = Texture.from('assets/img/Stars/Sun1.png')
+    super(texture)
 
     this.x = x
     this.y = y
     this.r = r
+
+    this.width = r
+    this.height = r
   }
 }
 
@@ -35,7 +40,7 @@ export default class extends Container {
     this.position.x = x
     this.position.y = y
 
-    this.addChild(new Atmosphere())
+    // this.addChild(new Atmosphere())
     this.addChild(new SunCenter(x, y, size))
   }
 }

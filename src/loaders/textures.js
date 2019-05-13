@@ -8,7 +8,7 @@ const textures = []
 planets.forEach(element => {
   const texture = {
     name: `Planets_${element}`,
-    url: `${texturePrefix}/Planets/${element}.png`
+    url: `${texturePrefix}/Planets/${element}.pngs`
   }
   textures.push(texture)
 })

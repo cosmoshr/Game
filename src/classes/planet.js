@@ -1,14 +1,16 @@
-import { Loader, Sprite } from 'pixi.js'
+import { Sprite, Texture } from 'pixi.js'
 
 export default class extends Sprite {
-  constructor(x, y, type, size) {
-    const assetName = `Planets_${type}`
-    super(Loader.shared.resources[assetName].texture)
+  constructor(planet) {
+    const texture = Texture.from('/assets/img/planets/Habitital_Planet.png')
+    super(texture)
 
-    this.width = size
-    this.height = size
+    this.width = planet.size
+    this.height = planet.size
 
-    this.x = x
-    this.y = y
+    this.x = planet.path
+    this.y = planet.path
+    this.position.x = this.x
+    this.position.y = this.y
   }
 }

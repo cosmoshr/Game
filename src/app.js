@@ -4,26 +4,23 @@ import { onDragStart, onDragMove, onDragEnd } from './handlers/movement'
 import Generator from './generator/generator.worker'
 import Star from './classes/star'
 import Planet from './classes/planet';
+import { Graphics } from 'pixi.js';
+
+import Renderer from "renderer";
 
 export default class {
-  constructor(app) {
-    this.app = app
+  constructor() {
+    this.app = new Renderer()
+    this.app.gameLoop = this.update
 
-    // ! Test
-    let test = new Star(100, 100, 50)
-    let test2 = new Planet(100, 50, "Rocky", 50)
-    console.log(test)
-    this.app.stage.addChild(test)
-    this.app.stage.addChild(test2)
     const generator = new Generator()
     generator.postMessage(0)
-    generator.onmessage = (e) => {
-      console.log(e.data)
-      console.log("End")
-    }
+    generator.onmessage = (cosmos) => this.app.addCosmos(cosmos.data)
 
     this.initMovment()
   }
+
+  update() {}
 
   initMovment() {
     // Make events triggure
