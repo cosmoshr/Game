@@ -14,7 +14,7 @@ export default class extends Application {
     this.gameLoop = this.ticker.add
 
     const background = new Graphics()
-    background.beginFill(0x000050)
+    background.beginFill(0x000010)
     background.drawRect(-100000, -100000, 200000, 200000)
     background.endFill()
     this.stage.addChild(background)

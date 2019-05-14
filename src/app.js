@@ -3,10 +3,9 @@ import { onDragStart, onDragMove, onDragEnd } from './handlers/movement'
 
 import Generator from './generator/generator.worker'
 import Star from './classes/star'
-import Planet from './classes/planet';
-import { Graphics } from 'pixi.js';
+import Planet from './classes/planet'
 
-import Renderer from "renderer";
+import Renderer from "renderer"
 
 export default class {
   constructor() {
