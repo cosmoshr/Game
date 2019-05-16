@@ -4,7 +4,7 @@ const minPlanetSpacing = 100
 const maxPlanetSpacing = 200
 
 export default class {
-  sunSize = Math.floor(Math.random() * 10) + 10
+  sunSize = Math.floor(Math.random() * 500) + 100
   planets = []
 
   constructor(x, y, size) {
@@ -26,41 +26,44 @@ export default class {
           path: planetPathSize
         }
         usedSpace = planetPathSize
-      } else {
+      } else
         overflow = true
-      }
     }
 
     this.generatePlanets()
   }
   // eslint-disable-next-line class-methods-use-this
-  generateType() {
+  generateType(path) {
     const types = []
     let type
 
     planetTypes.forEach(name => {
       // eslint-disable-next-line import/no-dynamic-require, global-require
       const planet = require(`../constants/planets/${name}`)
-      const id = types.length
 
-      types[id] = planet
-      types[id].name = name
+      if (planet.zone[0] < path && planet.zone[1] > path) {
+        const id = types.length
+
+        types[id] = planet
+        types[id].name = name
+      }
     })
 
     if (types.length !== 1) {
       const rand = Math.floor(Math.random() * types.length)
       type = types[rand]
-    } else {
+    } else
       // eslint-disable-next-line prefer-destructuring
       type = types[0]
-    }
+
     return type
   }
 
   generatePlanets() {
     this.planets.forEach((planet, i) => {
-      const type = this.generateType()
+      const type = this.generateType(planet.path)
       const size = Math.random() * (type.default.size[1] - type.default.size[0]) + type.default.size[0]
+      const degrees = Math.random() * 360
 
       const resources = {}
 
@@ -74,7 +77,8 @@ export default class {
         path: planet.path,
         type,
         size,
-        resources
+        resources,
+        degrees
       }
     })
   }

@@ -18,10 +18,22 @@ Math.circleIntersect = (solarSystemPos, solarSystem, solarSystems, solarSystemSp
     solarSystemPos.x - radius1 > solarSystems.x + radius2 ||
           solarSystems.x - radius2 > solarSystemPos.x + radius1 ||
           solarSystemPos.y + radius1 < solarSystems.y - radius2 ||
-          solarSystems.y + radius2 < solarSystemPos.y - radius1) {
+          solarSystems.y + radius2 < solarSystemPos.y - radius1)
     return false
-  }
+
 
   return true
 }
 
+/**
+ * Converts degrees and radius of a circle to x and y coordernates
+ * @param {x} The x coordernate at the center of the circle
+ * @param {y} The y coordernate at the center of the circle
+ * @param {rad} The radius of the circle
+ * @param {degrees} The degrees to the point you are trying to get
+ * @returns {Object} The x and y coordernates
+ */
+Math.genPosOnCircle = (x, y, rad, degrees) => ({
+  x: x + rad * Math.sin(degrees),
+  y: y + rad * Math.cos(degrees)
+})

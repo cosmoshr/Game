@@ -4,5 +4,6 @@ export default {
   zone: [700, 5000],
   resources: {
     xlkcvhsLKdgh: [89, 78]
-  }
+  },
+  numberOfTextures: 1
 }

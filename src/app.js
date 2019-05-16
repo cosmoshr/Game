@@ -2,10 +2,9 @@
 import { onDragStart, onDragMove, onDragEnd } from './handlers/movement'
 
 import Generator from './generator/generator.worker'
-import Star from './classes/star'
-import Planet from './classes/planet'
 
-import Renderer from "renderer"
+import Renderer from 'renderer'
+import { init as initTextures } from './loaders/textures';
 
 export default class {
   constructor() {
@@ -15,6 +14,8 @@ export default class {
     const generator = new Generator()
     generator.postMessage(0)
     generator.onmessage = (cosmos) => this.app.addCosmos(cosmos.data)
+
+    initTextures()
 
     this.initMovment()
   }

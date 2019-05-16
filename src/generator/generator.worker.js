@@ -2,11 +2,11 @@ import BuildSolarSystem from './buildSolarSystem.worker'
 import generateSolarSystem from './generateSolarSystem'
 
 const worldSize = {
-  width: 10000,
-  height: 10000
+  width: 50000,
+  height: 50000
 }
 
-const maxSolarSystemSize = 2000
+const maxSolarSystemSize = 5000
 const minSolarSystemSize = 1000
 const solarSystemSpacing = 200
 
@@ -23,9 +23,8 @@ const start = () => {
     worker.onmessage = (content) => {
       generatedSolarSystem[index] = content.data
       SolarSystemWebWorkers--
-      if (SolarSystemWebWorkers === 0) {
+      if (SolarSystemWebWorkers === 0)
         postMessage(generatedSolarSystem)
-      }
     }
   })
 }

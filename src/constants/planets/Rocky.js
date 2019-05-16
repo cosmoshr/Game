@@ -7,5 +7,6 @@ export default {
     rock: [1000, 2000],
     food: [0, 5],
     water: [0, 10]
-  }
+  },
+  numberOfTextures: 1
 }

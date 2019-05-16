@@ -24,6 +24,7 @@
     "no-restricted-globals": "off",
     "arrow-parens": 0,
     "max-len": 0,
+    "curly": ["error", "multi"],
     "import/no-unresolved": [
       2,
       {
