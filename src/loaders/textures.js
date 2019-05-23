@@ -18,8 +18,7 @@ export function init() {
   planetTypes.forEach(planetName => {
     // eslint-disable-next-line import/no-dynamic-require, global-require
     const planet = require(`../constants/planets/${planetName}.js`).default
-    for (let i = 0; i < planet.numberOfTextures; i++)
-      textures[textures.length] = {
+    for (let i = 0; i < planet.numberOfTextures; i++) textures[textures.length] = {
         name: `Planets_${planetName}_${i}`,
         url: `/assets/img/Planets/${planetName}/${i}.png`
       }
@@ -27,4 +26,3 @@ export function init() {
 }
 
 export default textures
-

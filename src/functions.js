@@ -15,11 +15,10 @@ Math.circleIntersect = (solarSystemPos, solarSystem, solarSystems, solarSystemSp
     radius2 = solarSystems.r + solarSystemSpacing
 
   if (
-    solarSystemPos.x - radius1 > solarSystems.x + radius2 ||
-          solarSystems.x - radius2 > solarSystemPos.x + radius1 ||
-          solarSystemPos.y + radius1 < solarSystems.y - radius2 ||
-          solarSystems.y + radius2 < solarSystemPos.y - radius1)
-    return false
+    solarSystemPos.x - radius1 > solarSystems.x + radius2
+          || solarSystems.x - radius2 > solarSystemPos.x + radius1
+          || solarSystemPos.y + radius1 < solarSystems.y - radius2
+          || solarSystems.y + radius2 < solarSystemPos.y - radius1) return false
 
 
   return true
