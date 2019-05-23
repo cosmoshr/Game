@@ -1,4 +1,4 @@
-import { Loader, Container, Sprite, Texture } from 'pixi.js'
+import { Loader, Container, Sprite } from 'pixi.js'
 
 // eslint-disable-next-line no-unused-vars
 class Atmosphere extends Sprite {
@@ -17,8 +17,7 @@ class Atmosphere extends Sprite {
 
 class SunCenter extends Sprite {
   constructor(x, y, r) {
-    const texture = Texture.from('assets/img/Stars/Sun1.png')
-    super(texture)
+    super(Loader.shared.resources.sun.texture)
 
     this.x = x
     this.y = y

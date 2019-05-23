@@ -41,7 +41,7 @@ export default class {
       // eslint-disable-next-line import/no-dynamic-require, global-require
       const planet = require(`../constants/planets/${name}`)
 
-      if (planet.zone[0] < path && planet.zone[1] > path) {
+      if (planet.default.zone[0] < path && planet.default.zone[1] > path) {
         const id = types.length
 
         types[id] = planet

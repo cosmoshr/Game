@@ -33,7 +33,12 @@ Math.circleIntersect = (solarSystemPos, solarSystem, solarSystems, solarSystemSp
  * @param {degrees} The degrees to the point you are trying to get
  * @returns {Object} The x and y coordernates
  */
-Math.genPosOnCircle = (x, y, rad, degrees) => ({
-  x: x + rad * Math.sin(degrees),
-  y: y + rad * Math.cos(degrees)
-})
+Math.genPosOnCircle = (centerX, centerY, rad, degrees) => {
+  const x = centerX + rad * Math.sin(degrees)
+  const y = centerY + rad * Math.cos(degrees)
+
+  return {
+    x,
+    y
+  }
+}

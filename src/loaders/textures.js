@@ -1,33 +1,30 @@
-import planets from '../constants/planets/_types'
+import planetTypes from '../constants/planets/_types'
 
-const texturePrefix = '/assets/img'
+const textures = [
+  {
+    name: 'sun',
+    url: '/assets/img/Stars/Sun1.png'
+  },
+  {
+    name: 'planet',
+    url: '/assets/img/Planets/Rocky/0.png'
+  }
+]
 
-const textures = []
-
+/**
+ * Genterate the texture loader array
+ */
 export function init() {
-  textures.push(
-    {
-      name: 'Stars_Sun',
-      url: `${texturePrefix}/stars/Sun1.png`
-    },
-    {
-      name: 'Atmosphere',
-      url: `${texturePrefix}/Atmosphere1.svg`
-    }
-  )
-  planets.forEach(element => {
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-    const planet = require(`../constants/planets/${element}`)
-    for (let i = 0; i < planet.default.numberOfTextures; i++) {
-      const texture = {
-        name: `Planets_${element}_${i}`,
-        url: `${texturePrefix}/Planets/${element}/${i}.png`
+  planetTypes.forEach(planetName => {
+    // eslint-disable-next-line import/no-dynamic-require, global-require
+    const planet = require(`../constants/planets/${planetName}.js`).default
+    for (let i = 0; i < planet.numberOfTextures; i++)
+      textures[textures.length] = {
+        name: `Planets_${planetName}_${i}`,
+        url: `/assets/img/Planets/${planetName}/${i}.png`
       }
-      textures.push(texture)
-    }
   })
 }
 
-export default function () {
-  return textures
-}
+export default textures
+

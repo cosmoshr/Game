@@ -1,5 +1,8 @@
-import { Application, Graphics } from 'pixi.js'
+import { Application, Graphics, Loader } from 'pixi.js'
 import SolarSystem from './classes/solarSystem'
+
+import textures, { init as initTextures } from './loaders/textures'
+import Generator from './generator/generator.worker'
 
 export default class extends Application {
   constructor() {
@@ -20,6 +23,15 @@ export default class extends Application {
     this.stage.addChild(background)
 
     document.onkeydown = this.keyManager.bind(this)
+
+    initTextures()
+    Loader.shared.add(textures).load(this.loaded.bind(this))
+  }
+
+  loaded() {
+    const generator = new Generator()
+    generator.postMessage(0)
+    generator.onmessage = (cosmos) => this.addCosmos(cosmos.data)
   }
 
   keyManager(e) {

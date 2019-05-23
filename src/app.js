@@ -1,21 +1,13 @@
 /* eslint-disable */
 import { onDragStart, onDragMove, onDragEnd } from './handlers/movement'
 
-import Generator from './generator/generator.worker'
-
 import Renderer from 'renderer'
-import { init as initTextures } from './loaders/textures';
+// import { init as initTextures } from './loaders/textures';
 
 export default class {
   constructor() {
     this.app = new Renderer()
     this.app.gameLoop = this.update
-
-    const generator = new Generator()
-    generator.postMessage(0)
-    generator.onmessage = (cosmos) => this.app.addCosmos(cosmos.data)
-
-    initTextures()
 
     this.initMovment()
   }

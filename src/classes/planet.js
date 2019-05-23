@@ -1,18 +1,12 @@
-import { Sprite, Texture } from 'pixi.js'
-import textures from '../loaders/textures'
-
+import { Sprite, Loader } from 'pixi.js'
 import '../functions'
 
 export default class extends Sprite {
   constructor(planet) {
     const rand = Math.floor(Math.random() * planet.type.default.numberOfTextures)
-    let texture
-    textures().forEach(element => {
-      if (element.name === `Planets_${planet.type.name}_${rand}`)
-        texture = Texture.from(element.url)
-    })
+    const textureName = `Planets_${planet.type.name}_${rand}`
 
-    super(texture)
+    super(Loader.shared.resources[textureName].texture)
 
     this.r = planet.path
     this.d = planet.degrees
@@ -20,12 +14,9 @@ export default class extends Sprite {
     this.width = planet.size
     this.height = planet.size
 
-    // const pos = Math.genPosOnCircle(0, 0, this.r, this.degrees)
+    const pos = Math.genPosOnCircle(0, 0, this.r, this.d)
 
-    // this.position.x = pos.x
-    // this.position.y = pos.y
-
-    this.position.x = planet.path
-    this.position.y = planet.path
+    this.position.x = pos.x
+    this.position.y = pos.y
   }
 }
