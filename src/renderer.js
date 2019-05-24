@@ -20,6 +20,7 @@ export default class extends Application {
     background.beginFill(0x000010)
     background.drawRect(-100000, -100000, 200000, 200000)
     background.endFill()
+    background.alpha = 0
     this.stage.addChild(background)
 
     document.onkeydown = this.keyManager.bind(this)

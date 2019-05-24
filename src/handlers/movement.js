@@ -1,3 +1,5 @@
+// TODO: Pinch to zoom
+
 import { Point } from 'pixi.js'
 
 export function onDragStart(event) {
