@@ -1,33 +1,28 @@
-import planets from '../constants/planets/_types'
-import resources from '../constants/resources/_types'
-import stars from '../constants/stars/_types'
+import planetTypes from '../constants/planets/_types'
 
-const texturePrefix = 'assets/img'
-
-const textures = []
-
-planets.forEach(element => {
-  const texture = {
-    name: `Planets_${element}`,
-    url: `${texturePrefix}/Planets/${element}.png`
+const textures = [
+  {
+    name: 'sun',
+    url: '/assets/img/Stars/Sun1.png'
+  },
+  {
+    name: 'planet',
+    url: '/assets/img/Planets/Rocky/0.png'
   }
-  textures.push(texture)
-})
+]
 
-resources.forEach(element => {
-  const texture = {
-    name: `Resources_${element}`,
-    url: `${texturePrefix}/Resources/${element}.png`
-  }
-  textures.push(texture)
-})
-
-stars.forEach(element => {
-  const texture = {
-    name: `Stars_${element}`,
-    url: `${texturePrefix}/Stars/${element}.png`
-  }
-  textures.push(texture)
-})
+/**
+ * Genterate the texture loader array
+ */
+export function init() {
+  planetTypes.forEach(planetName => {
+    // eslint-disable-next-line import/no-dynamic-require, global-require
+    const planet = require(`../constants/planets/${planetName}.js`).default
+    for (let i = 0; i < planet.numberOfTextures; i++) textures[textures.length] = {
+        name: `Planets_${planetName}_${i}`,
+        url: `/assets/img/Planets/${planetName}/${i}.png`
+      }
+  })
+}
 
 export default textures

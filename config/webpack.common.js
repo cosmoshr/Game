@@ -42,9 +42,6 @@ const modules = {
             ],
           },
         },
-        {
-          loader: 'eslint-loader',
-        },
       ],
     },
     {
@@ -115,6 +112,10 @@ const modules = {
       test: /\.html$/,
       exclude: /node_modules/,
       loader: 'raw-loader',
+    },
+    {
+      test: /\.worker\.js$/,
+      use: { loader: 'worker-loader' }
     },
   ],
 };

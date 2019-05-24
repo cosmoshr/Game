@@ -15,11 +15,12 @@
   "dependencies": {
     "breakpoint-sass": "^2.7.1",
     "global": "^4.3.2",
-    "pixi.js": "^5.0.2"
+    "pixi.js": "^5.0.2",
+    "worker-loader": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/core": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.0.0-beta.49",
     "autoprefixer": "^8.6.2",
     "babel-eslint": "^8.2.3",

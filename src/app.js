@@ -1,17 +1,18 @@
+/* eslint-disable */
 import { onDragStart, onDragMove, onDragEnd } from './handlers/movement'
 
-import Generator from './generator'
+import Renderer from 'renderer'
+// import { init as initTextures } from './loaders/textures';
 
 export default class {
-  constructor(app) {
-    this.app = app
-
-    // eslint-disable-next-line no-unused-vars
-    console.log('Gen')
-    this.generator = new Generator(app)
+  constructor() {
+    this.app = new Renderer()
+    this.app.gameLoop = this.update
 
     this.initMovment()
   }
+
+  update() {}
 
   initMovment() {
     // Make events triggure
