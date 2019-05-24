@@ -1,4 +1,6 @@
-import { Sprite, Loader, Container, Graphics } from 'pixi.js'
+import {
+ Sprite, Loader, Container, Graphics
+} from 'pixi.js'
 import '../functions'
 
 class RoundedRectangle extends Graphics {
