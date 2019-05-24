@@ -23,8 +23,7 @@ const start = () => {
     worker.onmessage = (content) => {
       generatedSolarSystem[index] = content.data
       SolarSystemWebWorkers--
-      if (SolarSystemWebWorkers === 0)
-        postMessage(generatedSolarSystem)
+      if (SolarSystemWebWorkers === 0) postMessage(generatedSolarSystem)
     }
   })
 }

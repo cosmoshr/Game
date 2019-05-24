@@ -5,6 +5,7 @@ const maxPlanetSpacing = 200
 
 export default class {
   sunSize = Math.floor(Math.random() * 500) + 100
+
   planets = []
 
   constructor(x, y, size) {
@@ -26,12 +27,12 @@ export default class {
           path: planetPathSize
         }
         usedSpace = planetPathSize
-      } else
-        overflow = true
+      } else overflow = true
     }
 
     this.generatePlanets()
   }
+
   // eslint-disable-next-line class-methods-use-this
   generateType(path) {
     const types = []

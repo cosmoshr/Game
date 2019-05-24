@@ -10,14 +10,12 @@ export default (worldSize, maxSolarSystemSize, minSolarSystemSize, solarSystemSp
     const solarSystem = Math.floor(Math.random() * (maxSolarSystemSize - minSolarSystemSize)) + minSolarSystemSize
     const solarSystemPos = { x: Math.floor(Math.random() * worldSize.width), y: Math.floor(worldSize.height * Math.random()) }
     let isSutible = true
-    for (let o = 0; o < solarSystems.length; o++)
-      if (Math.circleIntersect(solarSystemPos, solarSystem, solarSystems[o], solarSystemSpacing)) {
+    for (let o = 0; o < solarSystems.length; o++) if (Math.circleIntersect(solarSystemPos, solarSystem, solarSystems[o], solarSystemSpacing)) {
         isSutible = false
         break
       }
 
-    if (isSutible)
-      solarSystems[solarSystems.length] = {
+    if (isSutible) solarSystems[solarSystems.length] = {
         x: solarSystemPos.x,
         y: solarSystemPos.y,
         r: solarSystem
