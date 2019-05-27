@@ -21,6 +21,7 @@ matrix:
 jobs:
   include:
     - stage: Web
+      install: yarn
       script: yarn build
       deploy:
         provider: pages
