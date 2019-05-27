@@ -13,7 +13,8 @@
     "build": "webpack -p --progress --config config/webpack.prod.js",
     "build:electron": "cross-env WEBPACK_ENV=electron-renderer yarn build && electron-builder",
     "serve": "webpack-dev-server -d --progress --color --config config/webpack.dev.js --host 0.0.0.0",
-    "serve:electron": "concurrently \"cross-env WEBPACK_ENV=electron-renderer yarn serve\" \"wait-on http://localhost:8080 && cross-env ELECTRON_ENV=serve electron electron.js\""
+    "serve:electron": "concurrently \"cross-env WEBPACK_ENV=electron-renderer yarn serve\" \"wait-on http://localhost:8080 && cross-env ELECTRON_ENV=serve electron electron.js\"",
+    "test": "echo No test"
   },
   "build": {
     "productName": "Cosmos Habititation Race",

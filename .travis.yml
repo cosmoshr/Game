@@ -1,16 +1,32 @@
 language: node_js
-node_js: "lts/*"
+node_js:
+- stable
 
 os:
-  - windows
   - linux
   - osx
+  - windows
 
-cache: yarn
+script: 
+  - yarn build && yarn build:electron
 
-jobs:
-  include:
-    - stage: Web
-      script: yarn build
-    - stage: Electron
-      script: yarn build:electron
+deploy:
+  provider: pages
+  skip_cleanup: true
+  api_key:
+    secure: isPEix2hsp2+o7ddOypQWE8F4vRYGUJnN0v5ahOHsFiohbpllcv4RahswNgo3WkDi26xajSQ5Pn+rOktEcPQhXThiUMcvqeH13VwANG3Ka4r/L/GERHc6169EOmWBx4URa0gwGnJsr66vuw2huOXHXeGsuYGeUOU7GBZUtAv3Pqlg1+aTAYQuL86qzzVYrcZxYp0wid9ljCMDmohnEzZZd4mD8nvZcqygGTD3mW6RNAgssMOuu0Zc50/oHFqeoimqoQqGsOIVRK5aZqLkKsCXl6OYe4CB5rGU6yPxZtVBam6zg98K2bdqyhhtuh+Uq5yC1UG1F5tynB2yVoTo6wv23lMd9WKIZfSgXLQGgw9dh0Lc95d9EsGnsSGrtHS+cwqDb2/onDMYG0yHzyWhWwsTTZ8J8Tjru6BiOYYw3DBLjtn0kADQXk2xstiQkTSbjXJNLDHbyh1MwABviXvDA08YkGEpoYcDGgZlfYMS5rwU/DPa+TqjKxPZdAodyF+gnHWQdey+PGsDEkgfxL+veBB2eeduLF2OSfuYRI8+silUs+a9x3Gie+CLwzMBTfP9WqYAyemhkqSG/IMbiA4FahaDvTdbOw5EeKt8BYo6Os/ZkrP2EYH2h+wVub4kTIVQvFlptCKxLGrGyQCEndL3DioKR1+CZggaafhp7k+cbASuts=
+  keep_history: true
+  local_dir: dist/web/
+  on:
+    branch: master
+    os: linux
+
+deploy: 
+  provider: releases
+  api_key:
+    secure: isPEix2hsp2+o7ddOypQWE8F4vRYGUJnN0v5ahOHsFiohbpllcv4RahswNgo3WkDi26xajSQ5Pn+rOktEcPQhXThiUMcvqeH13VwANG3Ka4r/L/GERHc6169EOmWBx4URa0gwGnJsr66vuw2huOXHXeGsuYGeUOU7GBZUtAv3Pqlg1+aTAYQuL86qzzVYrcZxYp0wid9ljCMDmohnEzZZd4mD8nvZcqygGTD3mW6RNAgssMOuu0Zc50/oHFqeoimqoQqGsOIVRK5aZqLkKsCXl6OYe4CB5rGU6yPxZtVBam6zg98K2bdqyhhtuh+Uq5yC1UG1F5tynB2yVoTo6wv23lMd9WKIZfSgXLQGgw9dh0Lc95d9EsGnsSGrtHS+cwqDb2/onDMYG0yHzyWhWwsTTZ8J8Tjru6BiOYYw3DBLjtn0kADQXk2xstiQkTSbjXJNLDHbyh1MwABviXvDA08YkGEpoYcDGgZlfYMS5rwU/DPa+TqjKxPZdAodyF+gnHWQdey+PGsDEkgfxL+veBB2eeduLF2OSfuYRI8+silUs+a9x3Gie+CLwzMBTfP9WqYAyemhkqSG/IMbiA4FahaDvTdbOw5EeKt8BYo6Os/ZkrP2EYH2h+wVub4kTIVQvFlptCKxLGrGyQCEndL3DioKR1+CZggaafhp7k+cbASuts=
+  skip_cleanup: true
+  file: dist/Cosmos Habititation Race-*
+  on:
+    tags: true
+    branch: master
