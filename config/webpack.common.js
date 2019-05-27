@@ -1,26 +1,27 @@
 // Import dependencies
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const autoprefixer = require('autoprefixer')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 // Import Configuration
-const config = require('../config');
+const config = require('../config')
 
 /**
  * Entry point for the bundle.
  */
 const entry = {
-  app: config.ENTRY,
-};
+  app: config.ENTRY
+}
 
 /**
  * Array of resolve modules entry and file extension to prevent ESLint errors.
  */
 const resolve = {
   modules: [config.ENTRY, 'node_modules'],
-  extensions: ['*', '.js', '.json'],
-};
+  extensions: ['*', '.js', '.json']
+}
 
 /**
  * Default modules loaders.
@@ -35,14 +36,10 @@ const modules = {
           loader: 'babel-loader?cacheDirectory',
           options: {
             presets: ['@babel/preset-env'],
-            plugins: [
-              [
-                '@babel/plugin-proposal-class-properties',
-              ],
-            ],
-          },
-        },
-      ],
+            plugins: [['@babel/plugin-proposal-class-properties']]
+          }
+        }
+      ]
     },
     {
       test: /\.css$/,
@@ -53,8 +50,8 @@ const modules = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: config.SOURCEMAPS,
-            },
+              sourceMap: config.SOURCEMAPS
+            }
           },
           {
             loader: 'postcss-loader',
@@ -62,18 +59,18 @@ const modules = {
               ident: 'postcss',
               plugins: () => [
                 autoprefixer({
-                  browsers: ['last 5 versions'],
-                }),
+                  browsers: ['last 5 versions']
+                })
               ],
-              sourceMap: 'inline',
-            },
-          },
-        ],
-      }),
+              sourceMap: 'inline'
+            }
+          }
+        ]
+      })
     },
     {
       test: /\.(woff|woff2|eot|ttf|svg|ico|jpg|jpeg|png)$/,
-      loader: 'url-loader?limit=1000000',
+      loader: 'url-loader?limit=1000000'
     },
     {
       test: /\.scss$/,
@@ -84,8 +81,8 @@ const modules = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: config.SOURCEMAPS,
-            },
+              sourceMap: config.SOURCEMAPS
+            }
           },
           {
             loader: 'postcss-loader',
@@ -93,32 +90,32 @@ const modules = {
               ident: 'postcss',
               plugins: () => [
                 autoprefixer({
-                  browsers: ['last 5 versions'],
-                }),
+                  browsers: ['last 5 versions']
+                })
               ],
-              sourceMap: 'inline',
-            },
+              sourceMap: 'inline'
+            }
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: config.SOURCEMAPS,
-            },
-          },
-        ],
-      }),
+              sourceMap: config.SOURCEMAPS
+            }
+          }
+        ]
+      })
     },
     {
       test: /\.html$/,
       exclude: /node_modules/,
-      loader: 'raw-loader',
+      loader: 'raw-loader'
     },
     {
       test: /\.worker\.js$/,
       use: { loader: 'worker-loader' }
-    },
-  ],
-};
+    }
+  ]
+}
 
 /**
  * Shared plugins.
@@ -134,23 +131,25 @@ const modules = {
  */
 const plugins = [
   new CleanWebpackPlugin([config.DIST], {
-    allowExternal: true,
+    allowExternal: true
   }),
   new ExtractTextPlugin(config.CSSFILENAME),
   new HtmlWebpackPlugin({
-    template: `${config.OUTPUT}/index.html`,
-  }),
-];
+    template: `${config.OUTPUT}/index.html`
+  })
+]
 
+if (process.env.WEBPACK_ENV === 'electron-renderer')
+  plugins.push(new CopyWebpackPlugin([{ from: 'electron.js' }]))
 /**
  * Webpack configuration.
  */
 const WebpackConfig = {
+  target: process.env.WEBPACK_ENV || 'web',
   entry,
   resolve,
   module: modules,
-  plugins,
-};
-
+  plugins
+}
 // Export WebpackConfig module
-module.exports = WebpackConfig;
+module.exports = WebpackConfig

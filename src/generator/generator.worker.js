@@ -1,3 +1,4 @@
+import "subworkers";
 import BuildSolarSystem from './buildSolarSystem.worker'
 import generateSolarSystem from './generateSolarSystem'
 
