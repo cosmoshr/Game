@@ -1,13 +1,10 @@
-matrix:
-  include:
-    - os: osx
-      osx_image: xcode10.2
-      language: node_js
-      node_js: "lts/*"
+language: node_js
+node_js: "lts/*"
 
-    - os: linux
-      language: node_js
-      node_js: "lts/*"
+os:
+  - windows
+  - linux
+  - osx
 
 cache: yarn
 
