@@ -49,7 +49,7 @@ const plugins = [
  */
 const WebpackConfig = {
   output,
-  plugins,
+  plugins
 };
 
 // Merge and export WebpackConfig module
