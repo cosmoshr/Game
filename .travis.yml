@@ -16,12 +16,12 @@ matrix:
 
     - os: linux
       services: docker
-      language: generic
+      language: node_js
+      node_js: "lts/*"
 
 jobs:
   include:
     - stage: Web
-      install: yarn
       script: yarn build
       deploy:
         provider: pages
