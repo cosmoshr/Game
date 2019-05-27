@@ -1,5 +1,5 @@
 import {
- Sprite, Loader, Container, Graphics
+  Sprite, Loader, Container, Graphics
 } from 'pixi.js'
 import '../functions'
 
