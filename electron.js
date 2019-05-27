@@ -13,16 +13,17 @@ function createWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    titleBarStyle: 'hidden'
   })
 
   // and load the index.html of the app.
   if (process.env.ELECTRON_ENV === 'serve') mainWindow.loadURL('http://localhost:8080')
-   else mainWindow.loadURL(url.format({
-      pathname: path.join(__dirname, 'index.html'),
-      protocol: 'file:',
-      slashes: true
-    }))
+  else mainWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
 
 
   // Open the DevTools.
