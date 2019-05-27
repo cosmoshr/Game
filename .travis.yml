@@ -2,4 +2,37 @@ language: node_js
 node_js:
   - "lts/*"
 cache: yarn
-script: yarn build
+
+jobs:
+  include:
+    - stage: Build
+      name: "Webpack"
+      script: yarn build
+    - script: "yarn build:electron"
+      name: "Electron"
+    - stage: Release
+    - stage: Deploy
+      name: "Github Releases"
+      matrix: 
+        include:
+        - os: osx
+          before_deploy:
+          - node postBuild.js
+          deploy:
+            provider: releases
+            api_key: $GITHUB_TOKEN
+            file: "Cosmos_HR_Mac.dmg"
+            skip_cleanup: true
+            on:
+              tags: true
+        - os: windows
+          before_deploy:
+          - node postBuild.js
+          deploy:
+            provider: releases
+            api_key: $GITHUB_TOKEN
+            file: "Cosmos_HR_Windows.exe"
+            skip_cleanup: true
+            on:
+              tags: true
+      script: "yarn build:electron"
