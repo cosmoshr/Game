@@ -26,7 +26,7 @@
       "buildResources": "src"
     },
     "publish": null,
-    "icon": "public/favicon256.ico"
+    "icon": "public/favicon.ico"
   },
   "dependencies": {
     "breakpoint-sass": "^2.7.1",
