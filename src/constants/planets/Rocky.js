@@ -1,5 +1,5 @@
 export default {
-  size: [5, 50],
+  size: [20, 50],
   chance: 90,
   zone: [1, 1000],
   resources: {
