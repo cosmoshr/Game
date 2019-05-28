@@ -33,11 +33,7 @@ const modules = {
       exclude: /node_modules/,
       use: [
         {
-          loader: 'babel-loader?cacheDirectory',
-          options: {
-            presets: ['@babel/preset-env'],
-            plugins: [['@babel/plugin-proposal-class-properties']]
-          }
+          loader: 'babel-loader?cacheDirectory'
         }
       ]
     },

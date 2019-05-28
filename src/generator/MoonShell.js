@@ -1,6 +1,6 @@
-import planetTypes from '../constants/planets/_types'
+import moonTypes from '../constants/moons/_types'
 
-export default class PlanetShell {
+export default class MoonShell {
   resources = {}
 
   constructor(path) {
@@ -25,14 +25,14 @@ export default class PlanetShell {
     const types = []
     let type
 
-    planetTypes.forEach(name => {
+    moonTypes.forEach(name => {
       // eslint-disable-next-line import/no-dynamic-require, global-require
-      const planet = require(`../constants/planets/${name}`)
+      const moon = require(`../constants/moons/${name}`)
 
-      if (planet.default.zone[0] < this.path && planet.default.zone[1] > this.path) {
+      if (moon.default.zone[0] < this.path && moon.default.zone[1] > this.path) {
         const id = types.length
 
-        types[id] = planet
+        types[id] = moon
         types[id].name = name
       }
     })
