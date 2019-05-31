@@ -30,6 +30,7 @@
     "icon": "public/favicon.png"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "breakpoint-sass": "^2.7.1",
     "global": "^4.3.2",
     "pixi.js": "^5.0.2",
@@ -48,6 +49,7 @@
     "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
+    "dexie": "^2.0.4",
     "electron": "5.0.2",
     "electron-builder": "^20.15.1",
     "eslint": "^5.16.0",
