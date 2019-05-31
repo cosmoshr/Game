@@ -11,9 +11,10 @@ const config = require('../config')
 /**
  * Entry point for the bundle.
  */
-const entry = {
-  app: config.ENTRY
-}
+const entry = [
+  'babel-polyfill',
+  config.ENTRY
+]
 
 /**
  * Array of resolve modules entry and file extension to prevent ESLint errors.
