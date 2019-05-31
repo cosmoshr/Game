@@ -14,15 +14,11 @@ const cosmosLoader = async () => {
 }
 const cosmosUpdater = async cosmos => {
   db.cosmos.update(cosmos.whichCosmos + 1, cosmos.newCosmos).then(updated => {
-    if (updated)
-      db.cosmos.update(cosmos.whichCosmos + 1, { updated: Date.now() }).then(_updated => {
-        if (_updated)
-          cosmosLoader()
-        else
-          postMessage('', 'Err in CosmosUpdater')
+    if (updated) db.cosmos.update(cosmos.whichCosmos + 1, { updated: Date.now() }).then(_updated => {
+        if (_updated) cosmosLoader()
+        else postMessage('', 'Err in CosmosUpdater')
       })
-    else
-      postMessage('', 'Err in CosmosUpdater')
+    else postMessage('', 'Err in CosmosUpdater')
   })
 }
 
