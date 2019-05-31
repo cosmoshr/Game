@@ -32,6 +32,5 @@ const init = () => {
 
 export default function () {
   if (!hasInit) init()
-  console.log(textures)
   return textures
 }

@@ -39,10 +39,9 @@ export default class PlanetShell extends ObjectShell {
       } else overflow = true
     }
 
-    // eslint-disable-next-line func-names, prefer-arrow-callback
-    this.moons.forEach(function (e, i) {
+    this.moons.forEach((e, i) => {
       this.moons[i] = new MoonShell(e.path)
-    }.bind(this))
+    })
   }
 
   genType() {
