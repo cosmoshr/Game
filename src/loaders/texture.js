@@ -1,5 +1,7 @@
 import planetTypes from '../constants/planets/_types'
 
+let hasInit = false
+
 const textures = [
   {
     name: 'sun',
@@ -14,7 +16,8 @@ const textures = [
 /**
  * Genterate the texture loader array
  */
-export function init() {
+const init = () => {
+  hasInit = true
   planetTypes.forEach(planetName => {
     // eslint-disable-next-line import/no-dynamic-require, global-require
     const planet = require(`../constants/planets/${planetName}.js`).default
@@ -25,4 +28,8 @@ export function init() {
   })
 }
 
-export default textures
+export default function () {
+  if (!hasInit) init()
+  console.log(textures)
+  return textures
+}
