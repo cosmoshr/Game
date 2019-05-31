@@ -2,7 +2,7 @@ export default {
   resources: {
     H3: [500, 3000]
   },
-  size: [2, 5],
+  size: [7, 10],
   zone: [1, 10],
-  chance: 80
+  chance: 45
 }
