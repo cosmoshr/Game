@@ -2,6 +2,7 @@ import {
   Sprite, Loader, Container, Graphics
 } from 'pixi.js'
 import '../functions'
+import Moon from './moons'
 
 class RoundedRectangle extends Graphics {
   constructor(x, y, width, height, cornerRadius, color, alpha) {
@@ -58,6 +59,13 @@ export default class extends Container {
 
     this.planet = new PlanetCenter(planet)
     this.addChild(this.planet)
+
+    this.moons = planet.moons
+    this.moons.forEach((moon, i) => {
+      this.moons[i] = new Moon(moon)
+      this.moons[i].init()
+      this.addChild(this.moons[i])
+    })
 
     this.info = new Info(planet)
     this.addChild(this.info)
