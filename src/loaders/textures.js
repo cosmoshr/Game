@@ -21,8 +21,7 @@ export function init() {
     })
   })
 
-  moonTypes.forEach(planetName =>
-    textures.push({
+  moonTypes.forEach(planetName => textures.push({
       name: `moon_${planetName}`,
       url: `assets/img/Moons/${planetName}.png`
     }))
