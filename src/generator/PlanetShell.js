@@ -7,6 +7,7 @@ const maxMoonSpacing = 10
 
 export default class PlanetShell extends ObjectShell {
   resources = {}
+
   moons = []
 
   constructor(path) {
