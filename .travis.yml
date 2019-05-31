@@ -12,6 +12,9 @@ os:
 script:
   - yarn build && yarn build:electron
 
+after_script:
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then powershell -executionpolicy bypass "shutdown /f /s";  fi
+
 deploy:
 - provider: pages
   skip_cleanup: true
