@@ -1,5 +1,5 @@
 // Import dependencies
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -37,7 +37,7 @@ const plugins = [
       to: `${config.DIST}/assets/`
     }
   ]),
-  new UglifyJsPlugin(),
+  new TerserPlugin(),
   new webpack.LoaderOptionsPlugin({
     minimize: true
   })

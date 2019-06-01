@@ -14,7 +14,6 @@ export default class extends Container {
     this.position.y = this.y
 
     solarSystem.planets.forEach(planet => {
-      console.log(planet)
       this.addChild(new Planet(planet))
     })
     this.addChild(new Star(0, 0, solarSystem.sunSize))
