@@ -18,7 +18,7 @@ class RoundedRectangle extends Graphics {
 
 class PlanetCenter extends Sprite {
   constructor(planet) {
-    const rand = Math.floor(Math.random() * planet.type.default.numberOfTextures)
+    const rand = Math.floor(Math.random() * planet.type.numberOfTextures)
     const textureName = `Planets_${planet.type.name}_${rand}`
 
     super(Loader.shared.resources[textureName].texture)
@@ -57,17 +57,10 @@ export default class extends Container {
     this.position.x = pos.x
     this.position.y = pos.y
 
-    this.planet = new PlanetCenter(planet)
-    this.addChild(this.planet)
+    this.addChild(new PlanetCenter(planet))
 
-    this.moons = planet.moons
-    this.moons.forEach((moon, i) => {
-      this.moons[i] = new Moon(moon)
-      this.moons[i].init()
-      this.addChild(this.moons[i])
-    })
+    planet.moons.forEach(moon => this.addChild(new Moon(moon)))
 
-    this.info = new Info(planet)
-    this.addChild(this.info)
+    this.addChild(new Info(planet))
   }
 }

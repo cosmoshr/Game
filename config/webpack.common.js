@@ -136,8 +136,7 @@ const plugins = [
   })
 ]
 
-if (process.env.WEBPACK_ENV === 'electron-renderer')
-  plugins.push(new CopyWebpackPlugin([{ from: 'electron.js' }]))
+if (process.env.WEBPACK_ENV === 'electron-renderer') plugins.push(new CopyWebpackPlugin([{ from: 'electron.js' }]))
 /**
  * Webpack configuration.
  */

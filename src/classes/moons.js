@@ -8,11 +8,8 @@ export default class Moon extends Sprite {
     this.p = moon.path
     this.d = moon.degrees
     this.size = moon.size
-  }
 
-  init() {
     const pos = Math.genPosOnCircle(0, 0, this.p, this.d)
-
     this.position.x = pos.x
     this.position.y = pos.y
 

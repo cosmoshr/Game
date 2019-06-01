@@ -8,5 +8,6 @@ export default {
     food: [0, 5],
     water: [0, 10]
   },
-  numberOfTextures: 1
+  numberOfTextures: 1,
+  name: 'Rocky'
 }

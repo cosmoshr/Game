@@ -24,9 +24,9 @@ const init = () => {
     })
   })
 
-  moonTypes.forEach(planetName => textures.push({
-    name: `moon_${planetName}`,
-    url: `assets/img/Moons/${planetName}.png`
+  moonTypes.forEach(moonName => textures.push({
+    name: `moon_${moonName}`,
+    url: `assets/img/Moons/${moonName}.png`
   }))
 }
 

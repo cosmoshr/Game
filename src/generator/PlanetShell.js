@@ -17,56 +17,26 @@ export default class PlanetShell extends ObjectShell {
     this.genType()
     this.genResources()
 
-    this.size = Math.random() * (this.type.default.size[1] - this.type.default.size[0]) + this.type.default.size[0]
+    this.size = Math.random() * (this.type.size[1] - this.type.size[0]) + this.type.size[0]
     this.r = this.size + (Math.random() * (40 - 5) + 5)
 
-    this.genMoon()
-  }
-
-  genMoon() {
     let usedSpace = this.size
-    let overflow = false
-
-    while (!overflow) {
-      const planetPathSize = Math.floor(Math.random() * (maxMoonSpacing - minMoonSpacing)) + minMoonSpacing + usedSpace
-
-      if (planetPathSize < this.r) {
-        this.moons.push({
-          path: planetPathSize
-        })
-
-        usedSpace = planetPathSize
-      } else overflow = true
+    while (usedSpace < this.r) {
+      this.moons.push(new MoonShell(usedSpace))
+      usedSpace = Math.floor(Math.random() * (maxMoonSpacing - minMoonSpacing)) + minMoonSpacing + usedSpace
     }
-
-    this.moons.forEach((e, i) => {
-      this.moons[i] = new MoonShell(e.path)
-    })
   }
 
   genType() {
     const types = []
-    let type
 
     planetTypes.forEach(name => {
       // eslint-disable-next-line import/no-dynamic-require, global-require
-      const planet = require(`../constants/planets/${name}`)
+      const planet = require(`../constants/planets/${name}`).default
 
-      if (planet.default.zone[0] < this.path && planet.default.zone[1] > this.path) {
-        const id = types.length
-
-        types[id] = planet
-        types[id].name = name
-      }
+      if (planet.zone[0] < this.path && planet.zone[1] > this.path) types.push(planet)
     })
 
-    if (types.length !== 1) {
-      const rand = Math.floor(Math.random() * types.length)
-      type = types[rand]
-    } else
-      // eslint-disable-next-line prefer-destructuring
-      type = types[0]
-
-    this.type = type
+    this.type = types[Math.floor(Math.random() * types.length)]
   }
 }

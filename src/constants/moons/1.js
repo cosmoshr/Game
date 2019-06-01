@@ -4,5 +4,6 @@ export default {
   },
   size: [15, 20],
   zone: [4, 20],
-  chance: 80
+  chance: 80,
+  name: 1
 }

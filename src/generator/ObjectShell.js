@@ -4,11 +4,10 @@ export default class ObjectShell {
   }
 
   genResources() {
-    // eslint-disable-next-line func-names, prefer-arrow-callback
-    Object.keys(this.type.default.resources).forEach(function (item) {
-      const object = this.type.default.resources[item]
+    for (let index = 0; index < this.type.resources.length; index++) {
+      const object = this.type.resources[index]
 
-      this.resources[item] = Math.random() * (object[1] - object[0]) + object[0]
-    }.bind(this))
+      this.resources.push(Math.random() * (object[1] - object[0]) + object[0])
+    }
   }
 }

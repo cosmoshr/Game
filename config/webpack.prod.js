@@ -1,20 +1,19 @@
 // Import dependencies
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WebpackCommon = require('./webpack.common');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WebpackCommon = require('./webpack.common')
 // Import Configuration
-const config = require('../config');
+const config = require('../config')
 
 /**
  * Set output folder name for .js file for the production build.
  */
 const output = {
   path: config.DIST,
-  filename: config.JSFILENAME,
-};
+  filename: config.JSFILENAME
+}
 
 /**
  * Plugins for production build.
@@ -31,18 +30,18 @@ const output = {
 const plugins = [
   new CopyWebpackPlugin([
     {
-      from: `${config.OUTPUT}/favicon.ico`,
+      from: `${config.OUTPUT}/favicon.ico`
     },
     {
       from: `${config.OUTPUT}/assets/`,
-      to: `${config.DIST}/assets/`,
-    },
+      to: `${config.DIST}/assets/`
+    }
   ]),
   new UglifyJsPlugin(),
   new webpack.LoaderOptionsPlugin({
-    minimize: true,
-  }),
-];
+    minimize: true
+  })
+]
 
 /**
  * Webpack configuration.
@@ -50,7 +49,7 @@ const plugins = [
 const WebpackConfig = {
   output,
   plugins
-};
+}
 
 // Merge and export WebpackConfig module
-module.exports = merge(WebpackCommon, WebpackConfig);
+module.exports = merge(WebpackCommon, WebpackConfig)

@@ -8,5 +8,6 @@ export default {
     food: [100, 200],
     water: [100, 200]
   },
-  numberOfTextures: 3
+  numberOfTextures: 3,
+  name: 'Habitital_Planet'
 }
