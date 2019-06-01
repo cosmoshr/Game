@@ -34,11 +34,7 @@ const modules = {
       exclude: /node_modules/,
       use: [
         {
-          loader: 'babel-loader?cacheDirectory',
-          options: {
-            presets: ['@babel/preset-env'],
-            plugins: [['@babel/plugin-proposal-class-properties']]
-          }
+          loader: 'babel-loader?cacheDirectory'
         }
       ]
     },
@@ -140,8 +136,7 @@ const plugins = [
   })
 ]
 
-if (process.env.WEBPACK_ENV === 'electron-renderer')
-  plugins.push(new CopyWebpackPlugin([{ from: 'electron.js' }]))
+if (process.env.WEBPACK_ENV === 'electron-renderer') plugins.push(new CopyWebpackPlugin([{ from: 'electron.js' }]))
 /**
  * Webpack configuration.
  */

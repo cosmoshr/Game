@@ -6,8 +6,6 @@ export default class extends Container {
   constructor(solarSystem) {
     super()
 
-    this.solarSystem = solarSystem
-
     this.x = solarSystem.x
     this.y = solarSystem.y
     this.r = solarSystem.size
@@ -15,7 +13,7 @@ export default class extends Container {
     this.position.x = this.x
     this.position.y = this.y
 
-    this.solarSystem.planets.forEach(planet => {
+    solarSystem.planets.forEach(planet => {
       this.addChild(new Planet(planet))
     })
     this.addChild(new Star(0, 0, solarSystem.sunSize))

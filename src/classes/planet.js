@@ -2,6 +2,7 @@ import {
   Sprite, Loader, Container, Graphics
 } from 'pixi.js'
 import '../functions'
+import Moon from './moons'
 
 class RoundedRectangle extends Graphics {
   constructor(x, y, width, height, cornerRadius, color, alpha) {
@@ -17,7 +18,7 @@ class RoundedRectangle extends Graphics {
 
 class PlanetCenter extends Sprite {
   constructor(planet) {
-    const rand = Math.floor(Math.random() * planet.type.default.numberOfTextures)
+    const rand = Math.floor(Math.random() * planet.type.numberOfTextures)
     const textureName = `Planets_${planet.type.name}_${rand}`
 
     super(Loader.shared.resources[textureName].texture)
@@ -56,10 +57,10 @@ export default class extends Container {
     this.position.x = pos.x
     this.position.y = pos.y
 
-    this.planet = new PlanetCenter(planet)
-    this.addChild(this.planet)
+    this.addChild(new PlanetCenter(planet))
 
-    this.info = new Info(planet)
-    this.addChild(this.info)
+    planet.moons.forEach(moon => this.addChild(new Moon(moon)))
+
+    this.addChild(new Info(planet))
   }
 }

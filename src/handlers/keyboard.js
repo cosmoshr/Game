@@ -1,7 +1,10 @@
 class Key {
   isDown = false
+
   isUp = true
+
   press
+
   release
 
   constructor(value) {

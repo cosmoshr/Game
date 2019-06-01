@@ -1,17 +1,17 @@
 // Import dependencies
-const merge = require('webpack-merge');
-const WebpackCommon = require('./webpack.common');
+const merge = require('webpack-merge')
+const WebpackCommon = require('./webpack.common')
 
 // Import Configuration
-const config = require('../config');
+const config = require('../config')
 
 /**
  * Set output folder name for .js file for the dev server.
  */
 const output = {
   path: config.OUTPUT,
-  filename: config.JSFILENAME,
-};
+  filename: config.JSFILENAME
+}
 
 /**
  * Default dev server settings.
@@ -19,8 +19,8 @@ const output = {
 const devServer = {
   contentBase: config.OUTPUT,
   host: config.HOST,
-  port: config.PORT,
-};
+  port: config.PORT
+}
 
 /**
  * Webpack configuration.
@@ -28,13 +28,11 @@ const devServer = {
 const WebpackConfig = {
   output,
   devServer,
-  watch: true,
-};
-
-// Check if DEVTOLL is set and add to Webpack configuration
-if (config.DEVTOOL) {
-  WebpackConfig.devtool = config.DEVTOOL; // Set devtool
+  watch: true
 }
 
+// Check if DEVTOLL is set and add to Webpack configuration
+if (config.DEVTOOL) WebpackConfig.devtool = config.DEVTOOL // Set devtool
+
 // Merge and export WebpackConfig module
-module.exports = merge(WebpackCommon, WebpackConfig);
+module.exports = merge(WebpackCommon, WebpackConfig)

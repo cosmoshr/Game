@@ -12,8 +12,8 @@ const maxSolarSystemSize = 5000
 const minSolarSystemSize = 1000
 const solarSystemSpacing = 200
 
-const start = () => {
-  // TODO: Generate Solar Systems
+// eslint-disable-next-line no-unused-vars
+onmessage = (_a) => {
   const solarSystem = generateSolarSystem(worldSize, maxSolarSystemSize, minSolarSystemSize, solarSystemSpacing)
   let SolarSystemWebWorkers = 0
   const generatedSolarSystem = []
@@ -28,10 +28,4 @@ const start = () => {
       if (SolarSystemWebWorkers === 0) postMessage(generatedSolarSystem)
     }
   })
-}
-
-
-// eslint-disable-next-line no-unused-vars
-onmessage = (_a) => {
-  start()
 }
