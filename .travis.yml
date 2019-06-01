@@ -4,10 +4,12 @@ node_js:
 
 cache: yarn
 
+allow_failures:
+  - os: windows
+
 os:
   - linux
   - osx
-  - windows
 
 script:
   - yarn build && yarn build:electron
