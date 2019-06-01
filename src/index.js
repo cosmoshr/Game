@@ -1,22 +1,9 @@
 import './sass/styles.scss'
-import { onDragStart, onDragEnd, onDragMove } from './handlers/movement'
 import Game from './game'
 
 const game = new Game()
 
 game.gameLoop = () => {}
-
-game.stage.interactive = true
-game.stage.mousedown = onDragStart
-game.stage.touchstart = onDragStart
-
-game.stage.mouseup = onDragEnd
-game.stage.mouseupoutside = onDragEnd
-game.stage.touchend = onDragEnd
-game.stage.touchendoutside = onDragEnd
-
-game.stage.touchmove = onDragMove
-game.stage.mousemove = onDragMove
 
 const afterInit = () => {
   const loadtype = confirm('Load or Generate')

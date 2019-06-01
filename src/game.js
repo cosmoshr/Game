@@ -1,15 +1,27 @@
 import { Application, Graphics, Loader as PixiLoader } from 'pixi.js'
+import Viewport from 'pixi-viewport'
 import SolarSystem from './classes/solarSystem'
-
 import Loader from './loaders/loader.worker'
 
 export default class extends Application {
   constructor() {
     super({ width: innerWidth, height: innerHeight, resolution: 2 })
 
-    this.renderer.autoResize = true
     this.view.id = 'app'
     document.body.appendChild(this.view)
+
+    this.viewport = new Viewport({
+      screenWidth: window.innerWidth,
+      screenHeight: window.innerHeight,
+
+      interaction: this.renderer.plugins.interaction // the interaction module is important for wheel() to work properly when renderer.view is placed or scaled
+    })
+
+    this.stage.addChild(this.viewport)
+    this.viewport
+      .drag()
+      .pinch()
+      .wheel()
 
     document.onresize = this.resize
 
@@ -20,9 +32,7 @@ export default class extends Application {
     background.drawRect(-100000, -100000, 200000, 200000)
     background.endFill()
     background.alpha = 1
-    this.stage.addChild(background)
-
-    document.onkeydown = this.keyManager.bind(this)
+    this.viewport.addChild(background)
   }
 
   async init() {
@@ -85,7 +95,7 @@ export default class extends Application {
 
   loadComos(whichCosmos) {
     this.cosmos[whichCosmos].cosmos.forEach(solarSystem => {
-      this.stage.addChild(new SolarSystem(solarSystem))
+      this.viewport.addChild(new SolarSystem(solarSystem))
     })
   }
 
@@ -110,16 +120,6 @@ export default class extends Application {
       }
     })
     return updateCosmos
-  }
-
-  keyManager(e) {
-    if (e.code === 'Minus') {
-      this.stage.width /= 2
-      this.stage.height /= 2
-    } else if (e.code === 'Equal') {
-      this.stage.width *= 2
-      this.stage.height *= 2
-    }
   }
 
   resize() {
