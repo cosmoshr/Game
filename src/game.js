@@ -93,7 +93,7 @@ export default class extends Application {
     await generateCosmos
   }
 
-  loadComos(whichCosmos) {
+  async loadComos(whichCosmos) {
     this.cosmos[whichCosmos].cosmos.forEach(solarSystem => {
       this.viewport.addChild(new SolarSystem(solarSystem))
     })

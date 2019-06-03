@@ -1,0 +1,33 @@
+#splash {
+  text-align: center;
+
+  font-family: 'Roboto', sans-serif;
+
+  color: white;
+  background-color: black;
+  background-image: url('./splash.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh !important;
+  width: 100vw !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 500%;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 400%;
+}
+
+.back {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
