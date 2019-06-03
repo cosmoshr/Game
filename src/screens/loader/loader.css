@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-
 #loadingScreen {
   text-align: center;
 
@@ -7,8 +5,8 @@
 
   color: white;
   background-color: black;
-  height: 100vh !important;
-  width: 100vw !important;
+  height: 100vh;
+  width: 100vw;
 
   display: flex;
   justify-content: center;

@@ -49,14 +49,14 @@
 @keyframes pure-material-progress-linear {
   0% {
       background-size: 200% 100%;
-      background-position: left -31.25% top 0%;
+      background-position: left -31.25% top 0;
   }
   50% {
       background-size: 800% 100%;
-      background-position: left -49% top 0%;
+      background-position: left -49% top 0;
   }
   100% {
       background-size: 400% 100%;
-      background-position: left -102% top 0%;
+      background-position: left -102% top 0;
   }
 }
