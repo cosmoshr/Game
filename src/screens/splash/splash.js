@@ -21,6 +21,10 @@ export default class Splash {
     this.el.getElementsByClassName('loadGame')[0].onclick = this.loadGameMenu.bind(this)
   }
 
+  // --------------------------------------------
+  // LOAD GAME MENU
+  // --------------------------------------------
+
   loadGameMenu() {
     this.el.getElementsByClassName('home')[0].style.display = 'none'
     this.el.getElementsByClassName('load')[0].style.display = 'block'
@@ -40,6 +44,9 @@ export default class Splash {
     this.onLoadGame(Number(e.srcElement.className))
   }
 
+  // --------------------------------------------
+  // NEW GAME MENU
+  // --------------------------------------------
   newGame() {
     this.el.getElementsByClassName('home')[0].style.display = 'none'
     this.el.getElementsByClassName('new')[0].style.display = 'block'

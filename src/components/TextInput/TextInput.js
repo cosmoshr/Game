@@ -1,4 +1,7 @@
-const css = require('./style.css')
+const sharedCSS = require('../shared.css')
+const localCSS = require('./style.css')
+
+const css = sharedCSS + localCSS
 
 export default class TextInput extends HTMLElement {
   constructor() {
