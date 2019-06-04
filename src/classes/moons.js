@@ -2,7 +2,7 @@ import { Sprite, Loader } from 'pixi.js'
 
 export default class Moon extends Sprite {
   constructor(moon) {
-    const textureName = `moon_${moon.type.name}`
+    const textureName = `Moon_${moon.type.name}`
     super(Loader.shared.resources[textureName].texture)
 
     this.p = moon.path
