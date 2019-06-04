@@ -6,7 +6,7 @@ let hasInit = false
 const textures = [
   {
     name: 'sun',
-    url: 'assets/img/Stars/Sun1.svg'
+    url: 'assets/textures/stars/1.svg'
   }
 ]
 
