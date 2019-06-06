@@ -2,10 +2,11 @@ import { Application, Graphics, Loader as PixiLoader } from 'pixi.js'
 import Viewport from 'pixi-viewport'
 import SolarSystem from './classes/solarSystem'
 import Loader from './loaders/loader.worker'
+import Settings from './Settings'
 
 export default class extends Application {
   constructor() {
-    super({ width: innerWidth, height: innerHeight, resolution: 2 })
+    super({ width: innerWidth, height: innerHeight, resolution: Settings.quality })
 
     this.view.id = 'app'
     document.body.appendChild(this.view)

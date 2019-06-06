@@ -1,0 +1,129 @@
+input[type="range"] {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  margin: 15px 0;
+  padding: 0;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"] + .thumb {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  border: none;
+  height: 0;
+  width: 0;
+  border-radius: 50%;
+  background-color: #1ea9ff;
+  margin-left: 7px;
+  transform-origin: 50% 50%;
+  transform: rotate(-45deg);
+}
+
+input[type="range"] + .thumb .value {
+  display: block;
+  width: 30px;
+  text-align: center;
+  color: #1ea9ff;
+  font-size: 0;
+  transform: rotate(45deg);
+}
+
+input[type="range"] + .thumb.active {
+  border-radius: 50% 50% 50% 0;
+}
+
+input[type="range"] + .thumb.active .value {
+  color: rgba(30, 169, 255, 0.1);
+  margin-left: -1px;
+  margin-top: 8px;
+  font-size: 10px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 10px;
+  background: #c2c0c2;
+  border: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  border: none;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: #1ea9ff;
+  transition: box-shadow 0.3s;
+  -webkit-appearance: none;
+  background-color: #1ea9ff;
+  transform-origin: 50% 50%;
+  margin: -5px 0 0 0;
+}
+
+.keyboard-focused input[type="range"]:focus:not(.active)::-webkit-slider-thumb {
+  box-shadow: 0 0 0 10px rgba(30, 169, 255, 0.26);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 10px;
+  background: #c2c0c2;
+  border-radius: 10px;
+  border: none;
+}
+
+input[type="range"]::-moz-focus-inner {
+  border: 0;
+}
+
+input[type="range"]::-moz-range-thumb {
+  border: none;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: #1ea9ff;
+  transition: box-shadow 0.3s;
+  margin-top: -5px;
+}
+
+.keyboard-focused input[type="range"]:focus:not(.active)::-moz-range-thumb {
+  box-shadow: 0 0 0 10px rgba(30, 169, 255, 0.26);
+}
+
+input[type="range"]::-ms-track {
+  height: 10px;
+  background: transparent;
+  border-color: transparent;
+  border-width: 6px 0;
+  /*remove default tick marks*/
+  color: transparent;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: #777;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background: #ddd;
+}
+
+input[type="range"]::-ms-thumb {
+  border: none;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: #1ea9ff;
+  transition: box-shadow 0.3s;
+}
+
+.keyboard-focused input[type="range"]:focus:not(.active)::-ms-thumb {
+  box-shadow: 0 0 0 10px rgba(30, 169, 255, 0.26);
+}

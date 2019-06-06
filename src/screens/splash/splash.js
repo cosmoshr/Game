@@ -1,3 +1,5 @@
+import Settings from '../../Settings'
+
 const splashHTML = require('./splash.html').default
 const splashCSS = require('./splash.css')
 
@@ -19,6 +21,27 @@ export default class Splash {
 
     this.el.getElementsByClassName('newGame')[0].onclick = this.newGame.bind(this)
     this.el.getElementsByClassName('loadGame')[0].onclick = this.loadGameMenu.bind(this)
+    this.el.getElementsByClassName('openSettings')[0].onclick = this.settingsMenu.bind(this)
+
+    this.el.getElementsByClassName('saveSettings')[0].onclick = this.saveSettings.bind(this)
+  }
+
+  // --------------------------------------------
+  // SETTINGS
+  // --------------------------------------------
+
+  settingsMenu() {
+    this.el.getElementsByClassName('home')[0].style.display = 'none'
+    this.el.getElementsByClassName('settings')[0].style.display = 'block'
+
+    this.el.getElementsByClassName('quality')[0].max = 10
+    this.el.getElementsByClassName('quality')[0].value = Settings.quality
+  }
+
+  saveSettings() {
+    Settings.quality = Number(this.el.getElementsByClassName('quality')[0].value)
+    Settings.save()
+    this.back()
   }
 
   // --------------------------------------------
