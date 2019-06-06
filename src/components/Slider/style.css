@@ -10,6 +10,7 @@ input[type="range"] {
 
 input[type="range"]:focus {
   outline: none;
+  shape-rendering: crispEdges;
 }
 
 input[type="range"] + .thumb {
@@ -48,15 +49,17 @@ input[type="range"] + .thumb.active .value {
 
 input[type="range"] {
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
-input[type="range"]::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track, input[type="range"]::-moz-slider-runnable-track, input[type="range"]::slider-runnable-track {
   height: 10px;
   background: #c2c0c2;
   border: none;
 }
 
-input[type="range"]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb, input[type="range"]::-moz-slider-thumb, input[type="range"]::slider-thumb {
   border: none;
   height: 50px;
   width: 50px;
@@ -64,12 +67,14 @@ input[type="range"]::-webkit-slider-thumb {
   background: #1ea9ff;
   transition: box-shadow 0.3s;
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   background-color: #1ea9ff;
   transform-origin: 50% 50%;
   margin: -5px 0 0 0;
 }
 
-.keyboard-focused input[type="range"]:focus:not(.active)::-webkit-slider-thumb {
+.keyboard-focused input[type="range"]:focus:not(.active)::-webkit-slider-thumb, .keyboard-focused input[type="range"]:focus:not(.active)::-moz-slider-thumb, .keyboard-focused input[type="range"]:focus:not(.active)::slider-thumb {
   box-shadow: 0 0 0 10px rgba(30, 169, 255, 0.26);
 }
 
