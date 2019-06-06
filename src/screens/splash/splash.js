@@ -14,6 +14,8 @@ export default class Splash {
 
     this.el.prepend(style)
 
+    this.back()
+
     const backs = this.el.getElementsByClassName('back')
     const backsleng = backs.length
 
@@ -31,6 +33,8 @@ export default class Splash {
   // --------------------------------------------
 
   settingsMenu() {
+    this.showBack()
+
     this.el.getElementsByClassName('home')[0].style.display = 'none'
     this.el.getElementsByClassName('settings')[0].style.display = 'block'
 
@@ -49,6 +53,8 @@ export default class Splash {
   // --------------------------------------------
 
   loadGameMenu() {
+    this.showBack()
+
     this.el.getElementsByClassName('home')[0].style.display = 'none'
     this.el.getElementsByClassName('load')[0].style.display = 'block'
 
@@ -71,6 +77,8 @@ export default class Splash {
   // NEW GAME MENU
   // --------------------------------------------
   newGame() {
+    this.showBack()
+
     this.el.getElementsByClassName('home')[0].style.display = 'none'
     this.el.getElementsByClassName('new')[0].style.display = 'block'
 
@@ -87,6 +95,22 @@ export default class Splash {
     for (let i = 0; i < els.length; i++) els[i].style.display = 'none'
 
     this.el.getElementsByClassName('home')[0].style.display = 'block'
+
+    const backs = this.el.getElementsByClassName('back')
+    const backsleng = backs.length
+
+    for (let i = 0; i < backsleng; i++) backs[i].style.display = 'none'
+  }
+
+  async showBack() {
+    const show = new Promise(() => {
+      const backs = this.el.getElementsByClassName('back')
+      const backsleng = backs.length
+
+      for (let i = 0; i < backsleng; i++) backs[i].style.display = 'block'
+    })
+
+    await show
   }
 
   get dom() {
@@ -94,9 +118,12 @@ export default class Splash {
     return this.el
   }
 
-  kill() {
-    document.getElementById('app').style.display = 'block'
-    this.el.remove()
-    delete this
+  async kill() {
+    const kill = new Promise(() => {
+      document.getElementById('app').style.display = 'block'
+      this.el.remove()
+    })
+
+    await kill
   }
 }

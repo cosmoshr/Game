@@ -27,7 +27,12 @@ h2 {
 }
 
 .back {
+  cursor: pointer;
   position: absolute;
   left: 5px;
   top: 5px;
+  width: 20px;
+  height: 20px;
+  fill: white;
+  background-image: url('./back.svg');
 }
