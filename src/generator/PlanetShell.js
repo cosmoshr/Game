@@ -1,3 +1,4 @@
+import planetNames from './planetNames.json'
 import planetTypes from '../constants/planets/_types'
 import MoonShell from './MoonShell'
 import ObjectShell from './ObjectShell'
@@ -13,6 +14,7 @@ export default class PlanetShell extends ObjectShell {
   constructor(path) {
     super(path)
     this.degrees = Math.random() * 360
+    this.name = planetNames[Math.random(planetNames.length)]
 
     this.genType()
     this.genResources()

@@ -3,18 +3,7 @@ import {
 } from 'pixi.js'
 import '../functions'
 import Moon from './moons'
-
-class RoundedRectangle extends Graphics {
-  constructor(x, y, width, height, cornerRadius, color, alpha) {
-    super()
-
-    this.alpha = alpha
-    // this.lineStyle(4, 0x99CCFF, 1)
-    this.beginFill(color)
-    this.drawRoundedRect(x, y, width, height, cornerRadius)
-    this.endFill()
-  }
-}
+import InfoTop from './info/InfoTop'
 
 class InfoScreen extends Graphics {
   constructor(planet) {
@@ -55,26 +44,6 @@ class PlanetCenter extends Sprite {
   }
 }
 
-class InfoShort extends Container {
-  constructor(planet) {
-    super()
-    this.position.x = this.position.x - planet.size * 0.1
-    this.position.y = this.position.y - planet.size * 0.5
-    this.outside = new RoundedRectangle(0, 0, 100, 15, 5, 0xFFFFFF, 0.5)
-    this.inside = new RoundedRectangle(1, 1, 98, 13, 5, 0xFFFFFF, 0.5)
-
-    this.text = new Text(planet.owner, {
-      fontFamily: 'Arial', fontSize: 12, fill: 0xff1010, align: 'center'
-    })
-    this.text.x += 5
-
-    // this.inside = new RoundedRectangle(-size * 0.45, -size * 1.2, size * 1.9, size / 2.5, size / 5.5, 0xFFFFFF, 1)
-    this.addChild(this.outside)
-    this.addChild(this.inside)
-    this.addChild(this.text)
-  }
-}
-
 // TODO: Write commands to display the info for each planet
 class Info extends Container {
   constructor(planet) {
@@ -82,7 +51,7 @@ class Info extends Container {
 
     this.size = planet.size
 
-    this.infoShort = new InfoShort(planet)
+    this.infoShort = new InfoTop(planet)
 
     this.infoScreen = new InfoScreen(planet)
     this.infoScreen.visible = false
@@ -104,6 +73,7 @@ export default class extends Container {
 
     this.self = planet
     this.self.owner = 'Nobody'
+    this.self.name = planet.name
 
     this.r = planet.path
     this.d = planet.degrees

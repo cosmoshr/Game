@@ -7,6 +7,10 @@ const textures = [
   {
     name: 'sun',
     url: 'assets/textures/stars/1.svg'
+  },
+  {
+    name: 'unclaimed_planet_background',
+    url: 'assets/textures/ui/unclaimedPlanetBackground.svg'
   }
 ]
 
