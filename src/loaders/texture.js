@@ -6,7 +6,7 @@ let hasInit = false
 const textures = [
   {
     name: 'sun',
-    url: 'assets/img/Stars/Sun1.png'
+    url: 'assets/textures/stars/1.svg'
   }
 ]
 
@@ -20,13 +20,13 @@ const init = () => {
     const planet = require(`../constants/planets/${planetName}.js`).default
     for (let i = 0; i < planet.numberOfTextures; i++) textures.push({
       name: `Planets_${planetName}_${i}`,
-      url: `assets/img/Planets/${planetName}/${i}.png`
+      url: `assets/textures/planets/${planetName.toLowerCase()}/${i}.svg`
     })
   })
 
   moonTypes.forEach(moonName => textures.push({
-    name: `moon_${moonName}`,
-    url: `assets/img/Moons/${moonName}.png`
+    name: `Moon_${moonName}`,
+    url: `assets/textures/moons/${moonName}.svg`
   }))
 }
 
