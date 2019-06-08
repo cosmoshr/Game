@@ -1,4 +1,5 @@
 import { Application, Graphics, Loader as PixiLoader } from 'pixi.js'
+import { Simple as Cull } from 'pixi-cull'
 import Viewport from 'pixi-viewport'
 import SolarSystem from './classes/solarSystem'
 import Loader from './loaders/loader.worker'
@@ -26,6 +27,7 @@ export default class extends Application {
     document.onresize = this.resize
 
     this.gameLoop = this.ticker.add
+    this.ticker.add(this.loop.bind(this))
 
     const background = new Graphics()
     background.beginFill(0x000010)
@@ -33,6 +35,17 @@ export default class extends Application {
     background.endFill()
     background.alpha = 1
     this.viewport.addChild(background)
+
+    this.cull = new Cull()
+    this.cull.addList(this.viewport.children)
+    this.cull.cull(this.viewport.getVisibleBounds())
+  }
+
+  loop() {
+    if (this.viewport.dirty) {
+      this.cull.cull(this.viewport.getVisibleBounds())
+      this.viewport.dirty = false
+    }
   }
 
   async init() {
@@ -97,6 +110,8 @@ export default class extends Application {
     this.cosmos[whichCosmos].cosmos.forEach(solarSystem => {
       this.viewport.addChild(new SolarSystem(solarSystem))
     })
+
+    this.cull.addList(this.viewport.children)
   }
 
   /**
