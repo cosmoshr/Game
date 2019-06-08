@@ -108,10 +108,10 @@ export default class extends Application {
 
   loadComos(whichCosmos) {
     this.cosmos[whichCosmos].cosmos.forEach(solarSystem => {
-      this.viewport.addChild(new SolarSystem(solarSystem))
+      const object = new SolarSystem(solarSystem)
+      this.viewport.addChild(object)
+      this.cull.add(object)
     })
-
-    this.cull.addList(this.viewport.children)
   }
 
   /**
