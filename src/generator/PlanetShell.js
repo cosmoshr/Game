@@ -14,7 +14,7 @@ export default class PlanetShell extends ObjectShell {
   constructor(path) {
     super(path)
     this.degrees = Math.random() * 360
-    this.name = planetNames[Math.random(planetNames.length)]
+    this.name = planetNames[Math.floor(Math.random() * planetNames.length)]
 
     this.genType()
     this.genResources()

@@ -36,6 +36,8 @@ class PlanetCenter extends Sprite {
 
     super(Loader.shared.resources[textureName].texture)
 
+    this.textureName = textureName
+
     this.r = planet.path
     this.d = planet.degrees
 
@@ -73,7 +75,6 @@ export default class extends Container {
 
     this.self = planet
     this.self.owner = 'Nobody'
-    this.self.name = planet.name
 
     this.r = planet.path
     this.d = planet.degrees
@@ -83,7 +84,9 @@ export default class extends Container {
     this.position.x = pos.x
     this.position.y = pos.y
 
-    this.addChild(new PlanetCenter(this.self))
+    const planetCenter = new PlanetCenter(this.self)
+    this.addChild(planetCenter)
+    this.self.texture = planetCenter.textureName
 
     planet.moons.forEach(moon => this.addChild(new Moon(moon)))
 

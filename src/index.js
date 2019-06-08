@@ -6,7 +6,7 @@ const game = new Game()
 game.gameLoop = () => {}
 
 const afterInit = () => {
-  game.loadComos(14)
+  game.loadComos(1)
 }
 
 game.init().then(() => { afterInit() })
