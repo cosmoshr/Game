@@ -3,6 +3,7 @@ const loadingScreenHtml = require('./loader.html').default
 
 export default class LoadingScreen {
   constructor(reason) {
+    document.getElementById('app').style.display = 'none'
     this.el = document.createElement('div')
     this.el.setAttribute('id', 'loadingScreen')
     this.el.innerHTML = loadingScreenHtml
@@ -13,11 +14,7 @@ export default class LoadingScreen {
     this.el.prepend(style)
 
     this.changeReason(reason)
-  }
-
-  get dom() {
-    document.getElementById('app').style.display = 'none'
-    return this.el
+    document.body.appendChild(this.el)
   }
 
   changeReason(reason) {

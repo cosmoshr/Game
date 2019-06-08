@@ -1,18 +1,15 @@
 import './sass/styles.scss'
-
 import Game from './game'
-import LoadingScreen from './screens/loader/loader'
-import Splash from './screens/splash/splash'
+import LoadingScreen from './screens/loader'
+import Splash from './screens/splash'
 import initComponents from './components'
 
 initComponents()
 
-let splash,
-  loadingScreen
 const game = new Game()
 
-loadingScreen = new LoadingScreen('Loading game')
-document.body.appendChild(loadingScreen.dom)
+let splash
+let loadingScreen = new LoadingScreen('Loading game')
 
 game.gameLoop = () => {}
 
@@ -20,18 +17,17 @@ const afterInit = () => {
   loadingScreen.kill()
 
   splash = new Splash()
-  splash.games = game.cosmos
-  document.body.appendChild(splash.dom)
+  splash.games = game.cosmosList
+  document.body.appendChild(splash.el)
 
   splash.onGameCreated = name => {
     splash.kill()
 
     loadingScreen = new LoadingScreen('Generating world')
-    document.body.appendChild(loadingScreen.dom)
 
     game.generateCosmos(name)
-      .then(() => {
-        game.loadComos(Object.keys(game.cosmos).length - 1)
+      .then(id => {
+        game.launchGame(id)
         loadingScreen.kill()
       })
   }
@@ -40,10 +36,9 @@ const afterInit = () => {
     splash.kill()
 
     loadingScreen = new LoadingScreen('Loading world')
-    document.body.appendChild(loadingScreen.dom)
 
     setTimeout(() => {
-      if (id - 1 < game.cosmos.length) game.loadComos(id - 1).then(() => loadingScreen.kill())
+      if (id - 1 < JSON.parse(localStorage.getItem('cosmosList')).length) game.launchGame(id).then(() => loadingScreen.kill())
       else {
         // eslint-disable-next-line no-alert
         alert('Failed to load the world')

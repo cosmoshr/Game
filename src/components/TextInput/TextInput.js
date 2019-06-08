@@ -12,6 +12,8 @@ export default class TextInput extends HTMLElement {
     this.container = document.createElement('div')
     this.text = document.createElement('input')
     this.text.setAttribute('type', 'text')
+    this.text.setAttribute('placeholder', 'An Original Name')
+
     this.container.append(this.text)
 
     const style = document.createElement('style')

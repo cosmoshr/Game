@@ -3,7 +3,7 @@ import Button from './Button/Button'
 import TextInput from './TextInput/TextInput'
 import Slider from './Slider/Slider'
 
-export default function initComponents() {
+export default function () {
   customElements.define('linear-loader', LinearLoader)
   customElements.define('custom-button', Button)
   customElements.define('custom-text-input', TextInput)

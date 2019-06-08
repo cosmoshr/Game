@@ -1,12 +1,27 @@
-import { Application, Graphics, Loader as PixiLoader } from 'pixi.js'
+import {
+  Application,
+  Graphics,
+  Loader as PixiLoader
+} from 'pixi.js'
 import Viewport from 'pixi-viewport'
+import Dexie from 'dexie'
 import SolarSystem from './classes/solarSystem'
-import Loader from './loaders/loader.worker'
-import Settings from './Settings'
+import textureLoader from './loaders/texture'
+import Generator from './generator/generator.worker'
 
 export default class extends Application {
   constructor() {
-    super({ width: innerWidth, height: innerHeight, resolution: Settings.quality })
+    super({
+      width: innerWidth,
+      height: innerHeight,
+      resolution: 1
+    })
+
+    this.db = new Dexie('CosmosHR')
+    this.db.version(1).stores({
+      cosmos: '++id,cosmos',
+      cosmosList: ''
+    })
 
     this.view.id = 'app'
     document.body.appendChild(this.view)
@@ -37,90 +52,36 @@ export default class extends Application {
   }
 
   async init() {
-    const textureLoader = new Promise((resolve, reject) => {
-      const loader = new Loader()
-      loader.postMessage({ action: 'Load', data: { item: 'Texture', which: 'all' } })
-      loader.onmessage = (texture, err) => {
-        if (err) reject(err)
-        else PixiLoader.shared.add(texture.data).load(() => resolve('Done'))
-      }
+    this.id = 1
+    return new Promise(resolve => {
+      PixiLoader.shared.add(textureLoader()).load(() => resolve('Done'))
     })
-    const settingsLoader = new Promise((resolve, reject) => {
-      const loader = new Loader()
-      loader.postMessage({ action: 'Load', data: { item: 'Settings' } })
-      loader.onmessage = (settings, err) => {
-        if (err) reject(err)
-        else {
-          this.settings = settings.data
-          resolve('Done')
-        }
-      }
-    })
-    const cosmosLoader = new Promise((resolve, reject) => {
-      const loader = new Loader()
-      loader.postMessage({
-        action: 'Load',
-        data: { item: 'Cosmos', which: 'List' }
-      })
-      loader.onmessage = (cosmos, err) => {
-        if (err) reject(err)
-        else {
-          this.cosmos = cosmos.data
-          resolve('Done')
-        }
-      }
-    })
+  }
 
-    await Promise.all([textureLoader, settingsLoader, cosmosLoader])
-    return ('Done')
+  async launchGame(id) {
+    const cosmos = await this.db.cosmos.get(id)
+    cosmos.cosmos.forEach(solarSystem => {
+      this.viewport.addChild(new SolarSystem(solarSystem))
+    })
+    this.renderer.resolution = window.localStorage.getItem('quality') || 1
   }
 
   async generateCosmos(description) {
-    const generateCosmos = new Promise((resolve, reject) => {
-      const loader = new Loader()
-      loader.postMessage({
-        action: 'Generate',
-        data: { size: 'auto', description }
-      })
-      loader.onmessage = (newCosmos, err) => {
-        if (err) reject(err)
-        else {
-          this.cosmos = newCosmos.data
-          resolve('Done')
-        }
+    return new Promise(resolve => {
+      const generator = new Generator()
+      generator.postMessage({ size: 'auto', description })
+      generator.onmessage = async newCosmos => {
+        const id = await this.db.cosmos.add({
+          cosmos: newCosmos.data
+        })
+        const cosmosList = JSON.parse(window.localStorage.getItem('cosmosList')) || []
+        cosmosList.push({
+          description, id, dateCreated: Date.now(), lastModified: Date.now()
+        })
+        window.localStorage.setItem('cosmosList', JSON.stringify(cosmosList))
+        resolve(id)
       }
     })
-
-    await generateCosmos
-  }
-
-  async loadComos(whichCosmos) {
-    this.cosmos[whichCosmos].cosmos.forEach(solarSystem => {
-      this.viewport.addChild(new SolarSystem(solarSystem))
-    })
-  }
-
-  /**
-   * updateCosmos(1, {description: 'Test'})
-   * @param {Number} whichCosmos The index number of the cosmos
-   * @param {Object} newCosmos 1 and only 1 property of the newCosmos
-  */
-  async updateCosmos(whichCosmos, newCosmos) {
-    const updateCosmos = await new Promise((resolve, reject) => {
-      const loader = new Loader()
-      loader.postMessage({
-        action: 'Update',
-        data: { item: 'Cosmos', data: { whichCosmos, newCosmos } }
-      })
-      loader.onmessage = (callback, err) => {
-        if (err) reject(err)
-        else {
-          this.cosmos = callback.data
-          resolve('Done')
-        }
-      }
-    })
-    return updateCosmos
   }
 
   resize() {

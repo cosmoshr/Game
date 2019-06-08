@@ -4,17 +4,17 @@ export default class LinearLoader extends HTMLElement {
   constructor() {
     super()
 
-    this.shadow = this.attachShadow({ mode: 'closed' })
+    const shadowDOM = this.attachShadow({ mode: 'closed' })
 
     this.loader = document.createElement('progress')
     this.loader.setAttribute('max', 100)
     this.loader.setAttribute('class', 'pure-material-progress-linear')
 
-    const style = document.createElement('style')
-    style.textContent = loaderStyle
+    const css = document.createElement('style')
+    css.textContent = loaderStyle
 
-    this.shadow.appendChild(this.loader)
-    this.shadow.appendChild(style)
+    shadowDOM.appendChild(this.loader)
+    shadowDOM.appendChild(css)
 
     this.attributeChange()
 

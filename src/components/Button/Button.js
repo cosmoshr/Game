@@ -1,23 +1,21 @@
 const sharedCSS = require('../shared.css')
 const localCSS = require('./style.css')
 
-const css = sharedCSS + localCSS
-
 export default class Button extends HTMLElement {
   constructor() {
     super()
 
-    this.shadow = this.attachShadow({ mode: 'closed' })
+    const shadowDOM = this.attachShadow({ mode: 'closed' })
 
-    this.container = document.createElement('div')
-    this.button = document.createElement('button')
-    this.button.append(document.createElement('slot'))
-    this.container.append(this.button)
+    const container = document.createElement('div')
+    const button = document.createElement('button')
+    button.append(document.createElement('slot'))
+    container.append(button)
 
-    const style = document.createElement('style')
-    style.textContent = css
+    const css = document.createElement('style')
+    css.textContent = sharedCSS + localCSS
 
-    this.shadow.appendChild(this.container)
-    this.shadow.appendChild(style)
+    shadowDOM.appendChild(container)
+    shadowDOM.appendChild(css)
   }
 }
