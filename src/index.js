@@ -38,7 +38,7 @@ const afterInit = () => {
     loadingScreen = new LoadingScreen('Loading world')
 
     setTimeout(() => {
-      if (id - 1 < JSON.parse(localStorage.getItem('cosmosList')).length) game.launchGame(id).then(() => loadingScreen.kill())
+      if (id - 1 < localStorage.getItem('cosmosList').length) game.launchGame(id).then(() => loadingScreen.kill())
       else {
         // eslint-disable-next-line no-alert
         alert('Failed to load the world')
@@ -47,14 +47,6 @@ const afterInit = () => {
       }
     }, 100)
   }
-
-
-  // const loadtype = confirm('Load or Generate')
-  // if (loadtype) {
-  //   const world = Number(prompt(`Choose a world between 1-${Object.keys(game.cosmos).length}`))
-  //   if (world < Object.keys(game.cosmos).length) game.loadComos(world - 1)
-  //   else console.log('Err please reload')
-  // } else game.generateCosmos('A Galaxy Far Far Away').then(() => { game.loadComos(Object.keys(game.cosmos).length - 1) })
 }
 
 game.init().then(() => { afterInit() })
