@@ -11,6 +11,18 @@ const textures = [
   {
     name: 'unclaimed_planet_background',
     url: 'assets/textures/ui/unclaimedPlanetBackground.svg'
+  },
+  {
+    name: 'your_planet_background',
+    url: 'assets/textures/ui/yourPlanetBackground.svg'
+  },
+  {
+    name: 'other_planet_background',
+    url: 'assets/textures/ui/otherPlanetBackground.svg'
+  },
+  {
+    name: 'blank',
+    url: 'assets/textures/blank.svg'
   }
 ]
 

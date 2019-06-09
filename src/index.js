@@ -1,5 +1,8 @@
 import './sass/styles.scss'
 import Game from './game'
+import Players, { Player } from './data/players'
+
+Players.push(new Player('Nobody', true))
 
 const game = new Game()
 
