@@ -5,6 +5,7 @@ import LoadingOverlay from './overlays/loading'
 import Splash from './overlays/splash'
 import Overlay from './overlays/overlay'
 import initComponents from './components'
+import newError from './screens/error'
 
 const game = new Game()
 
@@ -50,14 +51,13 @@ const mainMenu = async () => {
   splash.onLoadGame = async id => {
     splash.kill()
     loadingOverlay.message = 'Loading World'
-    if (id - 1 < JSON.parse(localStorage.getItem('cosmosList')).length) {
+
+    if (localStorage.getItem('cosmosList').length > id - 1) {
       await game.launchGame(id)
       gameInProgress()
     } else {
-      // eslint-disable-next-line no-alert
-      alert('Failed to load the world')
       loadingOverlay.hide()
-      throw new Error('Failed to load the world')
+      newError(new Error('Failed to load the world'))
     }
   }
 }

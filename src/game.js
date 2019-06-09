@@ -74,7 +74,7 @@ export default class extends Application {
     cosmos.cosmos.forEach(solarSystem => {
       this.viewport.addChild(new SolarSystem(solarSystem))
     })
-    this.renderer.resolution = window.localStorage.getItem('quality') || 1
+    this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
   }
 
   async generateCosmos(description) {
