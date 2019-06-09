@@ -3,6 +3,7 @@ import Game from './game'
 import LoadingScreen from './screens/loader'
 import Splash from './screens/splash'
 import initComponents from './components'
+import newError from './screens/error'
 
 initComponents()
 
@@ -38,12 +39,10 @@ const afterInit = () => {
     loadingScreen = new LoadingScreen('Loading world')
 
     setTimeout(() => {
-      if (id - 1 < localStorage.getItem('cosmosList').length) game.launchGame(id).then(() => loadingScreen.kill())
+      if (localStorage.getItem('cosmosList').length > id - 1) game.launchGame(id).then(() => loadingScreen.kill())
       else {
-        // eslint-disable-next-line no-alert
-        alert('Failed to load the world')
         loadingScreen.kill()
-        throw new Error('Failed to load the world')
+        newError(new Error('Failed to load the world'))
       }
     }, 100)
   }
