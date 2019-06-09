@@ -5,7 +5,7 @@ import LoadingOverlay from './overlays/loading'
 import Splash from './overlays/splash'
 import Overlay from './overlays/overlay'
 import initComponents from './components'
-import newError from './screens/error'
+import newError from './overlays/error'
 
 const game = new Game()
 
