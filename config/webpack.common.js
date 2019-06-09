@@ -41,29 +41,7 @@ const modules = {
     {
       test: /\.css$/,
       exclude: /node_modules/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: config.SOURCEMAPS
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: () => [
-                autoprefixer({
-                  browsers: ['last 5 versions']
-                })
-              ],
-              sourceMap: 'inline'
-            }
-          }
-        ]
-      })
+      use: ['to-string-loader', 'css-loader']
     },
     {
       test: /\.(woff|woff2|eot|ttf|svg|ico|jpg|jpeg|png)$/,
@@ -71,7 +49,10 @@ const modules = {
     },
     {
       test: /\.scss$/,
-      exclude: /node_modules/,
+      exclude: [
+        /node_modules/,
+        /\.module\.scss$/
+      ],
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
