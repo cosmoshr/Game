@@ -25,6 +25,7 @@ export default class extends Application {
 
     this.view.id = 'app'
     document.body.appendChild(this.view)
+    window.game = this.view
 
     this.viewport = new Viewport({
       screenWidth: window.innerWidth,
@@ -56,6 +57,16 @@ export default class extends Application {
     return new Promise(resolve => {
       PixiLoader.shared.add(textureLoader()).load(() => resolve('Done'))
     })
+  }
+
+  reset() {
+    for (let i = this.viewport.children.length - 1; i >= 0; i--) this.viewport.removeChild(this.viewport.children[i])
+    const background = new Graphics()
+    background.beginFill(0x000010)
+    background.drawRect(-100000, -100000, 200000, 200000)
+    background.endFill()
+    background.alpha = 1
+    this.viewport.addChild(background)
   }
 
   async launchGame(id) {

@@ -1,7 +1,7 @@
 const splashHTML = require('./splash.html').default
 const splashCSS = require('./splash.css')
 
-export default class Splash {
+export default class {
   constructor() {
     this.el = document.createElement('div')
     this.el.setAttribute('id', 'splash')
@@ -20,10 +20,8 @@ export default class Splash {
     this.el.querySelector('#loadGame').onclick = this.loadGameMenu.bind(this)
     this.el.querySelector('#openSettings').onclick = this.settingsMenu.bind(this)
     this.el.querySelector('#saveSettings').onclick = this.saveSettings.bind(this)
-
-    document.getElementById('app').style.display = 'none'
+    this.el.querySelector('#quit').onclick = () => history.go(-1)
   }
-
 
   settingsMenu() {
     this.showBack()
@@ -101,5 +99,9 @@ export default class Splash {
   kill() {
     document.querySelector('#app').style.display = 'block'
     this.el.remove()
+  }
+
+  pressed(key) {
+    if (key.key === 'Escape' || key.key === 'ArrowLeft') this.back()
   }
 }
