@@ -1,8 +1,5 @@
-import {
-  Application,
-  Graphics,
-  Loader as PixiLoader
-} from 'pixi.js'
+import { Application, Graphics, Loader as PixiLoader } from 'pixi.js'
+import { Simple as Cull } from 'pixi-cull'
 import Viewport from 'pixi-viewport'
 import Dexie from 'dexie'
 import SolarSystem from './classes/solarSystem'
@@ -43,6 +40,7 @@ export default class extends Application {
     document.onresize = this.resize
 
     this.gameLoop = this.ticker.add
+    this.ticker.add(this.loop.bind(this))
 
     const background = new Graphics()
     background.beginFill(0x000010)
@@ -50,6 +48,17 @@ export default class extends Application {
     background.endFill()
     background.alpha = 1
     this.viewport.addChild(background)
+
+    this.cull = new Cull()
+    this.cull.addList(this.viewport.children)
+    this.cull.cull(this.viewport.getVisibleBounds())
+  }
+
+  loop() {
+    if (this.viewport.dirty) {
+      this.cull.cull(this.viewport.getVisibleBounds())
+      this.viewport.dirty = false
+    }
   }
 
   async init() {
@@ -73,6 +82,7 @@ export default class extends Application {
     const cosmos = await this.db.cosmos.get(id)
     cosmos.cosmos.forEach(solarSystem => {
       this.viewport.addChild(new SolarSystem(solarSystem))
+      this.cull.add(solarSystem)
     })
     this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
   }
