@@ -33,9 +33,9 @@
     "dexie": "^2.0.4",
     "pixi-viewport": "^3.23.2",
     "pixi.js": "^5.0.4",
-    "subworkers": "^1.0.1"
-    "pixi-cull": "^0.5.0",
     "subworkers": "^1.0.1",
+    "pixi-cull": "^0.5.0",
+    "subworkers": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^v7.4.5",
