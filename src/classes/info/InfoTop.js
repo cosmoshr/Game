@@ -3,7 +3,7 @@ import {
 } from 'pixi.js'
 import Line from '../graphics/Line'
 import Players from '../../data/players'
-
+import PieCircle from '../graphics/Pie/circle'
 import '../../functions'
 
 // Type 1: Unclaimed object
@@ -115,7 +115,6 @@ export default class InfoTop extends Container {
     this.status = Players.getPlanetOwnershipStatus(planet.owner)
 
     this.addChild(new Background(this.status))
-    this.addChild(new PlanetImage(planet.texture))
 
     if (this.status === 1) this.unclaimed(planet)
     else if (this.status === 2) this.yours(planet)
@@ -151,9 +150,14 @@ export default class InfoTop extends Container {
     this.addChild(this.projectObj)
   }
 
-  others(planet) {
-    this.addChild(new PlanetImage(planet.texture))
-    this.addChild(new Name(planet.name, 3))
-    this.addChild(new BotomText(planet.owner))
+  others() {
+    this.test = new PieCircle(0, 0, 7.5, 110, 0x808080)
+    this.test.position.x = 7.5
+    this.test.position.y = 7.5
+    this.addChild(this.test)
+
+    // this.addChild(new PlanetImage(planet.texture))
+    // this.addChild(new Name(planet.name, 3))
+    // this.addChild(new BotomText(planet.owner))
   }
 }
