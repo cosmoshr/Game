@@ -28,6 +28,7 @@ export default class {
 
     this.el.querySelector('#home').className = 'page'
     this.el.querySelector('#settings').className = 'fadein page'
+    this.el.querySelector('#quality').value = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
   }
 
   saveSettings() {

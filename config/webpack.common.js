@@ -42,13 +42,6 @@ const modules = {
       test: /\.css$/,
       exclude: /node_modules/,
       use: [
-        'to-string-loader',
-        {
-          loader: CssExtractPlugin.loader,
-          options: {
-            hmr: process.env.NODE_ENV === 'development'
-          }
-        },
         {
           loader: 'css-loader',
           options: {
