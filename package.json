@@ -14,7 +14,8 @@
     "build:electron": "cross-env WEBPACK_ENV=electron-renderer yarn build && electron-builder",
     "serve": "webpack-dev-server -d --progress --color --config config/webpack.dev.js --host 0.0.0.0",
     "serve:electron": "concurrently \"cross-env WEBPACK_ENV=electron-renderer yarn serve\" \"wait-on http://localhost:8080 && cross-env ELECTRON_ENV=serve electron electron.js\"",
-    "test": "echo No test"
+    "test": "echo No test",
+    "installall": "yarn install && subgit i"
   },
   "build": {
     "productName": "Cosmos Habititation Race",
@@ -32,8 +33,10 @@
   "dependencies": {
     "dexie": "^2.0.4",
     "pixi-cull": "^0.5.0",
+    "pixi-sound": "^3.0.3",
     "pixi-viewport": "^3.23.2",
     "pixi.js": "^5.0.4",
+    "subgit": "https://github.com/craftydh/subgit",
     "subworkers": "^1.0.1"
   },
   "devDependencies": {
@@ -83,7 +86,7 @@
   "config": {
     "ghooks": {
       "pre-commit": "yarn lint",
-      "post-merge": "yarn install"
+      "post-merge": "yarn installall"
     }
   }
 }

@@ -135,7 +135,8 @@ const plugins = [
   }),
   new HtmlWebpackPlugin({
     template: `${config.OUTPUT}/index.html`
-  })
+  }),
+  new CopyWebpackPlugin([{from: 'subgit/soundtrack', to: 'assets/soundtrack'}])
 ]
 
 if (process.env.WEBPACK_ENV === 'electron-renderer') plugins.push(new CopyWebpackPlugin([{ from: 'electron.js' }]))
