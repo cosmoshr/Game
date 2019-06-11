@@ -1,7 +1,7 @@
 // Import dependencies
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
@@ -41,47 +41,65 @@ const modules = {
     {
       test: /\.css$/,
       exclude: /node_modules/,
-      use: ['to-string-loader', 'css-loader']
+      use: [
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: config.SOURCEMAPS
+          }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
+            plugins: () => [
+              autoprefixer()
+            ],
+            sourceMap: 'inline'
+          }
+        }
+      ]
     },
     {
       test: /\.(woff|woff2|eot|ttf|svg|ico|jpg|jpeg|png)$/,
-      loader: 'url-loader?limit=1000000'
+      loader: 'url-loader',
+      options: {
+        limit: 1000000
+      }
     },
     {
       test: /\.scss$/,
-      exclude: [
-        /node_modules/,
-        /\.module\.scss$/
-      ],
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: config.SOURCEMAPS
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: () => [
-                autoprefixer({
-                  browsers: ['last 5 versions']
-                })
-              ],
-              sourceMap: 'inline'
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: config.SOURCEMAPS
-            }
+      exclude: /node_modules/,
+      use: [
+        {
+          loader: CssExtractPlugin.loader,
+          options: {
+            hmr: process.env.NODE_ENV === 'development'
           }
-        ]
-      })
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: config.SOURCEMAPS
+          }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
+            plugins: () => [
+              autoprefixer()
+            ],
+            sourceMap: 'inline'
+          }
+        },
+        {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: config.SOURCEMAPS
+          }
+        }
+      ]
     },
     {
       test: /\.html$/,
@@ -101,17 +119,20 @@ const modules = {
  * CleanWebpackPlugin()
  * A webpack plugin to remove/clean your build folder(s) before building.
  *
- * ExtractTextPlugin()
+ * CssExtractPlugin()
  * A webpack plugin to extract text from a bundle, or bundles, into a separate file.
  *
  * HtmlWebpackPlugin()
  * A webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
  */
 const plugins = [
-  new CleanWebpackPlugin([config.DIST], {
-    allowExternal: true
+  new CleanWebpackPlugin({
+    cleanOnceBeforeBuildPatterns: ['!public']
   }),
-  new ExtractTextPlugin(config.CSSFILENAME),
+  new CssExtractPlugin({
+    filename: config.CSSFILENAME,
+    chunkFilename: '[id].css'
+  }),
   new HtmlWebpackPlugin({
     template: `${config.OUTPUT}/index.html`
   })

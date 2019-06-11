@@ -81,8 +81,9 @@ export default class extends Application {
   async launchGame(id) {
     const cosmos = await this.db.cosmos.get(id)
     cosmos.cosmos.forEach(solarSystem => {
-      this.viewport.addChild(new SolarSystem(solarSystem))
-      this.cull.add(solarSystem)
+      const solorSystemObj = new SolarSystem(solarSystem)
+      this.viewport.addChild(solorSystemObj)
+      this.cull.add(solorSystemObj)
     })
     this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
   }
