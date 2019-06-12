@@ -1,14 +1,11 @@
 /* eslint-disable no-use-before-define */
 import './sass/styles.scss'
 import Game from './game'
-import Players, { Player } from './data/players'
 import LoadingOverlay from './overlays/loading'
 import Splash from './overlays/splash'
 import Overlay from './overlays/overlay'
 import initComponents from './components'
 import newError from './overlays/error'
-
-Players.push(new Player('Nobody', false))
 
 const game = new Game()
 

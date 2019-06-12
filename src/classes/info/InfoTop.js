@@ -1,9 +1,7 @@
 import {
   Container, Loader, Sprite, Text, TextStyle
 } from 'pixi.js'
-import Line from '../graphics/Line'
 import Players from '../../data/players'
-import PieCircle from '../graphics/Pie/circle'
 import '../../functions'
 
 // Type 1: Unclaimed object
@@ -29,7 +27,6 @@ class Background extends Sprite {
 }
 
 // Todo: Write code to make this usable when we start adding project suport to planets later
-// Todo: Make a pie graph type thing that can go behind this
 class ProjectImage extends Sprite {
   constructor() {
     super(Loader.shared.resources.sun.texture)
@@ -42,7 +39,6 @@ class ProjectImage extends Sprite {
   }
 }
 
-// Todo: Make a pie graph type thing that can go behind this
 class PlanetImage extends Sprite {
   constructor(textureName) {
     super(Loader.shared.resources[textureName].texture)
@@ -135,7 +131,6 @@ export default class InfoTop extends Container {
 
   unclaimed(planet) {
     this.addChild(new PlanetImage(planet.texture))
-    this.addChild(new Line(0.0375, 0xCECECE, 1, 15.75, 3.75, 15.75, 11.25))
     this.addChild(new Name(planet.name, 1))
   }
 
@@ -150,14 +145,9 @@ export default class InfoTop extends Container {
     this.addChild(this.projectObj)
   }
 
-  others() {
-    this.test = new PieCircle(0, 0, 7.5, 110, 0x808080)
-    this.test.position.x = 7.5
-    this.test.position.y = 7.5
-    this.addChild(this.test)
-
-    // this.addChild(new PlanetImage(planet.texture))
-    // this.addChild(new Name(planet.name, 3))
-    // this.addChild(new BotomText(planet.owner))
+  others(planet) {
+    this.addChild(new PlanetImage(planet.texture))
+    this.addChild(new Name(planet.name, 3))
+    this.addChild(new BotomText(planet.owner))
   }
 }
