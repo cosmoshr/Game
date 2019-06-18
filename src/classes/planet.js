@@ -49,6 +49,8 @@ export default class extends Container {
   constructor(planet) {
     super()
 
+    this.type = planet.type.name
+
     this.r = planet.path
     this.d = planet.degrees
 

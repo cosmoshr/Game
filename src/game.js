@@ -7,6 +7,11 @@ import textureLoader from './loaders/texture'
 import Generator from './generator/generator.worker'
 
 export default class extends Application {
+  // TODO: Clean this up
+  planets = []
+
+  solarSystems = []
+
   constructor() {
     super({
       width: innerWidth,
@@ -80,12 +85,26 @@ export default class extends Application {
 
   async launchGame(id) {
     const cosmos = await this.db.cosmos.get(id)
-    cosmos.cosmos.forEach(solarSystem => {
+
+    const solarSystemPromises = []
+
+    cosmos.cosmos.forEach((solarSystem, index) => {
       const solorSystemObj = new SolarSystem(solarSystem)
-      this.viewport.addChild(solorSystemObj)
-      this.cull.add(solorSystemObj)
+
+      this.solarSystems.push(solorSystemObj)
+      this.planets = this.planets.concat(solarSystem.planets)
+
+      solarSystemPromises.push(new Promise(r => setTimeout(() => {
+        this.viewport.addChild(solorSystemObj)
+        this.cull.add(solorSystemObj)
+
+        r()
+      }, 5 + index)))
     })
+
     this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
+
+    await solarSystemPromises.all()
   }
 
   async generateCosmos(description) {

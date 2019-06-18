@@ -1,8 +1,10 @@
-import { Container, Graphics } from 'pixi.js'
+import { Container } from 'pixi.js'
 import Planet from './planet'
 import Star from './star'
 
 export default class extends Container {
+  planets = []
+
   constructor(solarSystem) {
     super()
 
@@ -14,14 +16,11 @@ export default class extends Container {
     this.position.y = this.y
 
     solarSystem.planets.forEach(planet => {
-      this.addChild(new Planet(planet))
+      const planetObj = new Planet(planet)
+      this.addChild(planetObj)
+      this.planets.push(planetObj)
     })
-    this.addChild(new Star(0, 0, solarSystem.sunSize))
 
-    const circle = new Graphics()
-    circle.beginFill(0xFFFFFF)
-    circle.drawCircle(this.x, this.y, this.r)
-    circle.endFill()
-    this.addChild(circle)
+    this.addChild(new Star(0, 0, solarSystem.sunSize))
   }
 }
