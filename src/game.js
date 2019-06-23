@@ -5,12 +5,15 @@ import Dexie from 'dexie'
 import SolarSystem from './classes/solarSystem'
 import textureLoader from './loaders/texture'
 import Generator from './generator/generator.worker'
+import Planets from './classes/planets'
+import SolarSystems from './classes/SolarSystems'
 
 export default class extends Application {
-  // TODO: Clean this up
-  planets = []
+  planets = new Planets()
 
-  solarSystems = []
+  solarSystems = new SolarSystems()
+
+  playerObervations = []
 
   constructor() {
     super({
@@ -21,7 +24,7 @@ export default class extends Application {
 
     this.db = new Dexie('CosmosHR')
     this.db.version(1).stores({
-      cosmos: '++id,cosmos',
+      cosmos: '++id,cosmos,starting',
       cosmosList: ''
     })
 
@@ -91,10 +94,10 @@ export default class extends Application {
     cosmos.cosmos.forEach((solarSystem, index) => {
       const solorSystemObj = new SolarSystem(solarSystem)
 
-      this.solarSystems.push(solorSystemObj)
-      this.planets = this.planets.concat(solarSystem.planets)
-
       solarSystemPromises.push(new Promise(r => setTimeout(() => {
+        this.solarSystems.push(solorSystemObj)
+        this.planets.addPlanets(solorSystemObj.planets)
+
         this.viewport.addChild(solorSystemObj)
         this.cull.add(solorSystemObj)
 
@@ -104,7 +107,17 @@ export default class extends Application {
 
     this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
 
-    await solarSystemPromises.all()
+    await Promise.all(solarSystemPromises)
+
+    this.getStartingPosiotion()
+
+    // Todo: Save the location of the starting planet to an array
+    // console.log(await this.db.cosmos.get(id))
+
+    // const test
+    // this.db.cosmos.get(id) =
+
+    // console.log(await this.db.cosmos.get(id))
   }
 
   async generateCosmos(description) {
@@ -122,6 +135,20 @@ export default class extends Application {
         window.localStorage.setItem('cosmosList', JSON.stringify(cosmosList))
         resolve(id)
       }
+    })
+  }
+
+  getStartingPosiotion() {
+    const solarSystem = this.solarSystems.habitable[Math.floor(Math.random() * this.solarSystems.habitable.length)]
+    const planet = solarSystem.habitablePlanets[Math.floor(Math.random() * solarSystem.habitablePlanets.length)]
+
+    this.viewport.moveCenter(planet.x + solarSystem.x, planet.y + solarSystem.y)
+    this.viewport.fitWidth(window.innerWidth)
+
+    this.playerObervations.push({
+      x: planet.x + solarSystem.x,
+      y: planet.x + solarSystem.x,
+      r: 500
     })
   }
 

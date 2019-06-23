@@ -38,5 +38,7 @@ export default class PlanetShell extends ObjectShell {
     })
 
     this.type = types[Math.floor(Math.random() * types.length)]
+
+    this.texture = Math.floor(Math.random() * this.type.numberOfTextures)
   }
 }

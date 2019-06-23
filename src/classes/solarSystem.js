@@ -5,6 +5,8 @@ import Star from './star'
 export default class extends Container {
   planets = []
 
+  habitablePlanets = []
+
   constructor(solarSystem) {
     super()
 
@@ -19,6 +21,8 @@ export default class extends Container {
       const planetObj = new Planet(planet)
       this.addChild(planetObj)
       this.planets.push(planetObj)
+
+      if (planetObj.type === 'Habitital_Planet') this.habitablePlanets.push(planetObj)
     })
 
     this.addChild(new Star(0, 0, solarSystem.sunSize))

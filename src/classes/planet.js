@@ -18,8 +18,7 @@ class RoundedRectangle extends Graphics {
 
 class PlanetCenter extends Sprite {
   constructor(planet) {
-    const rand = Math.floor(Math.random() * planet.type.numberOfTextures)
-    const textureName = `Planets_${planet.type.name}_${rand}`
+    const textureName = `Planets_${planet.type.name}_${planet.texture}`
 
     super(Loader.shared.resources[textureName].texture)
 
