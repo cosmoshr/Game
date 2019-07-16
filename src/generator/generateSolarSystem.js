@@ -1,4 +1,4 @@
-import '../functions'
+import '../mathExtended'
 
 const solarSystems = []
 

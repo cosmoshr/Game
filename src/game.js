@@ -1,7 +1,7 @@
 import {
-  Application, Graphics, Loader as PixiLoader
+  Application, Loader as PixiLoader
 } from 'pixi.js'
-import SolarSystem from './classes/solarSystem'
+import SolarSystem from './solarSystem'
 import loader from './loader'
 import Generator from './generator/generator.worker'
 import SoundManager from './sound'
@@ -12,6 +12,7 @@ import LoadingOverlay from './overlays/loading'
 import Splash from './overlays/splash'
 import newError from './overlays/error'
 import Overlay from './overlays/overlay'
+import Background from './background'
 
 export default class Game extends Application {
   ready = false
@@ -30,18 +31,12 @@ export default class Game extends Application {
 
     this.viewport = new Viewport(this.renderer)
     this.stage.addChild(this.viewport)
-    this.cull = new Cull(this.viewport)
 
-    document.onresize = this.resize
+    window.onresize = () => this.renderer.resize(innerWidth, innerHeight)
 
-    this.gameLoop = this.ticker.add
-
-    const background = new Graphics()
-    background.beginFill(0x000010)
-    background.drawRect(-100000, -100000, 200000, 200000)
-    background.endFill()
-    background.alpha = 1
+    const background = new Background()
     this.viewport.addChild(background)
+    this.cull = new Cull(this.viewport)
 
     this.soundManager = new SoundManager()
 
@@ -60,7 +55,10 @@ export default class Game extends Application {
   }
 
   loop() {
-    this.id = 1
+    if (this.viewport.dirty) {
+      this.cull.cull(this.viewport.getVisibleBounds())
+      this.viewport.dirty = false
+    }
   }
 
   splashScreen() {
@@ -107,10 +105,8 @@ export default class Game extends Application {
 
     PixiLoader.shared.load(() => {
       loading.kill()
+      this.soundManager.trigger('Whenever', false, true)
     })
-
-    console.log(PixiLoader.shared.progress)
-    this.soundManager.trigger('Whenever', false, true)
 
     const overlay = new Overlay()
 
@@ -128,11 +124,7 @@ export default class Game extends Application {
 
   reset() {
     for (let i = this.viewport.children.length - 1; i >= 0; i--) this.viewport.removeChild(this.viewport.children[i])
-    const background = new Graphics()
-    background.beginFill(0x000010)
-    background.drawRect(-100000, -100000, 200000, 200000)
-    background.endFill()
-    background.alpha = 1
+    const background = new Background()
     this.viewport.addChild(background)
   }
 
@@ -162,9 +154,5 @@ export default class Game extends Application {
         resolve(id)
       }
     })
-  }
-
-  resize() {
-    this.renderer.resize(innerWidth, innerHeight)
   }
 }
