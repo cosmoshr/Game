@@ -4,6 +4,13 @@ import Soundtrack from '../public/assets/soundtrack'
 
 let hasInit = false
 
+const essential = [
+  {
+    name: 'Song_Main Menu',
+    url: 'assets/soundtrack/Main Menu.mp3'
+  }
+]
+
 const loaderArray = [
   {
     name: 'sun',
@@ -36,7 +43,8 @@ const init = () => {
   }))
 }
 
-export default function () {
+export default function (_essential = false) {
   if (!hasInit) init()
-  return loaderArray
+  if (!_essential) return loaderArray
+  return essential
 }
