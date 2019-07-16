@@ -4,18 +4,12 @@ node_js:
 
 cache: yarn
 
-allow_failures:
-  - os: windows
-
 os:
   - linux
   - osx
 
 script:
   - yarn build && yarn build:electron
-
-after_script:
-  - if [ "$TRAVIS_OS_NAME" != "linux" && "$TRAVIS_OS_NAME" != "osx" ]; then powershell -executionpolicy bypass "shutdown /f /s";  fi
 
 deploy:
 - provider: pages

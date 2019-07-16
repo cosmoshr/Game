@@ -1,7 +1,7 @@
 const splashHTML = require('./splash.html').default
 const splashCSS = require('./splash.css')
 
-export default class {
+export default class Splash {
   constructor() {
     this.el = document.createElement('div')
     this.el.setAttribute('id', 'splash')
@@ -28,6 +28,7 @@ export default class {
 
     this.el.querySelector('#home').className = 'page'
     this.el.querySelector('#settings').className = 'fadein page'
+    this.el.querySelector('#quality').value = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
   }
 
   saveSettings() {

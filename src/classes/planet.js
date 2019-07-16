@@ -36,7 +36,7 @@ class Info extends Container {
   }
 }
 
-export default class extends Container {
+export default class Planet extends Container {
   constructor(planet) {
     super()
 

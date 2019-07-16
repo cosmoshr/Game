@@ -28,7 +28,7 @@ class SunCenter extends Sprite {
   }
 }
 
-export default class extends Container {
+export default class Star extends Container {
   constructor(x, y, size) {
     super()
 

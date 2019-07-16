@@ -19,8 +19,13 @@ document.addEventListener('keydown', key => {
 
 game.gameLoop = () => {}
 const gameInProgress = async () => {
+  game.soundManager.trigger('Whenever', false, true)
+
   const overlay = new Overlay()
   window.currentTarget = overlay
+
+  overlay.open = () => game.soundManager.trigger('Main Menu', true)
+  overlay.close = () => game.soundManager.endTemp()
 
   overlay.quitGame = () => {
     game.reset()
@@ -33,6 +38,7 @@ const gameInProgress = async () => {
 }
 
 const mainMenu = async () => {
+  game.soundManager.trigger('Main Menu')
   const splash = new Splash()
   window.currentTarget = splash
 
@@ -40,6 +46,7 @@ const mainMenu = async () => {
   document.body.appendChild(splash.el)
 
   splash.onGameCreated = async name => {
+    game.soundManager.trigger('Game Starts')
     splash.kill()
 
     loadingOverlay.message = 'Loading World'
@@ -48,6 +55,7 @@ const mainMenu = async () => {
     gameInProgress()
   }
   splash.onLoadGame = async id => {
+    game.soundManager.trigger('Game Starts')
     splash.kill()
     loadingOverlay.message = 'Loading World'
 

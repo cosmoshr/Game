@@ -1,6 +1,6 @@
 const style = require('./style.css')
 
-export default class extends HTMLElement {
+export default class Slider extends HTMLElement {
   constructor() {
     super()
 
@@ -14,7 +14,7 @@ export default class extends HTMLElement {
 
     this.slider = document.createElement('input')
     this.slider.setAttribute('type', 'range')
-    this.slider.value = window.localStorage.getItem('quality') || 1
+    this.slider.value = 1
     this.slider.setAttribute('min', 1)
     this.slider.setAttribute('max', 10)
     this.slider.setAttribute('step', 0.1)
@@ -25,5 +25,9 @@ export default class extends HTMLElement {
 
   get value() {
     return this.slider.value
+  }
+
+  set value(value) {
+    this.slider.value = value
   }
 }

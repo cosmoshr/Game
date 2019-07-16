@@ -1,12 +1,15 @@
-import { Application, Graphics, Loader as PixiLoader } from 'pixi.js'
+import {
+  Application, Graphics, Loader as PixiLoader
+} from 'pixi.js'
 import { Simple as Cull } from 'pixi-cull'
 import Viewport from 'pixi-viewport'
 import Dexie from 'dexie'
 import SolarSystem from './classes/solarSystem'
-import textureLoader from './loaders/texture'
+import loader from './loader'
 import Generator from './generator/generator.worker'
+import SoundManager from './sound'
 
-export default class extends Application {
+export default class Game extends Application {
   constructor() {
     super({
       width: innerWidth,
@@ -52,6 +55,8 @@ export default class extends Application {
     this.cull = new Cull()
     this.cull.addList(this.viewport.children)
     this.cull.cull(this.viewport.getVisibleBounds())
+
+    this.soundManager = new SoundManager()
   }
 
   loop() {
@@ -64,7 +69,9 @@ export default class extends Application {
   async init() {
     this.id = 1
     return new Promise(resolve => {
-      PixiLoader.shared.add(textureLoader()).load(() => resolve('Done'))
+      PixiLoader.shared.add(loader()).load(() => {
+        resolve('Done')
+      })
     })
   }
 
@@ -81,9 +88,9 @@ export default class extends Application {
   async launchGame(id) {
     const cosmos = await this.db.cosmos.get(id)
     cosmos.cosmos.forEach(solarSystem => {
-      const solarSystemObj = new SolarSystem(solarSystem)
-      this.viewport.addChild(solarSystemObj)
-      this.cull.add(solarSystemObj)
+      const solorSystemObj = new SolarSystem(solarSystem)
+      this.viewport.addChild(solorSystemObj)
+      this.cull.add(solorSystemObj)
     })
     this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
   }
