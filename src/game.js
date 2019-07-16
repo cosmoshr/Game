@@ -22,6 +22,8 @@ export default class extends Application {
       resolution: 1
     })
 
+    console.log('test')
+
     this.db = new Dexie('CosmosHR')
     this.db.version(1).stores({
       cosmos: '++id,cosmos,starting',

@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const webpack = require('webpack')
 
 // Import Configuration
 const config = require('../config')
@@ -139,11 +140,15 @@ const plugins = [
 ]
 
 if (process.env.WEBPACK_ENV === 'electron-renderer') plugins.push(new CopyWebpackPlugin([{ from: 'electron.js' }]))
+
+const optimization = {}
+
 /**
  * Webpack configuration.
  */
 const WebpackConfig = {
   target: process.env.WEBPACK_ENV || 'web',
+  optimization,
   entry,
   resolve,
   module: modules,

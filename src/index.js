@@ -1,25 +1,28 @@
+/* eslint-disable no-unexpected-multiline */
+/* eslint-disable no-spaced-func */
+/* eslint-disable func-call-spacing */
 /* eslint-disable no-use-before-define */
 import './sass/styles.scss'
-import Game from './game'
 import LoadingOverlay from './overlays/loading'
-import Splash from './overlays/splash'
-import Overlay from './overlays/overlay'
 import initComponents from './components'
 import newError from './overlays/error'
 
-const game = new Game()
-
 initComponents()
 
-const loadingOverlay = new LoadingOverlay()
+let loadingOverlay = new LoadingOverlay()
 
 document.addEventListener('keydown', key => {
   window.currentTarget.pressed(key)
 })
 
-game.gameLoop = () => {}
+let Game,
+  Splash,
+  Overlay,
+  game
 
-const gameInProgress = async () => {
+function gameloop() {}
+
+async function gameInProgress() {
   const overlay = new Overlay()
   window.currentTarget = overlay
 
@@ -33,7 +36,7 @@ const gameInProgress = async () => {
   loadingOverlay.hide()
 }
 
-const mainMenu = async () => {
+async function mainMenu() {
   const splash = new Splash()
   window.currentTarget = splash
 
@@ -63,8 +66,35 @@ const mainMenu = async () => {
 }
 
 (async () => {
+  Game = await import(/* webpackChunkName: "game" */ './game')
+  Game = Game.default
+  game = new Game()
+  game.gameLoop = gameloop
   await game.init()
-  loadingOverlay.hide()
 
+  Splash = await import(/* webpackChunkName: "splash" */ './overlays/splash')
+  Splash = Splash.default
+
+  Overlay = await import(/* webpackChunkName: "inGameOverlay" */ './overlays/overlay')
+  Overlay = Overlay.default
+
+  loadingOverlay.hide()
   mainMenu()
+
+  if (module.hot) module.hot.accept('./game.js', () => {
+    // eslint-disable-next-line no-console
+    console.log('Reloading game core')
+    loadingOverlay = new LoadingOverlay()
+
+    (async () => {
+      Game = await import(/* webpackChunkName: "game" */ './game')
+      Game = Game.default
+      game = new Game()
+      game.gameLoop = gameloop
+      await game.init()
+
+      loadingOverlay.hide()
+      mainMenu()
+    })()
+  })
 })()
