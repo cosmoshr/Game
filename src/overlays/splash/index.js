@@ -12,22 +12,22 @@ export default class Splash {
 
     this.el.prepend(style)
 
-    this.back()
+    this.back();
 
-    this.el.querySelector('#back').onclick = this.back.bind(this)
+    ['back', 'newGame', 'loadGame', 'openSettings', 'saveSettings']
+      .forEach(query => { this.el.querySelector(`#${query}`).onclick = this[query].bind(this) })
 
-    this.el.querySelector('#newGame').onclick = this.newGame.bind(this)
-    this.el.querySelector('#loadGame').onclick = this.loadGameMenu.bind(this)
-    this.el.querySelector('#openSettings').onclick = this.settingsMenu.bind(this)
-    this.el.querySelector('#saveSettings').onclick = this.saveSettings.bind(this)
     this.el.querySelector('#quit').onclick = () => history.go(-1)
   }
 
-  settingsMenu() {
+  toggle(oldPage, newPage) {
+    this.el.querySelector(`#${oldPage}`).className = 'page'
+    this.el.querySelector(`#${newPage}`).className = 'fadein page'
     this.showBack()
+  }
 
-    this.el.querySelector('#home').className = 'page'
-    this.el.querySelector('#settings').className = 'fadein page'
+  openSettings() {
+    this.toggle('home', 'settings')
     this.el.querySelector('#quality').value = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
   }
 
@@ -40,13 +40,10 @@ export default class Splash {
   // LOAD GAME MENU
   // --------------------------------------------
 
-  loadGameMenu() {
-    this.showBack()
-    this.el.querySelector('#home').className = 'page'
-    this.el.querySelector('#load').className = 'fadein page'
+  loadGame() {
+    this.toggle('home', 'load')
 
     const games = this.el.querySelector('#games')
-
 
     if (!games.firstChild) {
       const cosmosList = JSON.parse(window.localStorage.getItem('cosmosList')) || [{ description: 'No saves Yet! Go generate one!', id: 'X' }]
@@ -54,14 +51,14 @@ export default class Splash {
         const button = document.createElement('custom-button')
         button.setAttribute('class', game.id)
         button.innerText = game.description
-        button.onclick = this.loadGame.bind(this)
+        button.onclick = this.startSavedGame.bind(this)
         games.append(button)
       })
     }
   }
 
-  loadGame(e) {
-    if (e.srcElement.className !== 'X') this.onLoadGame(Number(e.srcElement.className))
+  startSavedGame(e) {
+    if (e.srcElement.className !== 'X') this.launchGame(Number(e.srcElement.className))
     else {
       this.el.querySelector('#load').className = 'page'
       this.newGame()
@@ -72,24 +69,22 @@ export default class Splash {
   // NEW GAME MENU
   // --------------------------------------------
   newGame() {
-    this.showBack()
-
-    this.el.querySelector('#home').className = 'page'
-    this.el.querySelector('#new').className = 'fadein page'
+    this.toggle('home', 'new')
     this.el.querySelector('#createGame').onclick = this.createGame.bind(this)
   }
 
-  createGame() {
-    if (this.el.querySelector('#gameName').value !== '') if (this.onGameCreated) this.onGameCreated(this.el.querySelector('#gameName').value)
+  async createGame() {
+    if (this.el.querySelector('#gameName').value !== '') {
+      const id = await this.generator(this.el.querySelector('#gameName').value)
+      this.launchGame(id)
+    }
   }
 
   back() {
     const els = this.el.getElementsByClassName('page')
-
     for (let i = 0; i < els.length; i++) els[i].className = 'page'
 
     this.el.querySelector('#home').className = 'fadein page'
-
     this.el.querySelector('#back').className = 'slideout'
   }
 

@@ -10,7 +10,6 @@ import DB from './db'
 import Cull from './cull'
 import LoadingOverlay from './overlays/loading'
 import Splash from './overlays/splash'
-import newError from './overlays/error'
 import Overlay from './overlays/overlay'
 import Background from './background'
 
@@ -69,45 +68,24 @@ export default class Game extends Application {
     splash.games = this.cosmosList
     document.body.appendChild(splash.el)
 
-    splash.onGameCreated = async name => {
-      const loaderOverlay = new LoadingOverlay()
+    splash.generator = async name => this.generateCosmos(name)
+
+    splash.launchGame = async id => {
+      const loading = new LoadingOverlay()
+      loading.message = 'Loading World'
       this.soundManager.trigger('Game Starts')
       splash.kill()
 
-      loaderOverlay.message = 'Loading World'
-      const id = await this.generateCosmos(name)
-      this.launchGame(id)
-      this.gameInProgress()
-      loaderOverlay.kill()
-    }
-    splash.onLoadGame = async id => {
-      const loaderOverlay = new LoadingOverlay()
-      this.soundManager.trigger('Game Starts')
-      splash.kill()
-      loaderOverlay.message = 'Loading World'
-
-      if (localStorage.getItem('cosmosList').length > id - 1) {
+      PixiLoader.shared.load(async () => {
+        loading.kill()
+        this.soundManager.trigger('Whenever', false, true)
         await this.launchGame(id)
         this.gameInProgress()
-        loaderOverlay.kill()
-      } else {
-        loaderOverlay.kill()
-        newError(new Error('Failed to load the world'))
-      }
+      })
     }
   }
 
   gameInProgress() {
-    const loading = new LoadingOverlay(true)
-    PixiLoader.shared.onProgress.add(percent => {
-      loading.value = percent / 1.05
-    })
-
-    PixiLoader.shared.load(() => {
-      loading.kill()
-      this.soundManager.trigger('Whenever', false, true)
-    })
-
     const overlay = new Overlay()
 
     overlay.open = () => this.soundManager.trigger('Main Menu', true)
@@ -150,7 +128,7 @@ export default class Game extends Application {
         cosmosList.push({
           description, id, dateCreated: Date.now(), lastModified: Date.now()
         })
-        window.localStorage.setItem('cosmosList', JSON.stringify(cosmosList))
+        localStorage.setItem('cosmosList', JSON.stringify(cosmosList))
         resolve(id)
       }
     })
