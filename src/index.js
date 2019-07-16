@@ -17,6 +17,13 @@ document.addEventListener('keydown', key => {
   window.currentTarget.pressed(key)
 })
 
+document.addEventListener('resize', () => {
+  console.log('resize')
+  game.resize()
+  game.renderer.resize(innerWidth, innerHeight)
+  game.viewport.resize(innerWidth, innerHeight)
+})
+
 game.gameLoop = () => {}
 const gameInProgress = async () => {
   game.soundManager.trigger('Whenever', false, true)

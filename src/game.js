@@ -40,8 +40,6 @@ export default class Game extends Application {
       .pinch()
       .wheel()
 
-    document.onresize = this.resize
-
     this.gameLoop = this.ticker.add
     this.ticker.add(this.loop.bind(this))
 
@@ -111,9 +109,5 @@ export default class Game extends Application {
         resolve(id)
       }
     })
-  }
-
-  resize() {
-    this.renderer.resize(innerWidth, innerHeight)
   }
 }
