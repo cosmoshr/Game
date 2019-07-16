@@ -1,15 +1,21 @@
 import {
   Application, Graphics, Loader as PixiLoader
 } from 'pixi.js'
-import { Simple as Cull } from 'pixi-cull'
-import Viewport from 'pixi-viewport'
-import Dexie from 'dexie'
 import SolarSystem from './classes/solarSystem'
 import loader from './loader'
 import Generator from './generator/generator.worker'
 import SoundManager from './sound'
+import Viewport from './viewport'
+import DB from './db'
+import Cull from './cull'
+import LoadingOverlay from './overlays/loading'
+import Splash from './overlays/splash'
+import newError from './overlays/error'
+import Overlay from './overlays/overlay'
 
 export default class Game extends Application {
+  ready = false
+
   constructor() {
     super({
       width: innerWidth,
@@ -17,33 +23,18 @@ export default class Game extends Application {
       resolution: 1
     })
 
-    this.db = new Dexie('CosmosHR')
-    this.db.version(1).stores({
-      cosmos: '++id,cosmos',
-      cosmosList: ''
-    })
+    this.db = new DB()
 
     this.view.id = 'app'
     document.body.appendChild(this.view)
-    window.game = this.view
 
-    this.viewport = new Viewport({
-      screenWidth: window.innerWidth,
-      screenHeight: window.innerHeight,
-
-      interaction: this.renderer.plugins.interaction // the interaction module is important for wheel() to work properly when renderer.view is placed or scaled
-    })
-
+    this.viewport = new Viewport(this.renderer)
     this.stage.addChild(this.viewport)
-    this.viewport
-      .drag()
-      .pinch()
-      .wheel()
+    this.cull = new Cull(this.viewport)
 
     document.onresize = this.resize
 
     this.gameLoop = this.ticker.add
-    this.ticker.add(this.loop.bind(this))
 
     const background = new Graphics()
     background.beginFill(0x000010)
@@ -52,27 +43,76 @@ export default class Game extends Application {
     background.alpha = 1
     this.viewport.addChild(background)
 
-    this.cull = new Cull()
-    this.cull.addList(this.viewport.children)
-    this.cull.cull(this.viewport.getVisibleBounds())
-
     this.soundManager = new SoundManager()
+
+    const loaderOverlay = new LoadingOverlay(true)
+
+    PixiLoader.shared.add(loader())
+    PixiLoader.shared.onProgress.add(percent => {
+      loaderOverlay.value = percent.progress
+    })
+
+    PixiLoader.shared.load(() => {
+      this.ticker.add(this.loop.bind(this))
+      loaderOverlay.kill()
+      this.splashScreen()
+    })
   }
 
   loop() {
-    if (this.viewport.dirty) {
-      this.cull.cull(this.viewport.getVisibleBounds())
-      this.viewport.dirty = false
+    this.id = 1
+  }
+
+  splashScreen() {
+    this.soundManager.trigger('Main Menu')
+    const splash = new Splash()
+
+    splash.games = this.cosmosList
+    document.body.appendChild(splash.el)
+
+    splash.onGameCreated = async name => {
+      const loaderOverlay = new LoadingOverlay()
+      this.soundManager.trigger('Game Starts')
+      splash.kill()
+
+      loaderOverlay.message = 'Loading World'
+      const id = await this.generateCosmos(name)
+      this.launchGame(id)
+      this.gameInProgress()
+      loaderOverlay.kill()
+    }
+    splash.onLoadGame = async id => {
+      const loaderOverlay = new LoadingOverlay()
+      this.soundManager.trigger('Game Starts')
+      splash.kill()
+      loaderOverlay.message = 'Loading World'
+
+      if (localStorage.getItem('cosmosList').length > id - 1) {
+        await this.launchGame(id)
+        this.gameInProgress()
+        loaderOverlay.kill()
+      } else {
+        loaderOverlay.kill()
+        newError(new Error('Failed to load the world'))
+      }
     }
   }
 
-  async init() {
-    this.id = 1
-    return new Promise(resolve => {
-      PixiLoader.shared.add(loader()).load(() => {
-        resolve('Done')
-      })
-    })
+  gameInProgress() {
+    this.soundManager.trigger('Whenever', false, true)
+
+    const overlay = new Overlay()
+
+    overlay.open = () => this.soundManager.trigger('Main Menu', true)
+    overlay.close = () => this.soundManager.endTemp()
+
+    overlay.quitGame = () => {
+      this.reset()
+      window.game.style.display = 'none'
+      this.splashScreen()
+    }
+
+    this.view.style.display = 'block'
   }
 
   reset() {
