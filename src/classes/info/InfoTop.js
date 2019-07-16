@@ -3,6 +3,7 @@ import {
 } from 'pixi.js'
 import Players from '../../data/players'
 import '../../functions'
+// import PlanetInfo from '../../overlays/planetInfo'
 
 // Type 1: Unclaimed object
 // Type 2: Your claimed object
@@ -118,6 +119,8 @@ export default class InfoTop extends Container {
 
     this.position.x = planet.size / 2 - this.width / 2
     this.position.y = -planet.size / 4 - 10
+
+    // this.on('pointerdown', this.openInfoScreen)
   }
 
   set population(population) {
@@ -128,6 +131,11 @@ export default class InfoTop extends Container {
   get population() {
     return this.popul
   }
+
+  // Todo: Finish sidebar info properly. Low priority
+  // openInfoScreen() {
+  //   if (!document.getElementById('info-sidebar')) this.info = new PlanetInfo(this)
+  // }
 
   unclaimed(planet) {
     this.addChild(new PlanetImage(planet.texture))
