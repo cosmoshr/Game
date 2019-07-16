@@ -1,6 +1,6 @@
 export default {
   size: [25, 50],
-  chance: 20,
+  chance: 10,
   zone: [300, 500],
   resources: {
     wood: [100, 200],

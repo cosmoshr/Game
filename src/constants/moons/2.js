@@ -1,3 +1,4 @@
+
 export default {
   resources: {
     H3: [500, 3000]
