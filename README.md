@@ -1,10 +1,10 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/cosmoshr/base-game/badge)](https://www.codefactor.io/repository/github/cosmoshr/base-game) [![Build Status](https://travis-ci.com/cosmoshr/Base-Game.svg?branch=master)](https://travis-ci.com/cosmoshr/Base-Game)
+[![CodeFactor](https://www.codefactor.io/repository/github/cosmoshr/game/badge)](https://www.codefactor.io/repository/github/cosmoshr/game) [![Build Status](https://travis-ci.com/cosmoshr/Game.svg?branch=master)](https://travis-ci.com/cosmoshr/Game)
 
 # Cosmos Habitation Race
 
 A game about ...
 
-## Running 
+## Running
 
 ### To run in webpack dev mode
 
