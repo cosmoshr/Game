@@ -6,15 +6,24 @@ const maxPlanetSpacing = 200
 onmessage = (e) => {
   const sunSize = Math.floor(Math.random() * 500) + 100
   const planets = []
-  const solarSystem = {
-    sunSize, ...e.data
-  }
 
   let usedSpace = sunSize
+
   while (usedSpace < e.data.r) {
     planets.push(new PlanetShell(usedSpace))
     usedSpace = Math.floor(Math.random() * (maxPlanetSpacing - minPlanetSpacing)) + minPlanetSpacing + usedSpace
   }
-  solarSystem.planets = planets
-  postMessage(solarSystem)
+
+  const habitablePlanets = []
+
+  planets.forEach(planet => {
+    if (planet.isHabitable) habitablePlanets.push(planet)
+  })
+
+  postMessage({
+    habitablePlanets,
+    sunSize,
+    ...e.data,
+    planets
+  })
 }

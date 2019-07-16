@@ -22,8 +22,6 @@ export default class extends Application {
       resolution: 1
     })
 
-    console.log('test')
-
     this.db = new Dexie('CosmosHR')
     this.db.version(1).stores({
       cosmos: '++id,cosmos,starting',
@@ -111,24 +109,25 @@ export default class extends Application {
 
     await Promise.all(solarSystemPromises)
 
-    this.getStartingPosiotion()
+    this.viewport.moveCenter(cosmos.starting.planet.x + cosmos.starting.solarSystem.x, cosmos.starting.planet.y + cosmos.starting.solarSystem.y)
+    this.viewport.fitWidth(window.innerWidth)
 
-    // Todo: Save the location of the starting planet to an array
-    // console.log(await this.db.cosmos.get(id))
-
-    // const test
-    // this.db.cosmos.get(id) =
-
-    // console.log(await this.db.cosmos.get(id))
+    this.playerObervations.push({
+      x: cosmos.starting.planet.x + cosmos.starting.solarSystem.x,
+      y: cosmos.starting.planet.x + cosmos.starting.solarSystem.x,
+      r: 500
+    })
   }
 
   async generateCosmos(description) {
     return new Promise(resolve => {
       const generator = new Generator()
       generator.postMessage({ size: 'auto', description })
+
       generator.onmessage = async newCosmos => {
         const id = await this.db.cosmos.add({
-          cosmos: newCosmos.data
+          starting: newCosmos.data.starting,
+          cosmos: newCosmos.data.cosmos
         })
         const cosmosList = JSON.parse(window.localStorage.getItem('cosmosList')) || []
         cosmosList.push({

@@ -49,6 +49,7 @@ export default class extends Container {
     super()
 
     this.type = planet.type.name
+    this.isHabitable = planet.type.name === 'Habitital_Planet'
 
     this.r = planet.path
     this.d = planet.degrees

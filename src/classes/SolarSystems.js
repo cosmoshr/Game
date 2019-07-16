@@ -3,8 +3,19 @@ export default class SolarSystems {
 
   dirty = true
 
+  pushCosmos(cosmos) {
+    cosmos.forEach(ss => {
+      this.push(ss)
+    })
+
+    return this
+  }
+
   push(solarSystem) {
     this.solarSystems.push(solarSystem)
+    this.dirty = true
+
+    return this
   }
 
   calculate() {
@@ -15,11 +26,13 @@ export default class SolarSystems {
         let isHabitable = false
 
         ss.planets.forEach(planet => {
-          if (planet.type === 'Habitital_Planet') isHabitable = true
+          if (planet.isHabitable) isHabitable = true
         })
 
         if (isHabitable) this.habitableSS.push(ss)
       })
+
+      this.dirty = false
     }
   }
 
