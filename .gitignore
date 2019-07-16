@@ -1,6 +1,9 @@
 # Dist
 dist
 
+# Soundtrack assets
+public/assets/soundtrack
+
 .DS_Store
 
 # Logs
