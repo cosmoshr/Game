@@ -1,7 +1,7 @@
 const splashHTML = require('./splash.html').default
 const splashCSS = require('./splash.css')
 
-export default class {
+export default class Splash {
   constructor() {
     this.el = document.createElement('div')
     this.el.setAttribute('id', 'splash')

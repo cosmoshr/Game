@@ -693,7 +693,7 @@
   resolved "https://registry.yarnpkg.com/@pixi/constants/-/constants-5.0.4.tgz#ff8913ffd540aecb138c5f2c1113d16bea6de7d4"
   integrity sha512-M1w5ah3Ilp4hwW/jyX+v2b/nLhak35fA8yJk23BbgQKIhqng0s78cCLBTvoCV/s7cEVcm0kive+TEWs+YJl5Vg==
 
-"@pixi/core@^5.0.4":
+"@pixi/core@^5.0.2", "@pixi/core@^5.0.4":
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/@pixi/core/-/core-5.0.4.tgz#2bc1e797a6810c68238e700de5169bf25397eb1e"
   integrity sha512-P2K2JJC+BFZrRZT9P0+Ir8jd7VrH6w7/L1Njg2+iSetW9TdjkPahR+w93VGwpEzEkrYHoNs6FbSFCY38P/6g8A==
@@ -791,7 +791,7 @@
     "@pixi/ticker" "^5.0.4"
     "@pixi/utils" "^5.0.4"
 
-"@pixi/loaders@^5.0.4":
+"@pixi/loaders@^5.0.2", "@pixi/loaders@^5.0.4":
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/@pixi/loaders/-/loaders-5.0.4.tgz#6befefcd3b5066e9548330cf5bfc40fbd7736cd4"
   integrity sha512-SRboskl4eK5eBALGafUwkVSIFxqAmRZwISTOOPmEnn372+bdrp7FtKEzdF5aZoKv0ugsQ0/NjUEaqZD2Ux6z+Q==
@@ -965,14 +965,14 @@
     "@pixi/sprite" "^5.0.4"
     "@pixi/utils" "^5.0.4"
 
-"@pixi/ticker@^5.0.4":
+"@pixi/ticker@^5.0.1", "@pixi/ticker@^5.0.4":
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/@pixi/ticker/-/ticker-5.0.4.tgz#7066f07a32d9c2007fd67e65256b3ed4af1c721b"
   integrity sha512-K2NlLxni40jK2pdCa0ImpTBK/MzIxxQkx1sWQpOAm4dl4QJhbURIzLS9z2DgJ8L5kPWAGWtaZde5Z1doTV48bw==
   dependencies:
     "@pixi/settings" "^5.0.4"
 
-"@pixi/utils@^5.0.4":
+"@pixi/utils@^5.0.1", "@pixi/utils@^5.0.4":
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/@pixi/utils/-/utils-5.0.4.tgz#3b013491af245798d2309c4382c114170eae5836"
   integrity sha512-j6DiIo18gkMZC64RqvZME5Cun5nQBB3OxnuT5rrQeBU+pM6kOfz8Akr8GNcbCukmjM1k3FALHyCF/OfnZCTDzw==
@@ -6701,6 +6701,16 @@ pixi-cull@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/pixi-cull/-/pixi-cull-0.5.0.tgz#1d5ec8fa14b9507f652b7c4d8db807de7d42b4c3"
   integrity sha512-S9/UcBcYRZLycG80bhTyJBhEYH46+USyZ0o2xF0wK+/448ALjCQy2ZNTvJlvHz7ZK7so8DYifGQH66InHeYTkg==
+
+pixi-sound@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/pixi-sound/-/pixi-sound-3.0.3.tgz#c339e9e5f5bbe8ead9ef1c5ed7ce8b0ec2c6cac5"
+  integrity sha512-FPe4+DOOOJGjGpOKWOg1x+NYAsx6tKKI3gAMyI2JmALVO0WHH8/lcsfqvb3nIBgClvHHszHtK0+UKQoxZLK/XA==
+  dependencies:
+    "@pixi/core" "^5.0.2"
+    "@pixi/loaders" "^5.0.2"
+    "@pixi/ticker" "^5.0.1"
+    "@pixi/utils" "^5.0.1"
 
 pixi-viewport@^3.23.2:
   version "3.23.2"
