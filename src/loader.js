@@ -1,6 +1,6 @@
 import planetTypes from './constants/planets/_types'
 import moonTypes from './constants/moons/_types'
-import Soundtrack from '../subgit/soundtrack'
+import Soundtrack from '../public/assets/soundtrack'
 
 let hasInit = false
 
@@ -32,7 +32,7 @@ const init = () => {
 
   Soundtrack.forEach(soundtrack => loaderArray.push({
     name: `Song_${soundtrack.name}`,
-    url: `assets/textures/moons/${soundtrack.name}.mp3`
+    url: `assets/soundtrack/${soundtrack.name}.mp3`
   }))
 }
 

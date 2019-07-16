@@ -1,7 +1,7 @@
 const overlayStyle = require('./overlay.css')
 const overlayHtml = require('./overlay.html').default
 
-export default class {
+export default class Overlay {
   constructor() {
     this.isOpen = false
     this.el = document.createElement('div')
@@ -27,9 +27,11 @@ export default class {
 
   launch() {
     if (this.isOpen) {
+      this.close()
       this.isOpen = 0
       this.el.style.visibility = 'hidden'
     } else {
+      this.open()
       this.isOpen = 1
       this.el.style.visibility = 'visible'
     }

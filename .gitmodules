@@ -1,0 +1,4 @@
+[submodule "public/assets/soundtrack"]
+	path = public/assets/soundtrack
+	url = https://github.com/cosmoshr/Soundtrack.git
+	branch = master

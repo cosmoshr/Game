@@ -1,7 +1,7 @@
 const loaderStyle = require('./loader.css')
 const loadingScreenHtml = require('./loader.html').default
 
-export default class {
+export default class LoadingOverlay {
   constructor() {
     this.el = document.createElement('div')
     this.el.setAttribute('id', 'loadingScreen')

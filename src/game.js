@@ -1,18 +1,15 @@
 import {
   Application, Graphics, Loader as PixiLoader
 } from 'pixi.js'
-import Sound from 'pixi-sound'
 import { Simple as Cull } from 'pixi-cull'
 import Viewport from 'pixi-viewport'
 import Dexie from 'dexie'
 import SolarSystem from './classes/solarSystem'
 import loader from './loader'
 import Generator from './generator/generator.worker'
-import Soundtrack from '../subgit/soundtrack'
+import SoundManager from './sound'
 
-let loaded = false
-
-export default class extends Application {
+export default class Game extends Application {
   constructor() {
     super({
       width: innerWidth,
@@ -58,6 +55,8 @@ export default class extends Application {
     this.cull = new Cull()
     this.cull.addList(this.viewport.children)
     this.cull.cull(this.viewport.getVisibleBounds())
+
+    this.soundManager = new SoundManager()
   }
 
   loop() {
@@ -69,13 +68,8 @@ export default class extends Application {
 
   async init() {
     this.id = 1
-    Sound.add('Loading', 'assets/soundtrack/Main Menu.mp3')
-    Sound.play('Loading', () => {
-      this.playNewSong()
-    })
     return new Promise(resolve => {
       PixiLoader.shared.add(loader()).load(() => {
-        loaded = true
         resolve('Done')
       })
     })
@@ -121,22 +115,5 @@ export default class extends Application {
 
   resize() {
     this.renderer.resize(innerWidth, innerHeight)
-  }
-
-  playNewSong(trigger = 'Whenever') {
-    if (loaded) {
-      const songList = []
-      Soundtrack.forEach(song => {
-        song.trigger.forEach(triggerName => {
-          if (trigger === triggerName) songList.push(song)
-        })
-      })
-      const rand = songList[Math.floor((Math.random() * songList.length))]
-      Sound.play(rand.name, () => {
-        this.playNewSong()
-      })
-    } else Sound.play('Loading', () => {
-      this.playNewSong()
-    })
   }
 }
