@@ -9,7 +9,7 @@ import newError from './overlays/error'
 
 initComponents()
 
-let loadingOverlay = new LoadingOverlay()
+const loadingOverlay = new LoadingOverlay()
 
 document.addEventListener('keydown', key => {
   window.currentTarget.pressed(key)
@@ -80,21 +80,4 @@ async function mainMenu() {
 
   loadingOverlay.hide()
   mainMenu()
-
-  if (module.hot) module.hot.accept('./game.js', () => {
-    // eslint-disable-next-line no-console
-    console.log('Reloading game core')
-    loadingOverlay = new LoadingOverlay()
-
-    (async () => {
-      Game = await import(/* webpackChunkName: "game" */ './game')
-      Game = Game.default
-      game = new Game()
-      game.gameLoop = gameloop
-      await game.init()
-
-      loadingOverlay.hide()
-      mainMenu()
-    })()
-  })
 })()
