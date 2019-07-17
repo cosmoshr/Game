@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import './sass/styles.scss'
 import Game from './game'
 import initComponents from './components'

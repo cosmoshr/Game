@@ -20,38 +20,35 @@ export default class Game extends Application {
       resolution: 1
     })
 
-    this.db = new DB()
-
     this.view.id = 'app'
-    document.body.appendChild(this.view)
-
     this.viewport = new Viewport(this.renderer)
     this.stage.addChild(this.viewport)
-
-    window.onresize = () => this.renderer.resize(innerWidth, innerHeight)
+    document.body.appendChild(this.view)
 
     const background = new Background()
     this.viewport.addChild(background)
-    this.cull = new Cull(this.viewport)
 
+    this.db = new DB()
     this.soundManager = new SoundManager()
 
     const loaderOverlay = new LoadingOverlay(true)
 
-    this.keyTarget = key => console.log(key)
-    this.keyDown = key => this.keyTarget(key)
-    document.addEventListener('keydown', this.keyDown)
-
     PixiLoader.shared.add(loader(1))
-    PixiLoader.shared.onProgress.add(percent => {
-      loaderOverlay.value = percent.progress
-    })
+    PixiLoader.shared.onProgress.add(percent => { loaderOverlay.value = percent.progress })
 
     PixiLoader.shared.load(() => {
-      this.ticker.add(this.loop.bind(this))
       loaderOverlay.kill()
       this.splashScreen()
     })
+
+    this.cull = new Cull(this.viewport)
+
+    this.keyTarget = x => x
+    this.keyDown = key => this.keyTarget(key)
+    document.addEventListener('keydown', this.keyDown)
+
+    window.onresize = () => this.renderer.resize(innerWidth, innerHeight)
+    this.ticker.add(this.loop.bind(this))
   }
 
   loop() {
