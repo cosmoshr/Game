@@ -1,6 +1,6 @@
 export default [
   {
-    name: 'All the Beautiful Sars',
+    name: 'All the Beautiful Stars',
     trigger: ['Whenever']
   },
   {
@@ -8,7 +8,7 @@ export default [
     trigger: ['Attack']
   },
   {
-    name: ['Fly Through The Stars for Solo Cello'],
+    name: 'Fly Through The Stars for Solo Cello',
     trigger: ['Whenever']
   },
   {
@@ -36,7 +36,7 @@ export default [
     trigger: ['Whenever', 'Game Starts']
   },
   {
-    name: ['The Stars Shine Bright'],
+    name: 'The Stars Shine Bright',
     trigger: ['Whenever']
   },
   {
