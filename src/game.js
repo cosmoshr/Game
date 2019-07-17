@@ -3,13 +3,10 @@ import {
 } from 'pixi.js'
 import SolarSystem from './solarSystem'
 import loader from './loader'
-import Generator from './generator/generator.worker'
 import SoundManager from './sound'
 import { DB, Cull, Viewport } from './lib'
-import LoadingOverlay from './overlays/loading'
-import Splash from './overlays/splash'
-import Overlay from './overlays/overlay'
 import Background from './background'
+import { LoadingOverlay, Splash, Overlay } from './overlays'
 
 export default class Game extends Application {
   ready = false
@@ -71,8 +68,6 @@ export default class Game extends Application {
     splash.games = this.cosmosList
     document.body.appendChild(splash.el)
 
-    splash.generator = async name => this.generateCosmos(name)
-
     splash.launchGame = async id => {
       const loading = new LoadingOverlay()
       loading.message = 'Loading World'
@@ -120,23 +115,5 @@ export default class Game extends Application {
       this.cull.add(solorSystemObj)
     })
     this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
-  }
-
-  async generateCosmos(description) {
-    return new Promise(resolve => {
-      const generator = new Generator()
-      generator.postMessage({ size: 'auto', description })
-      generator.onmessage = async newCosmos => {
-        const id = await this.db.cosmos.add({
-          cosmos: newCosmos.data
-        })
-        const cosmosList = JSON.parse(window.localStorage.getItem('cosmosList')) || []
-        cosmosList.push({
-          description, id, dateCreated: Date.now(), lastModified: Date.now()
-        })
-        localStorage.setItem('cosmosList', JSON.stringify(cosmosList))
-        resolve(id)
-      }
-    })
   }
 }

@@ -1,3 +1,5 @@
+import generateCosmos from '../../generator'
+
 const splashHTML = require('./splash.html').default
 const splashCSS = require('./splash.css')
 
@@ -75,7 +77,7 @@ export default class Splash {
 
   async createGame() {
     if (this.el.querySelector('#gameName').value !== '') {
-      const id = await this.generator(this.el.querySelector('#gameName').value)
+      const id = await generateCosmos(this.el.querySelector('#gameName').value)
       this.launchGame(id)
     }
   }
