@@ -1,5 +1,3 @@
-import '../mathExtended'
-
 const solarSystems = []
 
 export default (worldSize, maxSolarSystemSize, minSolarSystemSize, solarSystemSpacing) => {

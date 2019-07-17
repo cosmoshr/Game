@@ -2,6 +2,7 @@
 import './sass/styles.scss'
 import Game from './game'
 import initComponents from './components'
+import './math'
 
 initComponents()
 
