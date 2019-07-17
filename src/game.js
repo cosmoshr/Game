@@ -11,6 +11,8 @@ import { LoadingOverlay, Splash, Overlay } from './overlays'
 export default class Game extends Application {
   ready = false
 
+  hasLoaded = false
+
   constructor() {
     super({
       width: innerWidth,
@@ -36,6 +38,10 @@ export default class Game extends Application {
 
     const loaderOverlay = new LoadingOverlay(true)
 
+    this.keyTarget = key => console.log(key)
+    this.keyDown = key => this.keyTarget(key)
+    document.addEventListener('keydown', this.keyDown)
+
     PixiLoader.shared.add(loader(1))
     PixiLoader.shared.onProgress.add(percent => {
       loaderOverlay.value = percent.progress
@@ -58,15 +64,19 @@ export default class Game extends Application {
   splashScreen() {
     this.soundManager.trigger('Main Menu')
     const splash = new Splash()
-    let hasLoaded = false
-    PixiLoader.shared.add(loader(2))
-    PixiLoader.shared.load(() => {
-      hasLoaded = true
-      PixiLoader.shared.add(loader(3))
-    })
+
+    if (!this.hasLoaded) {
+      PixiLoader.shared.add(loader(2))
+      PixiLoader.shared.load(() => {
+        this.hasLoaded = true
+        PixiLoader.shared.add(loader(3))
+      })
+    }
 
     splash.games = this.cosmosList
     document.body.appendChild(splash.el)
+
+    this.keyTarget = splash.pressed.bind(splash)
 
     splash.launchGame = async id => {
       const loading = new LoadingOverlay()
@@ -81,7 +91,7 @@ export default class Game extends Application {
         this.gameInProgress()
       }
 
-      if (!hasLoaded) PixiLoader.shared.load(load)
+      if (!this.hasLoaded) PixiLoader.shared.load(load)
       else load()
     }
   }
@@ -92,9 +102,11 @@ export default class Game extends Application {
     overlay.open = () => this.soundManager.trigger('Main Menu', true)
     overlay.close = () => this.soundManager.endTemp()
 
+    this.keyTarget = overlay.pressed.bind(overlay)
+
     overlay.quitGame = () => {
       this.reset()
-      window.game.style.display = 'none'
+      this.view.style.display = 'none'
       this.splashScreen()
     }
 
@@ -105,6 +117,7 @@ export default class Game extends Application {
     for (let i = this.viewport.children.length - 1; i >= 0; i--) this.viewport.removeChild(this.viewport.children[i])
     const background = new Background()
     this.viewport.addChild(background)
+    this.cull = new Cull(this.viewport)
   }
 
   async launchGame(id) {

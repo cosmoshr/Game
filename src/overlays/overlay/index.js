@@ -28,16 +28,17 @@ export default class Overlay {
   launch() {
     if (this.isOpen) {
       this.close()
-      this.isOpen = 0
       this.el.style.visibility = 'hidden'
+      this.isOpen = 0
     } else {
       this.open()
-      this.isOpen = 1
       this.el.style.visibility = 'visible'
+      this.isOpen = 1
     }
   }
 
   pressed(key) {
     if (key.key === 'Escape') this.launch()
+    if (key.key === 'Backspace') key.preventDefault()
   }
 }

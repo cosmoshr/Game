@@ -100,6 +100,20 @@ export default class Splash {
   }
 
   pressed(key) {
-    if (key.key === 'Escape' || key.key === 'ArrowLeft') this.back()
+    if (key.key === 'Escape') { this.back(); return }
+    switch (key.target.id) {
+      case 'gameName':
+        if (key.key === 'Enter') this.createGame()
+        break
+
+      case 'quality':
+        if (key.key === 'Enter') this.saveSettings()
+        break
+
+      default:
+        if (key.key === 'Escape' || key.key === 'ArrowLeft') this.back()
+        if (key.key === 'Backspace') { key.preventDefault(); this.back() }
+        break
+    }
   }
 }
