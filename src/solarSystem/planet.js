@@ -1,9 +1,9 @@
 import {
   Sprite, Loader, Container
 } from 'pixi.js'
-import '../functions'
-import Moon from './moons'
+import Moon from './moon'
 import InfoTop from './info/InfoTop'
+
 
 class PlanetCenter extends Sprite {
   constructor(planet) {

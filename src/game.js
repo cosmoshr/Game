@@ -1,15 +1,18 @@
 import {
-  Application, Graphics, Loader as PixiLoader
+  Application, Loader as PixiLoader
 } from 'pixi.js'
-import { Simple as Cull } from 'pixi-cull'
-import Viewport from 'pixi-viewport'
-import Dexie from 'dexie'
-import SolarSystem from './classes/solarSystem'
+import SolarSystem from './solarSystem'
 import loader from './loader'
-import Generator from './generator/generator.worker'
 import SoundManager from './sound'
+import { DB, Cull, Viewport } from './lib'
+import Background from './background'
+import { LoadingOverlay, Splash, Overlay } from './overlays'
 
 export default class Game extends Application {
+  ready = false
+
+  hasLoaded = false
+
   constructor() {
     super({
       width: innerWidth,
@@ -17,44 +20,35 @@ export default class Game extends Application {
       resolution: 1
     })
 
-    this.db = new Dexie('CosmosHR')
-    this.db.version(1).stores({
-      cosmos: '++id,cosmos',
-      cosmosList: ''
-    })
-
     this.view.id = 'app'
-    document.body.appendChild(this.view)
-    window.game = this.view
-
-    this.viewport = new Viewport({
-      screenWidth: window.innerWidth,
-      screenHeight: window.innerHeight,
-
-      interaction: this.renderer.plugins.interaction // the interaction module is important for wheel() to work properly when renderer.view is placed or scaled
-    })
-
+    this.viewport = new Viewport(this.renderer)
     this.stage.addChild(this.viewport)
-    this.viewport
-      .drag()
-      .pinch()
-      .wheel()
+    document.body.appendChild(this.view)
 
-    this.gameLoop = this.ticker.add
-    this.ticker.add(this.loop.bind(this))
-
-    const background = new Graphics()
-    background.beginFill(0x000010)
-    background.drawRect(-100000, -100000, 200000, 200000)
-    background.endFill()
-    background.alpha = 1
+    const background = new Background()
     this.viewport.addChild(background)
 
-    this.cull = new Cull()
-    this.cull.addList(this.viewport.children)
-    this.cull.cull(this.viewport.getVisibleBounds())
-
+    this.db = new DB()
     this.soundManager = new SoundManager()
+
+    const loaderOverlay = new LoadingOverlay(true)
+
+    PixiLoader.shared.add(loader(1))
+    PixiLoader.shared.onProgress.add(percent => { loaderOverlay.value = percent.progress })
+
+    PixiLoader.shared.load(() => {
+      loaderOverlay.kill()
+      this.splashScreen()
+    })
+
+    this.cull = new Cull(this.viewport)
+
+    this.keyTarget = x => x
+    this.keyDown = key => this.keyTarget(key)
+    document.addEventListener('keydown', this.keyDown)
+
+    window.onresize = () => this.renderer.resize(innerWidth, innerHeight)
+    this.ticker.add(this.loop.bind(this))
   }
 
   loop() {
@@ -64,23 +58,63 @@ export default class Game extends Application {
     }
   }
 
-  async init() {
-    this.id = 1
-    return new Promise(resolve => {
-      PixiLoader.shared.add(loader()).load(() => {
-        resolve('Done')
+  splashScreen() {
+    this.soundManager.trigger('Main Menu')
+    const splash = new Splash()
+
+    if (!this.hasLoaded) {
+      PixiLoader.shared.add(loader(2))
+      PixiLoader.shared.load(() => {
+        this.hasLoaded = true
+        PixiLoader.shared.add(loader(3))
       })
-    })
+    }
+
+    splash.games = this.cosmosList
+    document.body.appendChild(splash.el)
+
+    this.keyTarget = splash.pressed.bind(splash)
+
+    splash.launchGame = async id => {
+      const loading = new LoadingOverlay()
+      loading.message = 'Loading World'
+      this.soundManager.trigger('Game Starts')
+      splash.kill()
+
+      const load = async () => {
+        loading.kill()
+        this.soundManager.trigger('Whenever', false, true)
+        await this.launchGame(id)
+        this.gameInProgress()
+      }
+
+      if (!this.hasLoaded) PixiLoader.shared.load(load)
+      else load()
+    }
+  }
+
+  gameInProgress() {
+    const overlay = new Overlay()
+
+    overlay.open = () => this.soundManager.trigger('Main Menu', true)
+    overlay.close = () => this.soundManager.endTemp()
+
+    this.keyTarget = overlay.pressed.bind(overlay)
+
+    overlay.quitGame = () => {
+      this.reset()
+      this.view.style.display = 'none'
+      this.splashScreen()
+    }
+
+    this.view.style.display = 'block'
   }
 
   reset() {
     for (let i = this.viewport.children.length - 1; i >= 0; i--) this.viewport.removeChild(this.viewport.children[i])
-    const background = new Graphics()
-    background.beginFill(0x000010)
-    background.drawRect(-100000, -100000, 200000, 200000)
-    background.endFill()
-    background.alpha = 1
+    const background = new Background()
     this.viewport.addChild(background)
+    this.cull = new Cull(this.viewport)
   }
 
   async launchGame(id) {
@@ -91,23 +125,5 @@ export default class Game extends Application {
       this.cull.add(solorSystemObj)
     })
     this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
-  }
-
-  async generateCosmos(description) {
-    return new Promise(resolve => {
-      const generator = new Generator()
-      generator.postMessage({ size: 'auto', description })
-      generator.onmessage = async newCosmos => {
-        const id = await this.db.cosmos.add({
-          cosmos: newCosmos.data
-        })
-        const cosmosList = JSON.parse(window.localStorage.getItem('cosmosList')) || []
-        cosmosList.push({
-          description, id, dateCreated: Date.now(), lastModified: Date.now()
-        })
-        window.localStorage.setItem('cosmosList', JSON.stringify(cosmosList))
-        resolve(id)
-      }
-    })
   }
 }

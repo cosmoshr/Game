@@ -1,4 +1,5 @@
 import Sound from 'pixi-sound'
+import { Loader as PixiLoader } from 'pixi.js'
 import Soundtrack from '../public/assets/soundtrack'
 
 export default class SoundManager {
@@ -9,6 +10,7 @@ export default class SoundManager {
       Sound.play('Loading', () => {
         this.songFinished()
       })
+      this.hasFullyLoaded = false
     }
 
     songFinished() {
@@ -46,12 +48,33 @@ export default class SoundManager {
     }
 
     playSong(trigger) {
-      const songList = []
+      const songsValid = []
+      let songList = []
+
+      // Find all songs that have a trigger that is the same as the requested trigger.
       Soundtrack.forEach(song => {
         song.trigger.forEach(triggerName => {
           if (trigger === triggerName) songList.push(song)
         })
       })
+
+      // Check weather all songs have been loaded.
+      if (!this.hasFullyLoaded) {
+        const { resources } = PixiLoader.shared
+        Object.keys(resources).forEach(resource => { if (resource.match(/Song_[\w ]+/)) songsValid.push(resource.replace('Song_', '')) })
+        if (songsValid.length === Soundtrack.length) this.hasFullyLoaded = true
+      }
+
+      // If some songs havn't been loaded remove them from the possible songs list.
+      if (!this.hasFullyLoaded) songList = songList.filter(song => songsValid.some(song2 => song2 === song.name))
+
+      // If there are no songs try playing the loading song.
+      if (songList.length === 0) {
+        Sound.play('Loading', () => {
+          this.songFinished()
+        })
+        return
+      }
       const rand = songList[Math.floor((Math.random() * songList.length))]
       Sound.play(`Song_${rand.name}`, () => {
         this.songFinished()
