@@ -2,7 +2,6 @@ import {
   Container, Loader, Sprite, Text, TextStyle
 } from 'pixi.js'
 import Players from '../../data/players'
-import '../../functions'
 // import PlanetInfo from '../../overlays/planetInfo'
 
 // Type 1: Unclaimed object
