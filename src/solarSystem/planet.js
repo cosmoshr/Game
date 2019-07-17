@@ -41,7 +41,7 @@ export default class Planet extends Container {
     super()
 
     this.self = planet
-    this.self.owner = 'Nobody'
+    this.self.owner = 'Cosmos'
 
     this.r = planet.path
     this.d = planet.degrees
