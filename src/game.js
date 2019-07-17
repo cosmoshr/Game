@@ -41,7 +41,7 @@ export default class Game extends Application {
 
     const loaderOverlay = new LoadingOverlay(true)
 
-    PixiLoader.shared.add(loader(true))
+    PixiLoader.shared.add(loader(1))
     PixiLoader.shared.onProgress.add(percent => {
       loaderOverlay.value = percent.progress
     })
@@ -63,7 +63,12 @@ export default class Game extends Application {
   splashScreen() {
     this.soundManager.trigger('Main Menu')
     const splash = new Splash()
-    PixiLoader.shared.add(loader().filter(item => !loader(true).some(item2 => item.name === item2.name)))
+    let hasLoaded = false
+    PixiLoader.shared.add(loader(2))
+    PixiLoader.shared.load(() => {
+      hasLoaded = true
+      PixiLoader.shared.add(loader(3))
+    })
 
     splash.games = this.cosmosList
     document.body.appendChild(splash.el)
@@ -76,12 +81,15 @@ export default class Game extends Application {
       this.soundManager.trigger('Game Starts')
       splash.kill()
 
-      PixiLoader.shared.load(async () => {
+      const load = async () => {
         loading.kill()
         this.soundManager.trigger('Whenever', false, true)
         await this.launchGame(id)
         this.gameInProgress()
-      })
+      }
+
+      if (!hasLoaded) PixiLoader.shared.load(load)
+      else load()
     }
   }
 
