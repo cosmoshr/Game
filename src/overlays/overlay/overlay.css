@@ -11,15 +11,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 h1 {
-    margin-bottom: 20px;
-    font-size: 500%;
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-    font-size: 400%;
-  }
+  margin-bottom: 20px;
+  font-size: 500%;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 400%;
+}

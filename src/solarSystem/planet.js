@@ -1,8 +1,7 @@
 import {
   Sprite, Loader, Container, Graphics
 } from 'pixi.js'
-import '../functions'
-import Moon from './moons'
+import Moon from './moon'
 
 class RoundedRectangle extends Graphics {
   constructor(x, y, width, height, cornerRadius, color, alpha) {
