@@ -119,9 +119,11 @@ export default class Game extends Application {
 
   async launchGame(id) {
     this.id = id
-    const solorSystemObj = new SolarSystem()
-    this.viewport.addChild(solorSystemObj)
-    this.cull.add(solorSystemObj)
+    const cosmos = await this.db.cosmos.get(id)
+    this.solarSystem = new SolarSystem(cosmos.cosmos)
+    this.viewport.addChild(this.solarSystem)
+    this.cull.add(this.solarSystem)
+
     this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
   }
 }

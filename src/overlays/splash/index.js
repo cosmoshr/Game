@@ -77,7 +77,7 @@ export default class Splash {
 
   async createGame() {
     if (this.el.querySelector('#gameName').value !== '') {
-      const id = await generateCosmos(this.el.querySelector('#gameName').value)
+      const id = await generateCosmos(1000, 1000, 1000, this.el.querySelector('#gameName').value)
       this.launchGame(id)
     }
   }

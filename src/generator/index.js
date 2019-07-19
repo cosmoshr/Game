@@ -1,6 +1,8 @@
 import planet from './planet'
 import cicles from './cicles'
+import { DB } from '../lib'
 
+const db = new DB()
 // [
 //   {
 //     sunSize: 50,
@@ -25,22 +27,32 @@ import cicles from './cicles'
 //   }
 // ]
 
-export default function generator(height, width, numGalaxys) {
+export default async function generator(height, width, numGalaxys, description) {
   const solarSystem = []
   const galaxys = cicles(height, width, numGalaxys)
-  galaxys.forEach(_galaxy => {
+  galaxys.forEach((_galaxy, index) => {
     const galaxy = {
       offsetX: _galaxy.x,
       offsetY: _galaxy.y,
-      radius: _galaxy.r
+      radius: _galaxy.r,
+      id: index
     }
 
-    galaxy.sunSize = Math.floor((Math.random() * 100) + 80)
+    galaxy.sunSize = Math.floor((Math.random() * 200) + 80)
 
     galaxy.planets = planet(_galaxy.r)
 
     solarSystem.push(galaxy)
   })
 
-  return solarSystem
+  const id = await db.cosmos.add({
+    cosmos: solarSystem
+  })
+
+  const cosmosList = JSON.parse(window.localStorage.getItem('cosmosList')) || []
+  cosmosList.push({
+    description, id, dateCreated: Date.now(), lastModified: Date.now()
+  })
+  localStorage.setItem('cosmosList', JSON.stringify(cosmosList))
+  return (id)
 }

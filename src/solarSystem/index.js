@@ -1,7 +1,6 @@
 import { Container } from 'pixi.js'
 import Planet from './planet'
 import Star from './star'
-import generator from '../generator'
 
 class Galaxy extends Container {
   constructor(galaxy) {
@@ -20,12 +19,10 @@ class Galaxy extends Container {
 
 
 export default class SolarSystem extends Container {
-  constructor() {
+  constructor(solarSystem) {
     super()
     this.x = 0
     this.y = 0
-
-    const solarSystem = generator(1000, 1000, 10000)
 
     this.galaxys = []
     solarSystem.forEach(galaxy => this.galaxys.push(new Galaxy(galaxy)))
