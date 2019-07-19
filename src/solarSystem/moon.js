@@ -1,19 +1,18 @@
 import { Sprite, Loader } from 'pixi.js'
 
 export default class Moon extends Sprite {
-  constructor(moon) {
-    const textureName = `Moon_${moon.type.name}`
+  constructor(moon, distanceFromPlanet) {
+    const textureName = `Moon_${moon.type}`
     super(Loader.shared.resources[textureName].texture)
 
-    this.p = moon.path
-    this.d = moon.degrees
-    this.size = moon.size
+    this.self = moon
+    this.self.distanceFromPlanet = distanceFromPlanet / 1.9
 
-    const pos = Math.genPosOnCircle(0, 0, this.p, this.d)
-    this.position.x = pos.x
-    this.position.y = pos.y
+    this.x = this.self.distanceFromPlanet * Math.cos(Math.radians(this.self.posInCycle))
+    this.y = this.self.distanceFromPlanet * Math.sin(Math.radians(this.self.posInCycle))
+    this.angle = this.self.posInCycle
 
-    this.width = this.size
-    this.height = this.size
+    this.width = this.self.width
+    this.height = this.self.width
   }
 }

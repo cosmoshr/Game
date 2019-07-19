@@ -1,22 +1,46 @@
-import Generator from './generator.worker'
-import { DB } from '../lib'
+import planet from './planet'
+import cicles from './cicles'
 
-const db = new DB()
+// [
+//   {
+//     sunSize: 50,
+//     planets: [
+//       {
+//         name: 'Something',
+//         distanceFromSun: 150, // Increments by 100 starts at 150
+//         width: 60, // 40 - 60
+//         posInCycle: 180, // How far on the loop in degrees
+//         type: ['Habitital_Planet', 1],
+//         moons: [
+//           {
+//             width: 17, // 10 - 17
+//             posInCycle: 0,
+//             type: 1
+//           }
+//         ]
+//       }
+//     ],
+//     offsetX: 0,
+//     offsetY: 0
+//   }
+// ]
 
-export default function generateCosmos(description) {
-  return new Promise(resolve => {
-    const generator = new Generator()
-    generator.postMessage({ size: 'auto', description })
-    generator.onmessage = async newCosmos => {
-      const id = await db.cosmos.add({
-        cosmos: newCosmos.data
-      })
-      const cosmosList = JSON.parse(window.localStorage.getItem('cosmosList')) || []
-      cosmosList.push({
-        description, id, dateCreated: Date.now(), lastModified: Date.now()
-      })
-      localStorage.setItem('cosmosList', JSON.stringify(cosmosList))
-      resolve(id)
+export default function generator(height, width, numGalaxys) {
+  const solarSystem = []
+  const galaxys = cicles(height, width, numGalaxys)
+  galaxys.forEach(_galaxy => {
+    const galaxy = {
+      offsetX: _galaxy.x,
+      offsetY: _galaxy.y,
+      radius: _galaxy.r
     }
+
+    galaxy.sunSize = Math.floor((Math.random() * 100) + 80)
+
+    galaxy.planets = planet(_galaxy.r)
+
+    solarSystem.push(galaxy)
   })
+
+  return solarSystem
 }

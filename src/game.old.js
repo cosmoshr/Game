@@ -1,7 +1,7 @@
 import {
   Application, Loader as PixiLoader
 } from 'pixi.js'
-import SolarSystem from './solarSystem'
+import SolarSystem from './solarSystem.old'
 import loader from './loader'
 import SoundManager from './sound'
 import { DB, Cull, Viewport } from './lib'
@@ -118,10 +118,12 @@ export default class Game extends Application {
   }
 
   async launchGame(id) {
-    this.id = id
-    const solorSystemObj = new SolarSystem()
-    this.viewport.addChild(solorSystemObj)
-    this.cull.add(solorSystemObj)
+    const cosmos = await this.db.cosmos.get(id)
+    cosmos.cosmos.forEach(solarSystem => {
+      const solorSystemObj = new SolarSystem(solarSystem)
+      this.viewport.addChild(solorSystemObj)
+      this.cull.add(solorSystemObj)
+    })
     this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
   }
 }
