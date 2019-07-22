@@ -7,6 +7,8 @@ import SoundManager from './sound'
 import { DB, Cull, Viewport } from './lib'
 import Background from './background'
 import { LoadingOverlay, Splash, Overlay } from './overlays'
+import Manager from './manager'
+import bus from './bus'
 
 export default class Game extends Application {
   ready = false
@@ -32,6 +34,8 @@ export default class Game extends Application {
     this.soundManager = new SoundManager()
 
     const loaderOverlay = new LoadingOverlay(true)
+
+    this.manager = new Manager(this.viewport)
 
     PixiLoader.shared.add(loader(1))
     PixiLoader.shared.onProgress.add(percent => { loaderOverlay.value = percent.progress })
@@ -119,11 +123,18 @@ export default class Game extends Application {
 
   async launchGame(id) {
     this.id = id
-    const cosmos = await this.db.cosmos.get(id)
-    this.solarSystem = new SolarSystem(cosmos.cosmos)
+    this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
+    const { cosmos, state } = await this.manager.launchGame(id)
+    this.solarSystem = new SolarSystem(cosmos)
     this.viewport.addChild(this.solarSystem)
     this.cull.add(this.solarSystem)
 
-    this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
+    const h1 = document.createElement('h1')
+    h1.innerHTML = state.currentTurn
+    h1.onclick = () => {
+      bus.emit('next-turn-clicked')
+      h1.innerHTML = Number(h1.innerHTML) + 1
+    }
+    document.body.prepend(h1)
   }
 }

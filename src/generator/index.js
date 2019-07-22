@@ -45,8 +45,13 @@ export default async function generator(height, width, numGalaxys, description) 
     solarSystem.push(galaxy)
   })
 
+  const state = {
+    currentTurn: 1
+  }
+
   const id = await db.cosmos.add({
-    cosmos: solarSystem
+    cosmos: solarSystem,
+    state
   })
 
   const cosmosList = JSON.parse(window.localStorage.getItem('cosmosList')) || []

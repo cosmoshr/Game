@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "dexie": "^2.0.4",
+    "nanobus": "^4.4.0",
     "pixi-cull": "^0.5.0",
     "pixi-sound": "^3.0.3",
     "pixi-viewport": "^3.23.2",

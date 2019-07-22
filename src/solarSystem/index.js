@@ -17,7 +17,6 @@ class Galaxy extends Container {
   }
 }
 
-
 export default class SolarSystem extends Container {
   constructor(solarSystem) {
     super()
