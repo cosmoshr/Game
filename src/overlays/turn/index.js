@@ -1,17 +1,10 @@
-const overlayStyle = require('./overlay.css')
-const overlayHtml = require('./overlay.html').default
+import Overlay from '../OverlayBase'
 
-export default class {
+const css = require('./overlay.css')
+const html = require('./overlay.html').default
+
+export default class extends Overlay {
   constructor() {
-    this.isOpen = false
-    this.el = document.createElement('div')
-    this.el.setAttribute('id', 'overlay')
-    this.el.innerHTML = overlayHtml
-    const style = document.createElement('style')
-    style.textContent = overlayStyle
-
-    this.el.prepend(style)
-
-    document.body.appendChild(this.el)
+    super(html, css, 'turn-overlay', document.body)
   }
 }
