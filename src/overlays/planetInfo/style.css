@@ -1,0 +1,12 @@
+#info-sidebar {
+  height: 100vh;
+  width: 900px;
+}
+
+.image-container {
+  display: flex;
+}
+
+.image img {
+  width: 100%;
+}
