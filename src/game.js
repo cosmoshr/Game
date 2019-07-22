@@ -7,8 +7,6 @@ import SoundManager from './sound'
 import { DB, Cull, Viewport } from './lib'
 import Background from './background'
 import { LoadingOverlay, Splash, Overlay } from './overlays'
-import SolarSystems from './solarSystem/SolarSystems'
-import Planets from './solarSystem/planets'
 
 export default class Game extends Application {
   ready = false
@@ -120,7 +118,7 @@ export default class Game extends Application {
   }
 
   async launchGame(id) {
-    const cosmos = await this.db.cosmos.get(id)
+    const { cosmos } = await this.db.cosmos.get(id)
 
     cosmos.cosmos.forEach(solarSystem => {
       const solorSystemObj = new SolarSystem(solarSystem)
@@ -128,6 +126,6 @@ export default class Game extends Application {
       this.cull.add(solorSystemObj)
     })
 
-    this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
+    this.renderer.resolution = window.localStorage.getItem('quality') || 1
   }
 }
