@@ -1,7 +1,7 @@
 import PlanetShell from './PlanetShell'
 
-const minPlanetSpacing = 100
-const maxPlanetSpacing = 200
+const minPlanetSpacing = 200
+const maxPlanetSpacing = 300
 
 onmessage = (e) => {
   const sunSize = Math.floor(Math.random() * 500) + 100

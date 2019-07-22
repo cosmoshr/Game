@@ -3,10 +3,28 @@ import moonTypes from '../constants/moons/_types'
 import essential from './essential'
 
 export default function required() {
-  const array = [{
-    name: 'sun',
-    url: 'assets/textures/stars/1.svg'
-  }]
+  const array = [
+    {
+      name: 'sun',
+      url: 'assets/textures/stars/1.svg'
+    },
+    {
+      name: 'unclaimed_planet_background',
+      url: 'assets/textures/ui/unclaimedPlanetBackground.svg'
+    },
+    {
+      name: 'your_planet_background',
+      url: 'assets/textures/ui/yourPlanetBackground.svg'
+    },
+    {
+      name: 'other_planet_background',
+      url: 'assets/textures/ui/otherPlanetBackground.svg'
+    },
+    {
+      name: 'blank',
+      url: 'assets/textures/blank.svg'
+    }
+  ]
 
   planetTypes.forEach(planetName => {
     // eslint-disable-next-line import/no-dynamic-require, global-require
