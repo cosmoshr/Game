@@ -1,8 +1,7 @@
 import {
   Sprite, Loader, Container, Graphics
 } from 'pixi.js'
-import '../functions'
-import Moon from './moons'
+import Moon from './moon'
 
 class RoundedRectangle extends Graphics {
   constructor(x, y, width, height, cornerRadius, color, alpha) {
@@ -44,7 +43,7 @@ class Info extends Container {
   }
 }
 
-export default class extends Container {
+export default class Planet extends Container {
   constructor(planet) {
     super()
 

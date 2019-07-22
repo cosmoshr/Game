@@ -1,6 +1,6 @@
 const style = require('./style.css')
 
-export default class extends HTMLElement {
+export default class Slider extends HTMLElement {
   constructor() {
     super()
 

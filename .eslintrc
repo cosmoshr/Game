@@ -25,12 +25,7 @@
     "arrow-parens": 0,
     "max-len": 0,
     "curly": ["error", "multi"],
-    "import/no-unresolved": [
-      2,
-      {
-        "devDependencies": true
-      }
-    ],
+    "import/no-unresolved": 2,
     "import/no-extraneous-dependencies": [
       2,
       {

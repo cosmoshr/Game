@@ -1,8 +1,8 @@
-import '../functions'
+import '../math'
 
 const solarSystems = []
 
-export default (worldSize, maxSolarSystemSize, minSolarSystemSize, solarSystemSpacing) => {
+export default function (worldSize, maxSolarSystemSize, minSolarSystemSize, solarSystemSpacing) {
   const maxSolarSystems = Math.floor((worldSize.width * worldSize.height) / ((maxSolarSystemSize + solarSystemSpacing) ** 2))
   const maxSSSqu = maxSolarSystems ** 1.5
 

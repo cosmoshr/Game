@@ -1,9 +1,9 @@
-import Overlay from '../OverlayBase'
+import OverlayBase from '../OverlayBase'
 
 const overlayStyle = require('./overlay.css')
 const overlayHtml = require('./overlay.html').default
 
-export default class extends Overlay {
+export default class Overlay extends OverlayBase {
   constructor() {
     super(overlayHtml, overlayStyle, 'overlay', document.body)
 
@@ -22,15 +22,18 @@ export default class extends Overlay {
 
   launch() {
     if (this.isOpen) {
-      this.isOpen = 0
+      this.close()
       this.el.style.visibility = 'hidden'
+      this.isOpen = 0
     } else {
-      this.isOpen = 1
+      this.open()
       this.el.style.visibility = 'visible'
+      this.isOpen = 1
     }
   }
 
   pressed(key) {
     if (key.key === 'Escape') this.launch()
+    if (key.key === 'Backspace') key.preventDefault()
   }
 }

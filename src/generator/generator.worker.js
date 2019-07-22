@@ -1,8 +1,7 @@
-// eslint-disable-next-line import/no-unresolved
 import 'subworkers'
 import BuildSolarSystem from './buildSolarSystem.worker'
 import generateSolarSystem from './generateSolarSystem'
-import SolarSystems from '../classes/SolarSystems'
+import SolarSystems from '../solarSystem/SolarSystems'
 
 const worldSize = {
   width: 50000,

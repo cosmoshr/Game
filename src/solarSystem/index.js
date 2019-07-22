@@ -2,7 +2,7 @@ import { Container } from 'pixi.js'
 import Planet from './planet'
 import Star from './star'
 
-export default class extends Container {
+export default class SolarSystem extends Container {
   planets = []
 
   habitablePlanets = []
