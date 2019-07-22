@@ -120,38 +120,14 @@ export default class Game extends Application {
   }
 
   async launchGame(id) {
-    this.solarSystems = new SolarSystems()
-    this.planets = new Planets()
-
-    const { cosmos } = await this.db.cosmos.get(id)
-
-    const solarSystemPromises = []
-
-    cosmos.cosmos.forEach((solarSystem, index) => {
+    const cosmos = await this.db.cosmos.get(id)
+    
+    cosmos.cosmos.forEach(solarSystem => {
       const solorSystemObj = new SolarSystem(solarSystem)
-
-      solarSystemPromises.push(new Promise(r => setTimeout(() => {
-        this.solarSystems.push(solorSystemObj)
-        this.planets.addPlanets(solorSystemObj.planets)
-
-        this.viewport.addChild(solorSystemObj)
-        this.cull.add(solorSystemObj)
-
-        r()
-      }, 5 + index)))
+      this.viewport.addChild(solorSystemObj)
+      this.cull.add(solorSystemObj)
     })
 
     this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
-
-    await Promise.all(solarSystemPromises)
-
-    this.viewport.moveCenter(cosmos.starting.planet.x + cosmos.starting.solarSystem.x, cosmos.starting.planet.y + cosmos.starting.solarSystem.y)
-    this.viewport.fitWidth(window.innerWidth)
-
-    this.playerObervations = [{
-      x: cosmos.starting.planet.x + cosmos.starting.solarSystem.x,
-      y: cosmos.starting.planet.x + cosmos.starting.solarSystem.x,
-      r: 500
-    }]
   }
 }
