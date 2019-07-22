@@ -121,7 +121,7 @@ export default class Game extends Application {
 
   async launchGame(id) {
     const cosmos = await this.db.cosmos.get(id)
-    
+
     cosmos.cosmos.forEach(solarSystem => {
       const solorSystemObj = new SolarSystem(solarSystem)
       this.viewport.addChild(solorSystemObj)
