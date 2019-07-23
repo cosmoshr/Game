@@ -129,6 +129,8 @@ export default class Game extends Application {
     this.viewport.addChild(this.solarSystem)
     this.cull.add(this.solarSystem)
 
+    this.manager.start()
+
     const h1 = document.createElement('h1')
     h1.innerHTML = state.currentTurn
     h1.onclick = () => {

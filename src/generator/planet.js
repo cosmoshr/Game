@@ -1,4 +1,5 @@
 import planetTypes from '../constants/planets/_types'
+import moon from './moon'
 
 const generateType = () => {
   const type = []
@@ -20,8 +21,7 @@ export default function (radius) {
   for (let index = 0; index < numPlanets; index++) {
     const planet = {
       name: 'Something',
-      distanceFromSun: 300 + 110 * index,
-      moons: []
+      distanceFromSun: 300 + 110 * index
     }
 
     planet.width = Math.floor((Math.random() * 60) + 40)
@@ -29,6 +29,10 @@ export default function (radius) {
     planet.posInCycle = Math.floor(Math.random() * 360)
 
     planet.type = generateType()
+
+    planet.multiplier = Math.floor((Math.random() * 5) + 1)
+
+    planet.moons = moon()
 
     planets.push(planet)
   }

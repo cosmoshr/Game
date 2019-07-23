@@ -22,4 +22,8 @@ export default class Manager {
     await this.db.cosmos.update(this.id, { state })
     bus.emit('next-turn')
   }
+
+  start() {
+    bus.emit('start', this.cosmos.state.currentTurn)
+  }
 }
