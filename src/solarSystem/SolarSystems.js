@@ -18,6 +18,38 @@ export default class SolarSystems {
     return this
   }
 
+  calcTurn() {
+    let allTurnPromises = []
+
+    this.solarSystems.forEach(ss => {
+      allTurnPromises = [...allTurnPromises, ...ss.turn()]
+    })
+
+    return allTurnPromises
+  }
+
+  findSolarSystemWithPlanet(index) {
+    let ssArrIndex
+    let planetArrIndex
+
+    this.solarSystems.some((ss, ssi) => {
+      const hasPlanet = ss.planets.some((planet, pi) => {
+        if (planet.index === index) planetArrIndex = pi
+
+        return planet.index === index
+      })
+
+      if (hasPlanet) ssArrIndex = ssi
+
+      return hasPlanet
+    })
+
+    return {
+      ssArrIndex,
+      planetArrIndex
+    }
+  }
+
   calculate() {
     if (this.dirty) {
       this.habitableSS = []

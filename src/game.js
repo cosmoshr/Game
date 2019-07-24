@@ -7,11 +7,16 @@ import SoundManager from './sound'
 import { DB, Cull, Viewport } from './lib'
 import Background from './background'
 import { LoadingOverlay, Splash, Overlay } from './overlays'
+import Planets from './solarSystem/planets'
+import SolarSystems from './solarSystem/SolarSystems'
+import Turn from './overlays/turn'
 
 export default class Game extends Application {
   ready = false
 
   hasLoaded = false
+
+  viewPositions = []
 
   constructor() {
     super({
@@ -108,6 +113,21 @@ export default class Game extends Application {
     }
 
     this.view.style.display = 'block'
+
+    const turn = new Turn()
+    turn.turn = async () => this.turn()
+  }
+
+  async turn() {
+    let turnCalculations = []
+
+    // * Write code for turn based calculations here
+
+    turnCalculations = [...turnCalculations, ...this.solarSystems.calcTurn()]
+
+    // Todo: Add entity turns (and add entities)
+
+    return Promise.all(turnCalculations)
   }
 
   reset() {
@@ -120,11 +140,25 @@ export default class Game extends Application {
   async launchGame(id) {
     const { cosmos } = await this.db.cosmos.get(id)
 
+    this.planets = new Planets()
+    this.solarSystems = new SolarSystems()
+
     cosmos.cosmos.forEach(solarSystem => {
       const solorSystemObj = new SolarSystem(solarSystem)
+
+      this.planets.addPlanets(solorSystemObj.planets)
+      this.solarSystems.push(solorSystemObj)
+
       this.viewport.addChild(solorSystemObj)
       this.cull.add(solorSystemObj)
     })
+
+    const { ssArrIndex, planetArrIndex } = this.solarSystems.findSolarSystemWithPlanet(cosmos.starting.planet.index)
+
+    const realPlanet = this.solarSystems.solarSystems[ssArrIndex].planets[planetArrIndex]
+
+    this.viewport.moveCenter(cosmos.starting.solarSystem.x + realPlanet.position.x, cosmos.starting.solarSystem.y + realPlanet.position.x)
+    this.viewport.fitWidth(window.innerWidth)
 
     this.renderer.resolution = window.localStorage.getItem('quality') || 1
   }

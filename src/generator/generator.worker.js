@@ -12,7 +12,9 @@ const maxSolarSystemSize = 5000
 const minSolarSystemSize = 1000
 const solarSystemSpacing = 200
 
-function getStartingPosition(cosmos) {
+let planetIndex = 0
+
+function getStartingPlanet(cosmos) {
   const cosmosSorted = new SolarSystems().pushCosmos(cosmos)
   const solarSystem = cosmosSorted.habitable[Math.floor(Math.random() * cosmosSorted.habitable.length)]
   const planet = solarSystem.habitablePlanets[Math.floor(Math.random() * solarSystem.habitablePlanets.length)]
@@ -35,9 +37,15 @@ onmessage = (_a) => {
     worker.postMessage(system)
     worker.onmessage = (content) => {
       cosmos[index] = content.data
+
+      cosmos[index].planets.forEach((planet, i) => {
+        cosmos[index].planets[i].index = planetIndex++
+      })
+
       SolarSystemWebWorkers--
+
       if (SolarSystemWebWorkers === 0) postMessage({
-        starting: getStartingPosition(cosmos),
+        starting: getStartingPlanet(cosmos),
         cosmos
       })
     }

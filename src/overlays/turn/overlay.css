@@ -1,0 +1,10 @@
+#turn-overlay {
+  height: 128px;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+
+svg {
+  height: 128px;
+}

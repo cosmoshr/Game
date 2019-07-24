@@ -39,11 +39,13 @@ export default class Planet extends Container {
   constructor(planet) {
     super()
 
+    this.index = planet.index
+
     this.type = planet.type.name
     this.isHabitable = planet.type.name === 'Habitital_Planet'
 
     this.self = planet
-    this.self.owner = 'Cosmos'
+    this.self.owner = 'Nobody'
 
     this.r = planet.path
     this.d = planet.degrees
@@ -60,5 +62,13 @@ export default class Planet extends Container {
     planet.moons.forEach(moon => this.addChild(new Moon(moon)))
 
     this.addChild(new Info(this.self))
+  }
+
+  turn() {
+    return new Promise(r => {
+      console.log(`A promise from planet #${this.index}`)
+
+      r()
+    })
   }
 }

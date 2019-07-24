@@ -17,6 +17,18 @@ export default class Planets {
     this.addPlanet(planet)
   }
 
+  findPlanet(index) {
+    let plannetArrayIndex
+
+    this.planets.some((el, i) => {
+      if (index === el.index) plannetArrayIndex = i
+
+      return index === el.index
+    })
+
+    return plannetArrayIndex
+  }
+
   get habitablePlanets() {
     if (this.dirty) {
       this.hPlanets = []

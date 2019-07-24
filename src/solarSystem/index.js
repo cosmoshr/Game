@@ -3,6 +3,8 @@ import Planet from './planet'
 import Star from './star'
 
 export default class SolarSystem extends Container {
+  planets = []
+
   constructor(solarSystem) {
     super()
 
@@ -14,7 +16,10 @@ export default class SolarSystem extends Container {
     this.position.y = this.y
 
     solarSystem.planets.forEach(planet => {
-      this.addChild(new Planet(planet))
+      const planetObj = new Planet(planet)
+
+      this.planets.push(planetObj)
+      this.addChild(planetObj)
     })
     this.addChild(new Star(0, 0, solarSystem.sunSize))
 
@@ -23,5 +28,21 @@ export default class SolarSystem extends Container {
     circle.drawCircle(this.x, this.y, this.r)
     circle.endFill()
     this.addChild(circle)
+  }
+
+  turn() {
+    const promisies = []
+
+    promisies.push(new Promise(r => {
+      // eslint-disable-next-line no-console
+      console.log('Do a thing')
+      r()
+    }))
+
+    this.planets.forEach(p => {
+      promisies.push(p.turn())
+    })
+
+    return promisies
   }
 }
