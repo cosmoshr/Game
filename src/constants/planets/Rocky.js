@@ -1,3 +1,4 @@
+
 export default {
   size: [20, 50],
   chance: 90,
