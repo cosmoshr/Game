@@ -4,6 +4,7 @@ import {
 import Moon from './moon'
 import bus from '../bus'
 import sleep from '../lib/sleep'
+import PlanetInfo from './planetInfo'
 
 class PlanetCenter extends Sprite {
   constructor(planet) {
@@ -21,6 +22,23 @@ class PlanetCenter extends Sprite {
   }
 }
 
+class PlanetBody extends Container {
+  constructor(planet, index) {
+    super()
+    this.self = planet
+    this.index = index
+
+    this.angle = this.self.posInCycle
+
+    this.moons = []
+    this.self.moons.forEach(moon => this.moons.push(new Moon(moon, this.self.width, this.self.multiplier)))
+    this.moons.forEach(moon => this.addChild(moon))
+
+    this.planet = new PlanetCenter(this.self)
+    this.addChild(this.planet)
+  }
+}
+
 export default class Planet extends Container {
   constructor(planet, index) {
     super()
@@ -30,33 +48,20 @@ export default class Planet extends Container {
 
     this.x = this.self.distanceFromSun * Math.cos(Math.radians(this.self.posInCycle * this.self.multiplier))
     this.y = this.self.distanceFromSun * Math.sin(Math.radians(this.self.posInCycle * this.self.multiplier))
-    this.angle = this.self.posInCycle
 
-    this.planet = new PlanetCenter(this.self)
+    this.planet = new PlanetBody(this.self, index)
     this.addChild(this.planet)
-
-
-    this.moons = []
-    this.self.moons.forEach(moon => this.moons.push(new Moon(moon, this.self.width, this.self.multiplier)))
-    this.moons.forEach(moon => this.addChild(moon))
+    this.info = new PlanetInfo(this.self, this.index)
+    this.addChild(this.info)
 
     this.text = new Text(index, {
       fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center'
     })
-    this.text.angle = -this.self.posInCycle
     this.addChild(this.text)
 
     bus.on('next-turn', this.nextTurn.bind(this))
     bus.on('start', this.nextTurn.bind(this))
-    bus.on('InHabit', (id, name) => {
-      if (id[0] === this.index[0] && id[1] === this.index[1]) {
-        this.textx = new Text(name, {
-          fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center'
-        })
-        this.textx.angle = -this.self.posInCycle
-        this.addChild(this.textx)
-      }
-    })
+
     this.interactive = true
 
     this.on('mousedown', () => {
@@ -80,8 +85,8 @@ export default class Planet extends Container {
       this.self.posInCycle += 0.5
       this.x = this.self.distanceFromSun * Math.cos(Math.radians(this.self.posInCycle * this.self.multiplier))
       this.y = this.self.distanceFromSun * Math.sin(Math.radians(this.self.posInCycle * this.self.multiplier))
-      this.angle = this.self.posInCycle
-      this.text.angle = -this.self.posInCycle
+      this.planet.angle = this.self.posInCycle
+
       await sleep(10)
       if (index++ < 20) next()
     }

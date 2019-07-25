@@ -7,6 +7,12 @@ export default class Manager {
     this.db = new DB()
 
     bus.on('next-turn-clicked', this.nextTurn.bind(this))
+
+    this.playerList = { 1: { name: 'Cosmos', isMe: true } }
+
+    bus.on('WhoIs', (playerId, cbk) => {
+      bus.emit(`WhoIsCBK-${cbk}`, this.playerList[playerId])
+    })
   }
 
   async launchGame(id) {
