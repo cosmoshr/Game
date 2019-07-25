@@ -64,9 +64,17 @@ export default class Planet extends Container {
 
     this.interactive = true
 
+    this.on('mouseover', () => {
+      bus.emit('SettleShow')
+    })
+
+    this.on('mouseout', () => {
+      bus.emit('SettleHide')
+    })
+
     this.on('mousedown', () => {
-      console.log(this.index)
-      bus.emit('Clicky', this.index)
+      const name = prompt('Name')
+      bus.emit('Settle', index, name)
     })
 
     if (this.self.habited) {

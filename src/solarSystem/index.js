@@ -30,8 +30,13 @@ class Galaxy extends Container {
     galaxy.planets.forEach((planet, _index) => this.planets.push(new Planet(planet, [index, _index])))
     this.planets.forEach(planet => this.addChild(planet))
 
-    bus.on('Clicky', id => {
-      this.bounds.clear().drawCircle(0, 0, id[1] * 110 + 300)
+    bus.on(`SettleShow-${index}`, habitable => {
+      habitable.forEach(_id => {
+        this.bounds.drawCircle(0, 0, _id * 110 + 300)
+      })
+    })
+    bus.on(`SettleHide-${index}`, () => {
+      this.bounds.clear()
     })
   }
 }

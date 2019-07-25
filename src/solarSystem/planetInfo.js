@@ -55,8 +55,8 @@ export default class PlanetInfo extends Container {
 
     this.players = {}
 
-    bus.on('Start', () => {
-      if (planet.habitable) this.init()
+    bus.on('start', () => {
+      if (planet.habitated) this.init()
     })
 
     this.x = this.self.width * Math.cos(Math.radians(270))
