@@ -10,6 +10,7 @@ import { LoadingOverlay, Splash, Overlay } from './overlays'
 import Planets from './solarSystem/planets'
 import SolarSystems from './solarSystem/SolarSystems'
 import Turn from './overlays/turn'
+import EntityRegiter from './entities/register'
 
 export default class Game extends Application {
   ready = false
@@ -17,6 +18,8 @@ export default class Game extends Application {
   hasLoaded = false
 
   viewPositions = []
+
+  entities = new EntityRegiter()
 
   constructor() {
     super({
@@ -125,7 +128,7 @@ export default class Game extends Application {
 
     turnCalculations = [...turnCalculations, ...this.solarSystems.calcTurn()]
 
-    // Todo: Add entity turns (and add entities)
+    turnCalculations = [...turnCalculations, ...this.entitys.calcTurn()]
 
     return Promise.all(turnCalculations)
   }

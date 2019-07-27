@@ -66,6 +66,7 @@ export default class Planet extends Container {
 
   turn() {
     return new Promise(r => {
+      // eslint-disable-next-line no-console
       console.log(`A promise from planet #${this.index}`)
 
       r()
