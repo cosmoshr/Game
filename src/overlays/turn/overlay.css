@@ -5,6 +5,8 @@
   position: absolute;
 }
 
-svg {
-  height: 128px;
+#next-turn-overlay, 
+#next-turn-button {
+  width: 100%;
+  height: 100%;
 }
