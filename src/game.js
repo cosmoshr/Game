@@ -6,9 +6,12 @@ import loader from './loader'
 import SoundManager from './sound'
 import { DB, Cull, Viewport } from './lib'
 import Background from './background'
-import { LoadingOverlay, Splash, Overlay } from './overlays'
+import {
+  LoadingOverlay, Splash, Overlay, Turn
+} from './overlays'
 import Manager from './manager'
-import bus from './bus'
+import Entities from './entities/register'
+import Settler from './entities/Settler'
 
 export default class Game extends Application {
   ready = false
@@ -19,7 +22,7 @@ export default class Game extends Application {
     super({
       width: innerWidth,
       height: innerHeight,
-      resolution: 1
+      resolution: window.devicePixelRatio || 1
     })
 
     this.view.id = 'app'
@@ -62,7 +65,7 @@ export default class Game extends Application {
     }
   }
 
-  splashScreen() {
+  async splashScreen() {
     this.soundManager.trigger('Main Menu')
     const splash = new Splash()
 
@@ -119,24 +122,33 @@ export default class Game extends Application {
     const background = new Background()
     this.viewport.addChild(background)
     this.cull = new Cull(this.viewport)
+
+    this.turnOverlay.kill()
+    this.turnOverlay = null
   }
 
   async launchGame(id) {
     this.id = id
-    this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
-    const { cosmos, state } = await this.manager.launchGame(id)
+    const cosmos = await this.manager.launchGame(id)
+
     this.solarSystem = new SolarSystem(cosmos)
     this.viewport.addChild(this.solarSystem)
+
+    this.entities = new Entities()
+
+    const [starting] = this.solarSystem.galaxys[0].habitablePlanets
+    const [startingss] = this.solarSystem.galaxys
+
+    const settler = new Settler()
+    settler.setPos(starting.position.x + startingss.position.x, starting.position.y + startingss.position.y)
+    this.entities.push(settler)
+    this.viewport.addChild(settler)
+
+    this.turnOverlay = new Turn()
+
     this.cull.add(this.solarSystem)
+    this.cull.add(settler)
 
     this.manager.start()
-
-    const h1 = document.createElement('h1')
-    h1.innerHTML = state.currentTurn
-    h1.onclick = () => {
-      bus.emit('next-turn-clicked')
-      h1.innerHTML = Number(h1.innerHTML) + 1
-    }
-    document.body.prepend(h1)
   }
 }

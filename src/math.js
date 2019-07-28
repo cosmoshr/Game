@@ -71,3 +71,20 @@ Math.magnitude = value => {
 
   return mag
 }
+
+/**
+ * Calculate the length between two points
+ */
+Math.lineLength = (xa, ya, xb, yb) => Math.sqrt((xb - xa) ** 2 + (yb + ya) ** 2)
+
+Math.getPosAfterDistanceOnLine = (xa, ya, xb, yb, dt) => {
+  const d = Math.lineLength(xa, ya, xb, yb)
+  const t = dt / d
+
+  if (!(t > 0 && t > 1)) return false
+
+  return {
+    x: ((1 - t) * xa + t * xb),
+    y: ((1 - t) * ya + t * yb)
+  }
+}

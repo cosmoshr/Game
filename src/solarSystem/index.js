@@ -11,6 +11,8 @@ class Bounds extends Graphics {
 }
 
 class Galaxy extends Container {
+  habitablePlanets = []
+
   constructor(galaxy, index) {
     super()
     this.x = galaxy.offsetX
@@ -28,7 +30,10 @@ class Galaxy extends Container {
 
     this.planets = []
     galaxy.planets.forEach((planet, _index) => this.planets.push(new Planet(planet, [index, _index])))
-    this.planets.forEach(planet => this.addChild(planet))
+    this.planets.forEach(planet => {
+      if (planet.isHabitable) this.habitablePlanets.push(planet)
+      this.addChild(planet)
+    })
 
     bus.on(`SettleShow-${index}`, habitable => {
       habitable.forEach(_id => {
@@ -42,6 +47,8 @@ class Galaxy extends Container {
 }
 
 export default class SolarSystem extends Container {
+  planets = []
+
   constructor(solarSystem) {
     super()
     this.x = 0

@@ -9,9 +9,9 @@ const distance = (x1, y1, x2, y2) => {
 }
 
 // Uses P5.js for canvas creation and drawing
-export default function cicles(height, width, numGalaxys) {
+export default function cicles(height) {
   const circles = [],
-    protection = numGalaxys * 10
+    protection = height
 
   let circle = {},
     overlapping = false,
@@ -20,9 +20,9 @@ export default function cicles(height, width, numGalaxys) {
   // populate circles array
   // brute force method continues until # of circles target is reached
   // or until the protection value is reached
-  while (circles.length < numGalaxys && counter < protection) {
+  while (circles.length < height / 10 && counter < protection) {
     circle = {
-      x: Math.floor(Math.random() * width),
+      x: Math.floor(Math.random() * height),
       y: Math.floor(Math.random() * height),
       r: Math.floor((Math.random() * 4000) + 2000)
     }
@@ -52,7 +52,7 @@ export default function cicles(height, width, numGalaxys) {
   circles.forEach(_circle => {
     const newCicle = _circle
     newCicle.x -= height / 2
-    newCicle.y -= width / 2
+    newCicle.y -= height / 2
     finale.push(newCicle)
   })
 

@@ -19,7 +19,8 @@ const output = {
 const devServer = {
   contentBase: config.OUTPUT,
   host: config.HOST,
-  port: config.PORT
+  port: config.PORT,
+  compress: true
 }
 
 /**

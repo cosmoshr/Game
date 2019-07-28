@@ -30,18 +30,20 @@ export default class Manager {
       })
     })
 
-
-    bus.on('Settle', (id, name) => {
+    bus.on('Settle', async id => {
       let okay = true
       this.cosmos.cosmos[id[0]].planets.forEach((planet, index) => {
-        if (planet.habitated) if (id[1] + 3 < index || id[1] - 3 > index);
-        else okay = false
+        if (planet.habitated) if (!(id[1] + 3 < index || id[1] - 3 > index)) okay = false
       })
       if (okay) {
+        const name = this.planetNames[Math.floor(Math.random() * this.planetNames.length)]
+
         this.cosmos.cosmos[id[0]].planets[id[1]].habitated = true
         this.cosmos.cosmos[id[0]].planets[id[1]].name = name
         this.cosmos.cosmos[id[0]].planets[id[1]].owner = 1
+
         bus.emit('InHabit', id, name, 1)
+
         this.db.cosmos.update(this.id, { cosmos: this.cosmos.cosmos })
       }
     })
@@ -51,7 +53,7 @@ export default class Manager {
     this.id = id
     this.cosmos = await this.db.cosmos.get(id)
 
-    return { cosmos: this.cosmos.cosmos, state: this.cosmos.state }
+    return this.cosmos.cosmos
   }
 
   async nextTurn() {
@@ -61,7 +63,10 @@ export default class Manager {
     bus.emit('next-turn')
   }
 
-  start() {
+  async start() {
+    if (!this.planetNames) this.planetNames = await import(/* webpackChunkName: "planetNames" */ '../constants/planetNames.js')
+    this.planetNames = this.planetNames.default
+
     bus.emit('start', this.cosmos.state.currentTurn)
   }
 }

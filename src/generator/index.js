@@ -27,9 +27,9 @@ const db = new DB()
 //   }
 // ]
 
-export default async function generator(height, width, numGalaxys, description) {
+export default async function generator(height, description) {
   const solarSystem = []
-  const galaxys = cicles(height, width, numGalaxys)
+  const galaxys = cicles(height)
   galaxys.forEach((_galaxy, index) => {
     const galaxy = {
       offsetX: _galaxy.x,

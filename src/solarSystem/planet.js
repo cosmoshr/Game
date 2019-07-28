@@ -44,6 +44,10 @@ export default class Planet extends Container {
     super()
     this.self = planet
 
+    // eslint-disable-next-line prefer-destructuring
+    this.type = this.self.type[0]
+    this.isHabitable = this.type === 'Habitital_Planet'
+
     this.index = index
 
     this.x = this.self.distanceFromSun * Math.cos(Math.radians(this.self.posInCycle * this.self.multiplier))
@@ -53,11 +57,6 @@ export default class Planet extends Container {
     this.addChild(this.planet)
     this.info = new PlanetInfo(this.self, this.index)
     this.addChild(this.info)
-
-    this.text = new Text(index, {
-      fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center'
-    })
-    this.addChild(this.text)
 
     bus.on('next-turn', this.nextTurn.bind(this))
     bus.on('start', this.nextTurn.bind(this))
@@ -73,8 +72,7 @@ export default class Planet extends Container {
     })
 
     this.on('mousedown', () => {
-      const name = prompt('Name')
-      bus.emit('Settle', index, name)
+      bus.emit('Settle', index)
     })
 
     if (this.self.habited) {
