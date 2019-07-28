@@ -7,17 +7,16 @@ export const EntityActions = Object.freeze({
   MOVE: 3
 })
 
-export default class Entity extends Container {
+export default class DefaultEntity extends Container {
   movements = 0
 
   currentActions = []
 
-  constructor(name, movements, owned) {
+  constructor(name, movements) {
     super()
 
     this.name = name
     this.allowedMovements = movements
-    this.owned = owned
   }
 
   moveTo(x, y) {
@@ -28,37 +27,39 @@ export default class Entity extends Container {
   async doActions() {
     const promises = []
 
-    this.currentActions.forEach((action, i) => {
-      promises.push(new Promise(async r => {
-        switch (action.type) {
-          case EntityActions.SLEEP:
-            this.movemtents = 0
-            break
-
-          case EntityActions.NONE:
-            break
-
-          case EntityActions.SKIP:
-            this.movemtents = 0
-            break
-
-          case EntityActions.MOVE:
-            await this.move(action)
-            break
-
-          default:
-            throw new Error('Not a valid action')
-        }
-
-        this.currentActions[i].type = EntityActions.NONE
-        r()
-      }))
-    })
+    this.currentActions.forEach((action, i) => promises.push(new Promise(async r => r(await this.calcAction(action, i)))))
 
     return Promise.all(promises)
   }
 
+  async calcAction(action, i) {
+    switch (action.type) {
+      case EntityActions.NONE:
+        break
+
+      case EntityActions.SLEEP:
+        this.movemtents = 0
+        break
+
+      case EntityActions.SKIP:
+        this.movemtents = 0
+        this.currentActions[i].done = true
+        break
+
+      case EntityActions.MOVE:
+        this.currentActions[i].done = await this.move(action)
+        break
+
+      default:
+        throw new Error('Not a valid action')
+    }
+
+    if (this.currentActions[i].done) this.currentActions[i].type = EntityActions.NONE
+  }
+
   async move(action) {
+    let isDone = false
+
     const { x, y } = this.position
 
     const useMovements = Math.lineLength(x, y, action.x, action.y)
@@ -66,7 +67,7 @@ export default class Entity extends Container {
     let moveTo = { x: action.x, y: action.x }
 
     if (useMovements < this.movemtents) moveTo = Math.getPosAfterDistanceOnLine(x, y, action.x, action.y, this.movements)
-    else this.done = true
+    else isDone = true
 
     const neededMovements = Math.lineLength(x, y, moveTo.x, moveTo.y)
 
@@ -76,6 +77,8 @@ export default class Entity extends Container {
     }
 
     this.moveTo(moveTo.x, moveTo.y)
+
+    return isDone
   }
 
   turn() {
@@ -97,3 +100,5 @@ export default class Entity extends Container {
     return promises
   }
 }
+
+export class Entity extends DefaultEntity {}
