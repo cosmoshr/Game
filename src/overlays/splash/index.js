@@ -16,7 +16,7 @@ export default class Splash {
 
     this.back();
 
-    ['back', 'newGame', 'loadGame', 'openSettings', 'saveSettings'].forEach(query => { this.el.querySelector(`#${query}`).onclick = this[query].bind(this) })
+    ['back', 'newGame', 'loadGame', 'multiplayer', 'openSettings', 'saveSettings'].forEach(query => { this.el.querySelector(`#${query}`).onclick = this[query].bind(this) })
 
     this.el.querySelector('#quit').onclick = () => history.go(-1)
   }
@@ -37,6 +37,16 @@ export default class Splash {
     // window.localStorage.setItem('quality', this.el.querySelector('#quality').value)
   }
 
+  multiplayer() {
+    this.toggle('home', 'multiplayerPg')
+    this.el.querySelector('#ipAddr').value = '127.0.0.1:65535'
+    this.el.querySelector('#startMultiplayer').onclick = this.startMultipler.bind(this)
+  }
+
+  startMultipler() {
+    this.id = 1
+    alert('Has not been implemented')
+  }
   // --------------------------------------------
   // LOAD GAME MENU
   // --------------------------------------------
@@ -108,6 +118,10 @@ export default class Splash {
 
       case 'quality':
         if (key.key === 'Enter') this.saveSettings()
+        break
+
+      case 'ipAddr':
+        if (key.key === 'Enter') this.startMultipler()
         break
 
       default:

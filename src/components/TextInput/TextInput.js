@@ -26,4 +26,8 @@ export default class TextInput extends HTMLElement {
   get value() {
     return this.text.value
   }
+
+  set value(value) {
+    this.text.setAttribute('placeholder', value)
+  }
 }

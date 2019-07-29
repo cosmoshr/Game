@@ -45,8 +45,7 @@ export default class Planet extends Container {
     this.self = planet
 
     // eslint-disable-next-line prefer-destructuring
-    this.type = this.self.type[0]
-    this.isHabitable = this.type === 'Habitital_Planet'
+    this.isHabitable = this.self.type[0] === 'Habitital_Planet'
 
     this.index = index
 

@@ -1,5 +1,4 @@
 import { Sprite, Loader } from 'pixi.js'
-import bus from '../bus'
 
 export default class Star extends Sprite {
   constructor(size) {
@@ -10,7 +9,5 @@ export default class Star extends Sprite {
 
     this.width = size
     this.height = size
-
-    bus.emit('init', size)
   }
 }
