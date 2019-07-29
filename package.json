@@ -7,7 +7,7 @@
   "description": "The base game repository",
   "main": "dist/electron-renderer/electron.js",
   "scripts": {
-    "eslint": "eslint src",
+    "eslint": "eslint src --fix",
     "stylelint": "stylelint src/sass/**/*.scss",
     "lint": "yarn eslint && yarn stylelint",
     "lint:fix": "yarn eslint --fix && yarn stylelint --fix",
