@@ -28,6 +28,15 @@ class Internals extends Graphics {
 }
 
 export default class Settler extends Entity {
+  actionDisplay = [
+    ...this.actionDisplay,
+    {
+      name: 'Settle',
+      description: 'Claim a planet',
+      action: Actions.SETTLE
+    }
+  ]
+
   constructor() {
     super('Settler', 110)
 
@@ -39,15 +48,14 @@ export default class Settler extends Entity {
       bus.emit('getClosestPlanet', this.position.x, this.position.y)
 
       const planet = await new Promise(r => {
-        bus.on('closestPlanet', rplanet => {
-          bus.removeAllListeners('closestPlanet')
+        bus.once('closestPlanet', rplanet => {
           r(rplanet)
         })
       })
 
       bus.emit('settlePlanet', planet)
 
-      this.currentAction = Actions.NONE
+      this.currentAction = Actions.DELETE
     }
 
     super.handleAction()

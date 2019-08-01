@@ -7,11 +7,12 @@ import SoundManager from './sound'
 import { DB, Cull, Viewport } from './lib'
 import Background from './background'
 import {
-  LoadingOverlay, Splash, Overlay, Turn
+  LoadingOverlay, Splash, Overlay, InGame
 } from './overlays'
 import Manager from './manager'
 import Entities from './entities/register'
 import Settler from './entities/Settler'
+import PixiOverlays from './inPixiOverlays';
 
 export default class Game extends Application {
   ready = false
@@ -27,6 +28,7 @@ export default class Game extends Application {
 
     this.view.id = 'app'
     this.viewport = new Viewport(this.renderer)
+    this.viewport.interactive = true
     this.stage.addChild(this.viewport)
     document.body.appendChild(this.view)
 
@@ -131,10 +133,18 @@ export default class Game extends Application {
     this.id = id
     const cosmos = await this.manager.launchGame(id)
 
+    this.entities = new Entities()
+    this.turnOverlay = new InGame(this.entities)
+
     this.solarSystem = new SolarSystem(cosmos)
     this.viewport.addChild(this.solarSystem)
 
-    this.entities = new Entities()
+    this.pixiOverlay = new PixiOverlays()
+    this.viewport
+      .on('pointerup', m => this.pixiOverlay.click(m))
+      .on('pointermove', m => this.pixiOverlay.mouseMove(m))
+    this.viewport.addChild(this.pixiOverlay)
+    this.cull.add(this.pixiOverlay)
 
     const [starting] = this.solarSystem.galaxys[0].habitablePlanets
     const [startingss] = this.solarSystem.galaxys
@@ -142,12 +152,9 @@ export default class Game extends Application {
     const settler = new Settler()
     settler.setPos(starting.position.x + startingss.position.x, starting.position.y + startingss.position.y)
     this.entities.push(settler)
-    this.viewport.addChild(settler)
-
-    this.turnOverlay = new Turn()
 
     this.cull.add(this.solarSystem)
-    this.cull.add(settler)
+    this.cull.add(this.entities)
 
     this.manager.start()
   }

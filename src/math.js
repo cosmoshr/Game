@@ -81,7 +81,8 @@ Math.getPosAfterDistanceOnLine = (xa, ya, xb, yb, dt) => {
   const d = Math.lineLength(xa, ya, xb, yb)
   const t = dt / d
 
-  if (!(t > 0 && t > 1)) return false
+  if (t < 0) return false
+  if (t > 1) return true
 
   return {
     x: ((1 - t) * xa + t * xb),

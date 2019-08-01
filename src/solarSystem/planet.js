@@ -84,6 +84,12 @@ export default class Planet extends Container {
     }
   }
 
+  setSettleProperties(habited, name, owner) {
+    this.habitated = habited
+    this.name = name
+    this.owner = owner
+  }
+
   nextTurn(begin = 0) {
     let index = 1
     if (begin !== 0) this.self.posInCycle += begin * 10
