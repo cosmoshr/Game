@@ -10,6 +10,12 @@ Math.radians = degrees => (degrees * Math.PI) / 180
  */
 Math.degrees = radians => (radians * 180) / Math.PI
 
+Math.normalizeDegrees = degrees => {
+  if (degrees < 0) return 360 + degrees
+
+  return degrees
+}
+
 Math.circleIntersect = (solarSystemPos, solarSystem, solarSystems, solarSystemSpacing) => {
   const radius1 = solarSystem + solarSystemSpacing,
     radius2 = solarSystems.r + solarSystemSpacing
@@ -88,4 +94,15 @@ Math.getPosAfterDistanceOnLine = (xa, ya, xb, yb, dt) => {
     x: ((1 - t) * xa + t * xb),
     y: ((1 - t) * ya + t * yb)
   }
+}
+
+Math.getDirectionTo = (xa, ya, xb, yb) => {
+  const x = xa - xb
+  const y = ya - yb
+
+  const teta = Math.atan2(x, y)
+
+  console.log(Math.degrees(teta))
+
+  return Math.round(Math.degrees(teta))
 }

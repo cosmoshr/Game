@@ -102,50 +102,29 @@ export default class Entity extends Container {
         return
       }
 
-      // const length = Math.lineLength(x, y, movex, movey)
-
-      // let nextx,
-      //   nexty
-
-      // if (length <= this.usedMovements) { // If you have enough movements
       const nextx = movex
       const nexty = movey
 
       this.currentAction = Actions.NONE
       this.ActionProperties = {}
-      // } else { // If you don't have enough movements
-      //   const maxPos = Math.getPosAfterDistanceOnLine(x, y, movex, movey, this.usedMovements)
-      //   console.log(maxPos)
-
-      //   nextx = maxPos.x
-      //   nexty = maxPos.y
-      // }
-
-      // const nextLength = Math.lineLength(x, y, nextx, nexty)
-
-      // for (let i = 0; i < nextLength; i++) {
-      //   const newPos = Math.getPosAfterDistanceOnLine(x, y, nextx, nexty, i)
-
-      //   this.setPos(newPos.x, newPos.y)
-      // }
 
       const nextLength = Math.lineLength(x, y, nextx, nexty)
       let i = 0
+
+      this.angle = Math.getDirectionTo(x, y, nextx, nexty)
 
       const loop = async () => {
         const newPos = Math.getPosAfterDistanceOnLine(x, y, nextx, nexty, i)
         this.setPos(newPos.x, newPos.y)
 
-        await sleep(10)
-        i++
-        if (!(i < nextLength)) await loop()
+        await sleep(1)
+        i += 5
+        if (i < nextLength) await loop()
       }
 
       await loop()
 
       this.setPos(nextx, nexty)
-
-      console.log(`Move to ${nextx} ${nexty}`)
     }
   }
 }

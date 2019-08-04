@@ -49,12 +49,10 @@ export default class InGame {
       actionEl.innerHTML = `<img src="${action.icon}" alt="${action.description}" />`
 
       if (action.passCords) actionEl.onclick = async () => {
-        const posData = await new Promise(responce => {
+        const { x, y } = await new Promise(responce => {
           bus.emit('getCords')
           bus.once('returnCords', data => responce(data))
         })
-
-        const { x, y } = posData
 
         active.moveTo(x, y)
       }

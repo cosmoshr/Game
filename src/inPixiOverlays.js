@@ -19,6 +19,9 @@ class LocationPicker extends Container {
     this.addChild(this.circle)
 
     this.line = new Graphics()
+    this.line.lineStyle(4, color, 1)
+    this.line.moveTo(this.startPos.x, this.startPos.y)
+    this.line.lineTo(0, 0)
     this.addChild(this.line)
   }
 
