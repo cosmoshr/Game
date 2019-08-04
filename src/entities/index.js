@@ -2,6 +2,7 @@ import { Container } from 'pixi.js'
 import { Enum } from '../lib'
 
 import bus from '../bus'
+import sleep from '../lib/sleep'
 
 export const enumValues = [
   'NONE', 'SLEEP', 'MOVE', 'SKIP', 'DELETE'
@@ -89,7 +90,7 @@ export default class Entity extends Container {
     this.move()
   }
 
-  move() {
+  async move() {
     if (this.usedMovements !== 0) {
       const { movex, movey } = this.ActionProperties
       const { x, y } = this.position
@@ -127,6 +128,20 @@ export default class Entity extends Container {
 
       //   this.setPos(newPos.x, newPos.y)
       // }
+
+      const nextLength = Math.lineLength(x, y, nextx, nexty)
+      let i = 0
+
+      const loop = async () => {
+        const newPos = Math.getPosAfterDistanceOnLine(x, y, nextx, nexty, i)
+        this.setPos(newPos.x, newPos.y)
+
+        await sleep(10)
+        i++
+        if (!(i < nextLength)) await loop()
+      }
+
+      await loop()
 
       this.setPos(nextx, nexty)
 

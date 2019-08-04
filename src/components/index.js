@@ -2,7 +2,7 @@ import LinearLoader from './LinearLoader/LinearLoader'
 import Button from './Button/Button'
 import TextInput from './TextInput/TextInput'
 import Slider from './Slider/Slider'
-import ActionButton from './ActionButton';
+import ActionButton from './ActionButton'
 
 export default function () {
   customElements.define('linear-loader', LinearLoader)

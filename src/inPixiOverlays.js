@@ -12,42 +12,40 @@ class LocationPicker extends Container {
     this.color = color
     this.startPos = startPos
 
-    // this.circle = new Graphics()
-    // this.circle.beginFill(color)
-    // this.circle.drawCircle(0, 0, 32)
-    // this.circle.endFill()
-    // this.addChild(this.circle)
+    this.circle = new Graphics()
+    this.circle.lineStyle(5, color)
+    this.circle.drawCircle(0, 0, 100)
+    this.circle.endFill()
+    this.addChild(this.circle)
 
     this.line = new Graphics()
     this.addChild(this.line)
   }
 
   mouseMove(m) {
-    if (this.active) {
-      const { x, y } = m.data.global
+    const { x, y } = m.data.getLocalPosition(this)
 
-      // this.circle.x = x
-      // this.circle.y = y
+    this.moveData = m.data
 
-      this.line.clear()
-      this.line.moveTo(this.startPos.x, this.startPos.y)
-      this.line.lineTo(x, y)
+    this.circle.position.x = x
+    this.circle.position.y = y
 
-      this.mouse = {
-        x,
-        y
-      }
+    this.line.clear()
+    this.line.moveTo(this.startPos.x, this.startPos.y)
+    this.line.lineTo(x, y)
+
+    this.mouse = {
+      x,
+      y
     }
   }
 
-  click(m) {
+  click() {
     this.active = false
-
-    const { x, y } = m.data.global
 
     this.alpha = 0
 
-    this.done(x, y)
+    this.done(this.moveData)
 
     this.destroy()
   }
@@ -69,12 +67,19 @@ export default class PixiOverlays extends Container {
   }
 
   getCords() {
-    bus.emit('getActiveEntityPos')
-    bus.once('activeEntityPos', (x, y) => {
+    bus.once('activeEntity', e => {
+      const { x, y } = e.position
       this.locPicker = new LocationPicker(0xFF0000, { x, y })
-      this.locPicker.done = (xa, ya) => bus.emit('returnCords', xa, ya)
+      this.locPicker.done = data => {
+        bus.emit('returnCords', data.getLocalPosition(e.parent))
+
+        delete this.locPicker
+      }
 
       this.addChild(this.locPicker)
     })
+
+    bus.emit('getActiveEntity')
+    bus.emit('getActiveEntity')
   }
 }

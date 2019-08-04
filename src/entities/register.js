@@ -6,7 +6,7 @@ export default class EntityRegister extends Container {
     super()
     this.entities = entities
 
-    bus.on('getActiveEntityPos', () => bus.emit('activeEntityPos', this.active.position.x, this.active.position.y))
+    bus.on('getActiveEntity', () => bus.emit('activeEntity', this.active))
   }
 
   pushMultiple(entities) {
@@ -15,12 +15,15 @@ export default class EntityRegister extends Container {
       ...entities
     ]
 
+    entities.forEach(entity => this.addChild(entity))
+
     // eslint-disable-next-line prefer-destructuring
     if (!this.a) this.active = this.entities[0]
   }
 
   push(entity) {
     this.entities.push(entity)
+    this.addChild(entity)
 
     // eslint-disable-next-line prefer-destructuring
     if (!this.a) this.active = this.entities[0]

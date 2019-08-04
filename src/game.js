@@ -12,7 +12,7 @@ import {
 import Manager from './manager'
 import Entities from './entities/register'
 import Settler from './entities/Settler'
-import PixiOverlays from './inPixiOverlays';
+import PixiOverlays from './inPixiOverlays'
 
 export default class Game extends Application {
   ready = false
@@ -134,10 +134,14 @@ export default class Game extends Application {
     const cosmos = await this.manager.launchGame(id)
 
     this.entities = new Entities()
+    this.viewport.addChild(this.entities)
+    this.cull.add(this.entities)
+
     this.turnOverlay = new InGame(this.entities)
 
     this.solarSystem = new SolarSystem(cosmos)
     this.viewport.addChild(this.solarSystem)
+    this.cull.add(this.solarSystem)
 
     this.pixiOverlay = new PixiOverlays()
     this.viewport
@@ -152,9 +156,6 @@ export default class Game extends Application {
     const settler = new Settler()
     settler.setPos(starting.position.x + startingss.position.x, starting.position.y + startingss.position.y)
     this.entities.push(settler)
-
-    this.cull.add(this.solarSystem)
-    this.cull.add(this.entities)
 
     this.manager.start()
   }

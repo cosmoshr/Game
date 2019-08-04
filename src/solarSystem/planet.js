@@ -71,10 +71,6 @@ export default class Planet extends Container {
       bus.emit('SettleHide')
     })
 
-    this.on('mousedown', () => {
-      bus.emit('Settle', index)
-    })
-
     if (this.self.habited) {
       this.textx = new Text(this.self.name, {
         fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center'
