@@ -23,6 +23,14 @@ export default function required() {
     {
       name: 'blank',
       url: 'assets/textures/blank.svg'
+    },
+    {
+      name: 'settler',
+      url: 'assets/textures/entities/settler.svg'
+    },
+    {
+      name: 'settler_throttle',
+      url: 'assets/textures/entities/settlerThrottle.svg'
     }
   ]
 

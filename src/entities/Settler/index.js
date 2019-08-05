@@ -1,4 +1,4 @@
-import { Graphics } from 'pixi.js'
+import { Container, Sprite, Loader } from 'pixi.js'
 
 import Entity, { enumValues } from '..'
 import { Enum } from '../../lib'
@@ -11,19 +11,30 @@ export const settlerEnumValues = [
 
 export const Actions = new Enum(settlerEnumValues)
 
-class Internals extends Graphics {
+class Ship extends Container {
+  moving = false
+
   constructor() {
     super()
 
-    this.beginFill(0x66FF33)
+    this.body = new Sprite(Loader.shared.resources.settler.texture)
+    this.body.width = 50
+    this.body.height = 50
+    this.addChild(this.body)
 
-    this.drawPolygon([
-      -32, 64,
-      32, 64,
-      0, 0
-    ])
+    this.throttle = new Sprite(Loader.shared.resources.settler_throttle.texture)
+    this.throttle.alpha = 0
+    this.throttle.width = 50
+    this.throttle.height = 10
+    this.throttle.position.y = 50
+    this.addChild(this.throttle)
+  }
 
-    this.endFill()
+  isMoving(moving) {
+    this.moving = moving
+
+    if (this.moving) this.throttle.alpha = 1
+    else this.throttle.alpha = 0
   }
 }
 
@@ -40,7 +51,12 @@ export default class Settler extends Entity {
   constructor() {
     super('Settler', 110)
 
-    this.addChild(new Internals())
+    this.internals = new Ship()
+    this.addChild(this.internals)
+  }
+
+  changeMoveState(isMoving) {
+    this.internals.isMoving(isMoving)
   }
 
   async handleAction() {

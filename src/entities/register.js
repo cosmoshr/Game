@@ -1,9 +1,7 @@
-import { Container } from 'pixi.js'
 import bus from '../bus'
 
-export default class EntityRegister extends Container {
+export default class EntityRegister {
   constructor(entities = []) {
-    super()
     this.entities = entities
 
     bus.on('getActiveEntity', () => bus.emit('activeEntity', this.active))
@@ -15,15 +13,12 @@ export default class EntityRegister extends Container {
       ...entities
     ]
 
-    entities.forEach(entity => this.addChild(entity))
-
     // eslint-disable-next-line prefer-destructuring
     if (!this.a) this.active = this.entities[0]
   }
 
   push(entity) {
     this.entities.push(entity)
-    this.addChild(entity)
 
     // eslint-disable-next-line prefer-destructuring
     if (!this.a) this.active = this.entities[0]

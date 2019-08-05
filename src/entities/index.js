@@ -22,7 +22,7 @@ export default class Entity extends Container {
       name: 'Move',
       description: 'Move this entity',
       action: Actions.MOVE,
-      icon: '/assets/ui/icons/move.svg',
+      icon: 'assets/ui/icons/move.svg',
       passCords: true
     }
   ]
@@ -111,7 +111,9 @@ export default class Entity extends Container {
       const nextLength = Math.lineLength(x, y, nextx, nexty)
       let i = 0
 
-      this.angle = Math.getDirectionTo(x, y, nextx, nexty)
+      this.rotation = Math.getDirectionTo(x, y, nextx, nexty)
+
+      if (this.changeMoveState) this.changeMoveState(true)
 
       const loop = async () => {
         const newPos = Math.getPosAfterDistanceOnLine(x, y, nextx, nexty, i)
@@ -125,6 +127,8 @@ export default class Entity extends Container {
       await loop()
 
       this.setPos(nextx, nexty)
+
+      if (this.changeMoveState) this.changeMoveState(false)
     }
   }
 }
