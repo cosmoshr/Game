@@ -3,6 +3,7 @@ import { Container, Sprite, Loader } from 'pixi.js'
 import Entity, { enumValues } from '..'
 import { Enum } from '../../lib'
 import bus from '../../bus'
+import origin from '../../constants/origin'
 
 export const settlerEnumValues = [
   ...enumValues,
@@ -61,15 +62,16 @@ export default class Settler extends Entity {
 
   async handleAction() {
     if (this.currentAction === Actions.SETTLE) {
-      bus.emit('getClosestPlanet', this.position.x, this.position.y)
+      const { x, y } = this.toGlobal(origin)
 
       const planet = await new Promise(r => {
         bus.once('closestPlanet', rplanet => {
           r(rplanet)
         })
+        bus.emit('getClosestPlanet', x, y)
       })
 
-      bus.emit('settlePlanet', planet)
+      bus.emit('Settle', planet.index)
 
       this.currentAction = Actions.DELETE
     }

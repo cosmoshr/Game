@@ -47,9 +47,11 @@ export default class Manager {
 
     bus.on('Settle', async id => {
       let okay = true
+
       this.cosmos.cosmos[id[0]].planets.forEach((planet, index) => {
         if (planet.habitated) if (!(id[1] + 3 < index || id[1] - 3 > index)) okay = false
       })
+
       if (okay) {
         const name = this.planetNames[Math.floor(Math.random() * this.planetNames.length)]
 
@@ -61,23 +63,6 @@ export default class Manager {
 
         this.db.cosmos.update(this.id, { cosmos: this.cosmos.cosmos })
       }
-    })
-
-    bus.on('getClosestPlanet', (x, y) => {
-      let closestCordDiff = Math.lineLenght(x, y, x + 10000, y + 10000)
-      let closestPlanet
-
-      this.cosmos.cosmos.forEach(ss => {
-        ss.planets.forEach(planet => {
-          const cordDiff = Math.lineLenght(x, y, planet.position.x, planet.position.y)
-          if (closestCordDiff > cordDiff) {
-            closestPlanet = planet
-            closestCordDiff = cordDiff
-          }
-        })
-      })
-
-      bus.emit('closestPlanet', closestPlanet)
     })
   }
 

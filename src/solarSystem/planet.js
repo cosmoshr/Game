@@ -47,6 +47,7 @@ export default class Planet extends Container {
     // eslint-disable-next-line prefer-destructuring
     this.type = this.self.type[0]
     this.isHabitable = this.type === 'Habitital_Planet'
+    this.habitated = false
 
     this.index = index
 
@@ -57,6 +58,11 @@ export default class Planet extends Container {
     this.addChild(this.planet)
     this.info = new PlanetInfo(this.self, this.index)
     this.addChild(this.info)
+
+    this.text = new Text(index, {
+      fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center'
+    })
+    this.addChild(this.text)
 
     bus.on('next-turn', this.nextTurn.bind(this))
     bus.on('start', this.nextTurn.bind(this))
@@ -91,8 +97,8 @@ export default class Planet extends Container {
     if (begin !== 0) this.self.posInCycle += begin * 10
     const next = async () => {
       this.self.posInCycle += 0.5
-      this.x = this.self.distanceFromSun * Math.cos(Math.radians(this.self.posInCycle * this.self.multiplier))
-      this.y = this.self.distanceFromSun * Math.sin(Math.radians(this.self.posInCycle * this.self.multiplier))
+      this.position.x = this.self.distanceFromSun * Math.cos(Math.radians(this.self.posInCycle * this.self.multiplier))
+      this.position.y = this.self.distanceFromSun * Math.sin(Math.radians(this.self.posInCycle * this.self.multiplier))
       this.planet.angle = this.self.posInCycle
 
       await sleep(10)

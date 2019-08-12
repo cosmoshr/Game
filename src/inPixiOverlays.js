@@ -14,14 +14,14 @@ class LocationPicker extends Container {
 
     this.circle = new Graphics()
     this.circle.lineStyle(5, color)
-    this.circle.drawCircle(0, 0, 100)
+    this.circle.drawCircle(this.startPos.y, this.startPos.y, 100)
     this.circle.endFill()
     this.addChild(this.circle)
 
     this.line = new Graphics()
     this.line.lineStyle(4, color, 1)
     this.line.moveTo(this.startPos.x, this.startPos.y)
-    this.line.lineTo(0, 0)
+    this.line.lineTo(this.startPos.x, this.startPos.y)
     this.addChild(this.line)
   }
 
@@ -82,7 +82,6 @@ export default class PixiOverlays extends Container {
       this.addChild(this.locPicker)
     })
 
-    bus.emit('getActiveEntity')
     bus.emit('getActiveEntity')
   }
 }

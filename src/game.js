@@ -4,7 +4,7 @@ import {
 import SolarSystem from './solarSystem'
 import loader from './loader'
 import SoundManager from './sound'
-import { DB, Cull, Viewport } from './lib'
+import { DB, Viewport } from './lib'
 import Background from './background'
 import {
   LoadingOverlay, Splash, Overlay, InGame
@@ -50,22 +50,22 @@ export default class Game extends Application {
       this.splashScreen()
     })
 
-    this.cull = new Cull(this.viewport)
+    // this.cull = new Cull(this.viewport)
 
     this.keyTarget = x => x
     this.keyDown = key => this.keyTarget(key)
     document.addEventListener('keydown', this.keyDown)
 
     window.onresize = () => this.renderer.resize(innerWidth, innerHeight)
-    this.ticker.add(this.loop.bind(this))
+    // this.ticker.add(this.loop.bind(this))
   }
 
-  loop() {
-    if (this.viewport.dirty) {
-      this.cull.cull(this.viewport.getVisibleBounds())
-      this.viewport.dirty = false
-    }
-  }
+  // loop() {
+  //   if (this.viewport.dirty) {
+  //     this.cull.cull(this.viewport.getVisibleBounds())
+  //     this.viewport.dirty = false
+  //   }
+  // }
 
   async splashScreen() {
     this.soundManager.trigger('Main Menu')
@@ -123,7 +123,7 @@ export default class Game extends Application {
     for (let i = this.viewport.children.length - 1; i >= 0; i--) this.viewport.removeChild(this.viewport.children[i])
     const background = new Background()
     this.viewport.addChild(background)
-    this.cull = new Cull(this.viewport)
+    // this.cull = new Cull(this.viewport)
 
     this.turnOverlay.kill()
     this.turnOverlay = null
@@ -137,9 +137,9 @@ export default class Game extends Application {
 
     this.turnOverlay = new InGame(this.entities)
 
-    this.solarSystem = new SolarSystem(cosmos)
+    this.solarSystem = new SolarSystem(cosmos, this.viewport.position)
     this.viewport.addChild(this.solarSystem)
-    this.cull.add(this.solarSystem)
+    // this.cull.add(this.solarSystem)
 
     const [starting] = this.solarSystem.galaxys[0].habitablePlanets
     const [startingss] = this.solarSystem.galaxys
@@ -148,14 +148,14 @@ export default class Game extends Application {
     settler.setPos(starting.position.x + startingss.position.x, starting.position.y + startingss.position.y)
     this.entities.push(settler)
     this.viewport.addChild(settler)
-    this.cull.add(settler)
+    // this.cull.add(settler)
 
     this.pixiOverlay = new PixiOverlays()
     this.viewport
       .on('pointerup', m => this.pixiOverlay.click(m))
       .on('pointermove', m => this.pixiOverlay.mouseMove(m))
     this.viewport.addChild(this.pixiOverlay)
-    this.cull.add(this.pixiOverlay)
+    // this.cull.add(this.pixiOverlay)
 
     this.manager.start()
   }
