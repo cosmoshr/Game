@@ -16,8 +16,7 @@ export default class Splash {
 
     this.back();
 
-    ['back', 'newGame', 'loadGame', 'openSettings', 'saveSettings']
-      .forEach(query => { this.el.querySelector(`#${query}`).onclick = this[query].bind(this) })
+    ['back', 'newGame', 'loadGame', 'openSettings', 'saveSettings'].forEach(query => { this.el.querySelector(`#${query}`).onclick = this[query].bind(this) })
 
     this.el.querySelector('#quit').onclick = () => history.go(-1)
   }
@@ -30,12 +29,12 @@ export default class Splash {
 
   openSettings() {
     this.toggle('home', 'settings')
-    this.el.querySelector('#quality').value = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
+    // this.el.querySelector('#quality').value = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
   }
 
   saveSettings() {
     this.back()
-    window.localStorage.setItem('quality', this.el.querySelector('#quality').value)
+    // window.localStorage.setItem('quality', this.el.querySelector('#quality').value)
   }
 
   // --------------------------------------------
@@ -70,14 +69,15 @@ export default class Splash {
   // --------------------------------------------
   // NEW GAME MENU
   // --------------------------------------------
-  newGame() {
+  async newGame() {
     this.toggle('home', 'new')
+
     this.el.querySelector('#createGame').onclick = this.createGame.bind(this)
   }
 
   async createGame() {
     if (this.el.querySelector('#gameName').value !== '') {
-      const id = await generateCosmos(this.el.querySelector('#gameName').value)
+      const id = await generateCosmos(10000, this.el.querySelector('#gameName').value)
       this.launchGame(id)
     }
   }

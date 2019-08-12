@@ -1,62 +1,111 @@
 import {
-  Sprite, Loader, Container
+  Sprite, Loader, Container, Text
 } from 'pixi.js'
 import Moon from './moon'
-import InfoTop from './info/InfoTop'
-
+import bus from '../bus'
+import sleep from '../lib/sleep'
+import PlanetInfo from './planetInfo'
 
 class PlanetCenter extends Sprite {
   constructor(planet) {
-    const rand = Math.floor(Math.random() * planet.type.numberOfTextures)
-    const textureName = `Planets_${planet.type.name}_${rand}`
+    const textureName = `Planets_${planet.type[0]}_${planet.type[1]}`
 
     super(Loader.shared.resources[textureName].texture)
 
-    this.textureName = textureName
+    this.self = planet
 
-    this.r = planet.path
-    this.d = planet.degrees
+    this.x = -this.self.width / 2
+    this.y = -this.self.width / 2
 
-    this.width = planet.size
-    this.height = planet.size
+    this.width = this.self.width
+    this.height = this.self.width
   }
 }
 
-class Info extends Container {
-  constructor(planet) {
+class PlanetBody extends Container {
+  constructor(planet, index) {
     super()
+    this.self = planet
+    this.index = index
 
-    this.size = planet.size
+    this.angle = this.self.posInCycle
 
-    this.infoShort = new InfoTop(planet)
+    this.moons = []
+    this.self.moons.forEach(moon => this.moons.push(new Moon(moon, this.self.width, this.self.multiplier)))
+    this.moons.forEach(moon => this.addChild(moon))
 
-    this.infoShort.interactive = true
-
-    this.addChild(this.infoShort)
+    this.planet = new PlanetCenter(this.self)
+    this.addChild(this.planet)
   }
 }
 
 export default class Planet extends Container {
-  constructor(planet) {
+  constructor(planet, index) {
     super()
-
     this.self = planet
-    this.self.owner = 'Cosmos'
 
-    this.r = planet.path
-    this.d = planet.degrees
+    // eslint-disable-next-line prefer-destructuring
+    this.type = this.self.type[0]
+    this.isHabitable = this.type === 'Habitital_Planet'
+    this.habitated = false
 
-    const pos = Math.genPosOnCircle(0, 0, this.r, this.d)
+    this.index = index
 
-    this.position.x = pos.x
-    this.position.y = pos.y
+    this.x = this.self.distanceFromSun * Math.cos(Math.radians(this.self.posInCycle * this.self.multiplier))
+    this.y = this.self.distanceFromSun * Math.sin(Math.radians(this.self.posInCycle * this.self.multiplier))
 
-    const planetCenter = new PlanetCenter(this.self)
-    this.addChild(planetCenter)
-    this.self.texture = planetCenter.textureName
+    this.planet = new PlanetBody(this.self, index)
+    this.addChild(this.planet)
+    this.info = new PlanetInfo(this.self, this.index)
+    this.addChild(this.info)
 
-    planet.moons.forEach(moon => this.addChild(new Moon(moon)))
+    // TODO: Dectect development enviroments and display debug systems
+    //* Uncomment this code to display planet IDs on top of planet
+    // this.text = new Text(index, {
+    //   fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center'
+    // })
+    // this.addChild(this.text)
 
-    this.addChild(new Info(this.self))
+    bus.on('next-turn', this.nextTurn.bind(this))
+    bus.on('start', this.nextTurn.bind(this))
+
+    this.interactive = true
+
+    this.on('mouseover', () => {
+      bus.emit('SettleShow')
+    })
+
+    this.on('mouseout', () => {
+      bus.emit('SettleHide')
+    })
+
+    if (this.self.habited) {
+      this.textx = new Text(this.self.name, {
+        fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center'
+      })
+      this.textx.angle = -this.self.posInCycle
+      this.addChild(this.textx)
+    }
+  }
+
+  setSettleProperties(habited, name, owner) {
+    this.habitated = habited
+    this.name = name
+    this.owner = owner
+  }
+
+  nextTurn(begin = 0) {
+    let index = 1
+    if (begin !== 0) this.self.posInCycle += begin * 10
+    const next = async () => {
+      this.self.posInCycle += 0.5
+      this.position.x = this.self.distanceFromSun * Math.cos(Math.radians(this.self.posInCycle * this.self.multiplier))
+      this.position.y = this.self.distanceFromSun * Math.sin(Math.radians(this.self.posInCycle * this.self.multiplier))
+      this.planet.angle = this.self.posInCycle
+
+      await sleep(10)
+      if (index++ < 20) next()
+    }
+    next()
   }
 }

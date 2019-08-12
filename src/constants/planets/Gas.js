@@ -5,6 +5,6 @@ export default {
   resources: {
     xlkcvhsLKdgh: [89, 78]
   },
-  numberOfTextures: 1,
+  numberOfTextures: 2,
   name: 'Gas'
 }

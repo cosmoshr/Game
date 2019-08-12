@@ -4,9 +4,15 @@ import {
 import SolarSystem from './solarSystem'
 import loader from './loader'
 import SoundManager from './sound'
-import { DB, Cull, Viewport } from './lib'
+import { DB, Viewport } from './lib'
 import Background from './background'
-import { LoadingOverlay, Splash, Overlay } from './overlays'
+import {
+  LoadingOverlay, Splash, Overlay, InGame
+} from './overlays'
+import Manager from './manager'
+import Entities from './entities/register'
+import Settler from './entities/Settler'
+import PixiOverlays from './inPixiOverlays'
 
 export default class Game extends Application {
   ready = false
@@ -17,11 +23,12 @@ export default class Game extends Application {
     super({
       width: innerWidth,
       height: innerHeight,
-      resolution: 1
+      resolution: window.devicePixelRatio || 1
     })
 
     this.view.id = 'app'
     this.viewport = new Viewport(this.renderer)
+    this.viewport.interactive = true
     this.stage.addChild(this.viewport)
     document.body.appendChild(this.view)
 
@@ -33,6 +40,8 @@ export default class Game extends Application {
 
     const loaderOverlay = new LoadingOverlay(true)
 
+    this.manager = new Manager(this.viewport)
+
     PixiLoader.shared.add(loader(1))
     PixiLoader.shared.onProgress.add(percent => { loaderOverlay.value = percent.progress })
 
@@ -41,24 +50,24 @@ export default class Game extends Application {
       this.splashScreen()
     })
 
-    this.cull = new Cull(this.viewport)
+    // this.cull = new Cull(this.viewport)
 
     this.keyTarget = x => x
     this.keyDown = key => this.keyTarget(key)
     document.addEventListener('keydown', this.keyDown)
 
     window.onresize = () => this.renderer.resize(innerWidth, innerHeight)
-    this.ticker.add(this.loop.bind(this))
+    // this.ticker.add(this.loop.bind(this))
   }
 
-  loop() {
-    if (this.viewport.dirty) {
-      this.cull.cull(this.viewport.getVisibleBounds())
-      this.viewport.dirty = false
-    }
-  }
+  // loop() {
+  //   if (this.viewport.dirty) {
+  //     this.cull.cull(this.viewport.getVisibleBounds())
+  //     this.viewport.dirty = false
+  //   }
+  // }
 
-  splashScreen() {
+  async splashScreen() {
     this.soundManager.trigger('Main Menu')
     const splash = new Splash()
 
@@ -114,16 +123,40 @@ export default class Game extends Application {
     for (let i = this.viewport.children.length - 1; i >= 0; i--) this.viewport.removeChild(this.viewport.children[i])
     const background = new Background()
     this.viewport.addChild(background)
-    this.cull = new Cull(this.viewport)
+    // this.cull = new Cull(this.viewport)
+
+    this.turnOverlay.kill()
+    this.turnOverlay = null
   }
 
   async launchGame(id) {
-    const cosmos = await this.db.cosmos.get(id)
-    cosmos.cosmos.forEach(solarSystem => {
-      const solorSystemObj = new SolarSystem(solarSystem)
-      this.viewport.addChild(solorSystemObj)
-      this.cull.add(solorSystemObj)
-    })
-    this.renderer.resolution = window.localStorage.getItem('quality') || window.devicePixelRatio || 1
+    this.id = id
+    const cosmos = await this.manager.launchGame(id)
+
+    this.entities = new Entities()
+
+    this.turnOverlay = new InGame(this.entities)
+
+    this.solarSystem = new SolarSystem(cosmos, this.viewport.position)
+    this.viewport.addChild(this.solarSystem)
+    // this.cull.add(this.solarSystem)
+
+    const [starting] = this.solarSystem.galaxys[0].habitablePlanets
+    const [startingss] = this.solarSystem.galaxys
+
+    const settler = new Settler()
+    settler.setPos(starting.position.x + startingss.position.x, starting.position.y + startingss.position.y)
+    this.entities.push(settler)
+    this.viewport.addChild(settler)
+    // this.cull.add(settler)
+
+    this.pixiOverlay = new PixiOverlays()
+    this.viewport
+      .on('pointerup', m => this.pixiOverlay.click(m))
+      .on('pointermove', m => this.pixiOverlay.mouseMove(m))
+    this.viewport.addChild(this.pixiOverlay)
+    // this.cull.add(this.pixiOverlay)
+
+    this.manager.start()
   }
 }

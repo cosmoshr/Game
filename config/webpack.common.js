@@ -142,12 +142,38 @@ if (process.env.WEBPACK_ENV === 'electron-renderer') plugins.push(new CopyWebpac
 /**
  * Webpack configuration.
  */
+
+const optimization = {
+  splitChunks: {
+    chunks: 'all',
+    minChunks: 1,
+    maxAsyncRequests: 5,
+    maxInitialRequests: 3,
+    automaticNameDelimiter: '~',
+    automaticNameMaxLength: 30,
+    name: true,
+    cacheGroups: {
+      vendors: {
+        test: /[\\/]node_modules[\\/]/,
+        priority: -10
+      },
+      default: {
+        minChunks: 2,
+        priority: -20,
+        reuseExistingChunk: true
+      }
+    }
+  },
+  usedExports: true
+}
+
 const WebpackConfig = {
   target: process.env.WEBPACK_ENV || 'web',
   entry,
   resolve,
   module: modules,
-  plugins
+  plugins,
+  optimization
 }
 // Export WebpackConfig module
 module.exports = WebpackConfig
