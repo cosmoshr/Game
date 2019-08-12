@@ -30,21 +30,6 @@ export default class Manager {
       })
     })
 
-    bus.on('settlePlanet', planet => {
-      let okay = true
-      if (planet.habitated) okay = false
-
-      if (okay) {
-        const name = this.planetNames[Math.floor(Math.random() * this.planetNames.length)]
-
-        planet.setSettleProperties(true, name, 1)
-
-        bus.emit('InHabit', planet.index, name, 1)
-
-        this.db.cosmos.update(this.id, { cosmos: this.cosmos.cosmos })
-      }
-    })
-
     bus.on('Settle', async id => {
       let okay = true
 

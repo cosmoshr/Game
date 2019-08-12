@@ -59,10 +59,12 @@ export default class Planet extends Container {
     this.info = new PlanetInfo(this.self, this.index)
     this.addChild(this.info)
 
-    this.text = new Text(index, {
-      fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center'
-    })
-    this.addChild(this.text)
+    // TODO: Dectect development enviroments and display debug systems
+    //* Uncomment this code to display planet IDs on top of planet
+    // this.text = new Text(index, {
+    //   fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center'
+    // })
+    // this.addChild(this.text)
 
     bus.on('next-turn', this.nextTurn.bind(this))
     bus.on('start', this.nextTurn.bind(this))
