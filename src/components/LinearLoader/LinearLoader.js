@@ -24,5 +24,6 @@ export default class LinearLoader extends HTMLElement {
 
   attributeChange() {
     if (this.hasAttribute('value')) this.loader.setAttribute('value', this.getAttribute('value'))
+    else if (this.loader.hasAttribute('value')) this.loader.removeAttribute('value')
   }
 }

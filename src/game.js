@@ -13,6 +13,7 @@ import Manager from './manager'
 import Entities from './entities/register'
 import Settler from './entities/Settler'
 import PixiOverlays from './inPixiOverlays'
+import bus from './bus'
 
 export default class Game extends Application {
   ready = false
@@ -31,6 +32,8 @@ export default class Game extends Application {
     this.viewport.interactive = true
     this.stage.addChild(this.viewport)
     document.body.appendChild(this.view)
+
+    this.view.addEventListener('mousedown', () => bus.emit('closePlanetInfo'))
 
     const background = new Background()
     this.viewport.addChild(background)
