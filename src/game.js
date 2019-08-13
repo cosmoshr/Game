@@ -13,6 +13,7 @@ import Manager from './manager'
 import Entities from './entities/register'
 import Settler from './entities/Settler'
 import PixiOverlays from './inPixiOverlays'
+import PlanetInfo from './overlays/planetInfo'
 
 export default class Game extends Application {
   ready = false
@@ -156,6 +157,9 @@ export default class Game extends Application {
       .on('pointermove', m => this.pixiOverlay.mouseMove(m))
     this.viewport.addChild(this.pixiOverlay)
     // this.cull.add(this.pixiOverlay)
+
+    // eslint-disable-next-line no-unused-vars
+    const planetOverlay = new PlanetInfo()
 
     this.manager.start()
   }

@@ -2,9 +2,7 @@ const overlayHtml = require('./overlay.html').default
 const overlayStyle = require('./style.css')
 
 export default class PlanetInfo {
-  constructor(planet) {
-    this.planet = planet
-
+  constructor() {
     this.el = document.createElement('div')
 
     this.el.setAttribute('id', 'info-sidebar')
@@ -14,15 +12,5 @@ export default class PlanetInfo {
     this.el.append(style)
 
     document.body.append(this.el)
-  }
-
-  set planet(planet) {
-    this.p = planet
-
-    if (this.el) this.update()
-  }
-
-  get planet() {
-    return this.p
   }
 }

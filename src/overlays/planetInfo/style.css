@@ -1,12 +1,42 @@
 #info-sidebar {
   height: 100vh;
-  width: 900px;
+  width: 400px;
+  padding-left: 60px;
+  padding-top: 15px;
+  padding-right: 15px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background-image: url('PlanetOverlayBackground.svg')
 }
 
-.image-container {
+.planet-h2 {
+  font-size: 30px;
+  font-family: 'Overpass', sans-serif;
+  margin-bottom: 0;
+}
+
+.planet-h3 {
+  font-size: 15px;
+  font-family: 'Overpass', sans-serif;
+  margin-bottom: 0;
+
+  color: #aaaaaa;
+}
+
+.action-image {
   display: flex;
+  align-items: center;
 }
 
-.image img {
-  width: 100%;
+.action-image img {
+  height: 57px;
+  padding-right: 20px;
+}
+
+.action-info {
+  display: flex;
+  flex-direction: column;
 }
