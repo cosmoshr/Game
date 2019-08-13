@@ -62,6 +62,11 @@ export default class PlanetInfo extends Container {
 
     this.index = index
 
+    this.interactive = true
+    this.on('pointerup', () => {
+      bus.emit('displayPlanetInfo', this.index)
+    })
+
     bus.on('InHabit', (id, name, owner) => {
       if (id[0] === this.index[0] && id[1] === this.index[1]) {
         this.self.name = name

@@ -3,6 +3,7 @@ import Planet from './planet'
 import Star from './star'
 import bus from '../bus'
 import origin from '../constants/origin'
+import PlanetInfo from '../overlays/planetInfo'
 
 class Bounds extends Graphics {
   constructor(color, size) {
@@ -60,6 +61,23 @@ export default class SolarSystem extends Container {
     this.galaxys.forEach(galaxy => {
       this.addChild(galaxy)
       galaxy.planets.forEach(planet => this.planets.push(planet))
+    })
+
+    this.planetInfoOverlay = new PlanetInfo()
+    this.planetInfoOverlay.hide()
+
+    bus.on('displayPlanetInfo', id => {
+      let planetIndex
+
+      this.planets.forEach((planet, i) => {
+        if (planet.index === id) planetIndex = i
+      })
+
+      this.planetInfoOverlay.setPlanet(this.planets[planetIndex])
+    })
+
+    bus.on('closePlanetInfo', () => {
+      this.planetInfoOverlay.hide()
     })
 
     bus.on('getClosestPlanet', (xo, yo) => {
