@@ -134,31 +134,31 @@ export default class Game extends Application {
 
   async launchGame(id) {
     this.id = id
-    const cosmos = await this.manager.launchGame(id)
+    const { cosmos, entities } = await this.manager.launchGame(id)
 
     this.entities = new Entities()
-
     this.turnOverlay = new InGame(this.entities)
+
+    if (entities) this.entities.loadSave(entities)
+    this.viewport.addChild(this.entities)
 
     this.solarSystem = new SolarSystem(cosmos, this.viewport.position)
     this.viewport.addChild(this.solarSystem)
-    // this.cull.add(this.solarSystem)
 
     const [starting] = this.solarSystem.galaxys[0].habitablePlanets
     const [startingss] = this.solarSystem.galaxys
 
-    const settler = new Settler()
-    settler.setPos(starting.position.x + startingss.position.x, starting.position.y + startingss.position.y)
-    this.entities.push(settler)
-    this.viewport.addChild(settler)
-    // this.cull.add(settler)
+    if (!entities) {
+      const settler = new Settler()
+      settler.setPos(starting.position.x + startingss.position.x, starting.position.y + startingss.position.y)
+      this.entities.push(settler)
+    }
 
     this.pixiOverlay = new PixiOverlays()
     this.viewport
       .on('pointerup', m => this.pixiOverlay.click(m))
       .on('pointermove', m => this.pixiOverlay.mouseMove(m))
     this.viewport.addChild(this.pixiOverlay)
-    // this.cull.add(this.pixiOverlay)
 
     this.manager.start()
   }

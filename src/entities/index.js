@@ -17,6 +17,13 @@ export default class Entity extends Container {
 
   ActionProperties = {}
 
+  entitySaveProperties = [
+    'x',
+    'y',
+    'currentAction',
+    'usedMovements'
+  ]
+
   actionDisplay = [
     {
       name: 'Move',
@@ -26,6 +33,8 @@ export default class Entity extends Container {
       passCords: true
     }
   ]
+
+  entityType = ''
 
   constructor(name, movements) {
     super()
@@ -130,5 +139,12 @@ export default class Entity extends Container {
 
       if (this.changeMoveState) this.changeMoveState(false)
     }
+  }
+
+  loadSave(save) {
+    this.x = save.x
+    this.y = save.y
+    this.currentAction = save.currentAction
+    this.usedMovements = save.usedMovements
   }
 }
