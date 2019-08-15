@@ -18,6 +18,8 @@ class Ship extends Container {
   constructor() {
     super()
 
+    this.entityType = 'Settler'
+
     this.body = new Sprite(Loader.shared.resources.settler.texture)
     this.body.width = 50
     this.body.height = 50
@@ -48,6 +50,8 @@ export default class Settler extends Entity {
       action: Actions.SETTLE
     }
   ]
+
+  entityType = 'Settler'
 
   constructor() {
     super('Settler', 110)

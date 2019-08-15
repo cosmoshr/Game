@@ -55,13 +55,25 @@ export default class Manager {
     this.id = id
     this.cosmos = await this.db.cosmos.get(id)
 
-    return this.cosmos.cosmos
+    return {
+      cosmos: this.cosmos.cosmos,
+      entities: this.cosmos.entities
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async getEntitySave() {
+    return new Promise(res => {
+      bus.once('saveEntities', entities => res(entities))
+      bus.emit('getSaveEntities')
+    })
   }
 
   async nextTurn() {
     const { state } = this.cosmos
     state.currentTurn += 1
-    await this.db.cosmos.update(this.id, { state })
+    const entities = await this.getEntitySave()
+    await this.db.cosmos.update(this.id, { state, entities })
     bus.emit('next-turn')
   }
 
