@@ -1,5 +1,5 @@
 import { Container, Graphics } from 'pixi.js'
-import Planet from './planet'
+import Planet from './planets/planet'
 import Star from './star'
 import bus from '../bus'
 import origin from '../constants/origin'

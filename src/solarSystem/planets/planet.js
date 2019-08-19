@@ -1,10 +1,12 @@
 import {
   Sprite, Loader, Container, Text
 } from 'pixi.js'
-import Moon from './moon'
-import bus from '../bus'
-import sleep from '../lib/sleep'
+import Moon from '../moon'
+import bus from '../../bus'
+import sleep from '../../lib/sleep'
 import PlanetInfo from './planetInfo'
+import { projectActions } from './project'
+import origin from '../../constants/origin'
 
 class PlanetCenter extends Sprite {
   constructor(planet) {
@@ -40,6 +42,10 @@ class PlanetBody extends Container {
 }
 
 export default class Planet extends Container {
+  currentProject = ''
+
+  projectTurns = 0
+
   constructor(planet, index) {
     super()
     this.self = planet
@@ -88,18 +94,42 @@ export default class Planet extends Container {
     }
   }
 
-  nextTurn(begin = 0) {
+  async nextTurn(begin = 0) {
+    // Project
+    if (!this.project && this.currentProject !== '') this.project = projectActions[this.currentProject]
+
+    let projectDone = false
+    if (this.project) {
+      this.projectTurns += 1
+      if (this.projectTurns === this.project.time) projectDone = true
+    }
+
+    // Movement
     let index = 1
     if (begin !== 0) this.self.posInCycle += begin * 10
     const next = async () => {
       this.self.posInCycle += 0.5
-      this.position.x = this.self.distanceFromSun * Math.cos(Math.radians(this.self.posInCycle * this.self.multiplier))
-      this.position.y = this.self.distanceFromSun * Math.sin(Math.radians(this.self.posInCycle * this.self.multiplier))
+      this.x = this.self.distanceFromSun * Math.cos(Math.radians(this.self.posInCycle * this.self.multiplier))
+      this.y = this.self.distanceFromSun * Math.sin(Math.radians(this.self.posInCycle * this.self.multiplier))
       this.planet.angle = this.self.posInCycle
 
       await sleep(10)
-      if (index++ < 20) next()
+      if (index++ < 20) await next()
     }
-    next()
+
+    await next()
+
+    const actions = this.project
+    if (projectDone && actions) {
+      if (actions.summonEntity) {
+        const { x, y } = this.toGlobal(origin)
+
+        // eslint-disable-next-line new-cap
+        const entity = new actions.summonEntity()
+        entity.setPos(x + 25, y + 25)
+        bus.emit('summonEntity', entity)
+      }
+      delete this.project
+    }
   }
 }

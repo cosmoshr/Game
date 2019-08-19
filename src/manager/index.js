@@ -57,7 +57,8 @@ export default class Manager {
 
     return {
       cosmos: this.cosmos.cosmos,
-      entities: this.cosmos.entities
+      entities: this.cosmos.entities,
+      state: this.cosmos.state
     }
   }
 

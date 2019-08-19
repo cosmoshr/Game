@@ -14,6 +14,7 @@ import Entities from './entities/register'
 import Settler from './entities/Settler'
 import PixiOverlays from './inPixiOverlays'
 import bus from './bus'
+import { setPos } from './constants/origin'
 
 export default class Game extends Application {
   ready = false
@@ -133,8 +134,10 @@ export default class Game extends Application {
   }
 
   async launchGame(id) {
+    setPos(this.viewport.position)
+
     this.id = id
-    const { cosmos, entities } = await this.manager.launchGame(id)
+    const { cosmos, entities, state } = await this.manager.launchGame(id)
 
     this.entities = new Entities()
     this.turnOverlay = new InGame(this.entities)
@@ -148,7 +151,7 @@ export default class Game extends Application {
     const [starting] = this.solarSystem.galaxys[0].habitablePlanets
     const [startingss] = this.solarSystem.galaxys
 
-    if (!entities) {
+    if (!entities && state.currentTurn === 1) {
       const settler = new Settler()
       settler.setPos(starting.position.x + startingss.position.x, starting.position.y + startingss.position.y)
       this.entities.push(settler)

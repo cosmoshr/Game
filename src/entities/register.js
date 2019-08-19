@@ -2,6 +2,8 @@ import { Container } from 'pixi.js'
 
 import bus from '../bus'
 import types from './types'
+import { Actions } from '.'
+import origin from '../constants/origin'
 
 export default class EntityRegister extends Container {
   constructor() {
@@ -10,7 +12,9 @@ export default class EntityRegister extends Container {
     this.entities = []
 
     bus.on('getActiveEntity', () => bus.emit('activeEntity', this.active))
+    bus.on('setActiveEntity', entity => { this.active = entity })
     bus.on('getSaveEntities', () => bus.emit('saveEntities', this.save()))
+    bus.on('summonEntity', entity => this.push(entity))
   }
 
   pushMultiple(entities) {
@@ -37,15 +41,21 @@ export default class EntityRegister extends Container {
     const entitySaves = []
 
     this.entities.forEach(entity => {
-      const entitySave = {
-        entityType: entity.entityType
+      if (entity.action !== Actions.DELETE && entity.transform) {
+        const { x, y } = entity.toGlobal(origin)
+
+        const entitySave = {
+          entityType: entity.entityType,
+          x,
+          y
+        }
+
+        entity.entitySaveProperties.forEach(prop => {
+          if (entity[prop]) entitySave[prop] = entity[prop]
+        })
+
+        entitySaves.push(entitySave)
       }
-
-      entity.entitySaveProperties.forEach(prop => {
-        entitySave[prop] = entity[prop]
-      })
-
-      entitySaves.push(entitySave)
     })
 
     return entitySaves
@@ -53,7 +63,6 @@ export default class EntityRegister extends Container {
 
   loadSave(save) {
     save.forEach(entity => {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
       const EntityBase = types[entity.entityType]
 
       const newEntity = new EntityBase()

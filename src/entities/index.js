@@ -18,8 +18,6 @@ export default class Entity extends Container {
   ActionProperties = {}
 
   entitySaveProperties = [
-    'x',
-    'y',
     'currentAction',
     'usedMovements'
   ]
@@ -42,6 +40,9 @@ export default class Entity extends Container {
     this.name = name
     this.movements = movements
     this.usedMovements = this.movements
+
+    this.interactive = true
+    this.on('pointerdown', () => bus.emit('setActiveEntity', this))
 
     bus.on('next-turn', () => this.turn())
   }

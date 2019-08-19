@@ -1,7 +1,7 @@
 import {
   Container, Sprite, Loader, Text, TextStyle
 } from 'pixi.js'
-import bus from '../bus'
+import bus from '../../bus'
 
 class Image extends Sprite {
   constructor(textureName) {
