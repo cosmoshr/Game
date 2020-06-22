@@ -1,4 +1,4 @@
-import './sass/styles.scss'
+import './styles/styles.css'
 import Game from './game'
 import initComponents from './components'
 import './math'

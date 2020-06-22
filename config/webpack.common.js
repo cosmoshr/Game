@@ -71,40 +71,6 @@ const modules = {
       }
     },
     {
-      test: /\.scss$/,
-      exclude: /node_modules/,
-      use: [
-        {
-          loader: CssExtractPlugin.loader,
-          options: {
-            hmr: process.env.NODE_ENV === 'development'
-          }
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            sourceMap: config.SOURCEMAPS
-          }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            ident: 'postcss',
-            plugins: () => [
-              autoprefixer()
-            ],
-            sourceMap: 'inline'
-          }
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: config.SOURCEMAPS
-          }
-        }
-      ]
-    },
-    {
       test: /\.html$/,
       exclude: /node_modules/,
       loader: 'raw-loader'
@@ -143,9 +109,6 @@ const plugins = [
 ]
 
 if (process.env.WEBPACK_ENV === 'electron-renderer') plugins.push(new CopyWebpackPlugin([{ from: 'electron.js' }]))
-/**
- * Webpack configuration.
- */
 
 const optimization = {
   splitChunks: {
@@ -171,6 +134,9 @@ const optimization = {
   usedExports: true
 }
 
+/**
+ * Webpack configuration.
+ */
 const WebpackConfig = {
   target: process.env.WEBPACK_ENV || 'web',
   entry,
