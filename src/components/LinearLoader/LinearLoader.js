@@ -1,29 +1,19 @@
+import { html, MutationComponent } from 'stera'
+
 const loaderStyle = require('./style.css')
 
-export default class LinearLoader extends HTMLElement {
-  constructor() {
-    super()
+export default class LinearLoader extends MutationComponent {
+  render() {
+    let loaderValue = ''
 
-    const shadowDOM = this.attachShadow({ mode: 'closed' })
+    if (this.hasAttribute('value')) loaderValue = `value="${this.getAttribute('value')}"`
 
-    this.loader = document.createElement('progress')
-    this.loader.setAttribute('max', 100)
-    this.loader.setAttribute('class', 'pure-material-progress-linear')
+    return html`
+      <div>
+        <progress max="100" class="pure-material-progress-linear" ${loaderValue}></progress>
 
-    const css = document.createElement('style')
-    css.textContent = loaderStyle
-
-    shadowDOM.appendChild(this.loader)
-    shadowDOM.appendChild(css)
-
-    this.attributeChange()
-
-    const observer = new MutationObserver(this.attributeChange.bind(this))
-    observer.observe(this, { attributes: true })
-  }
-
-  attributeChange() {
-    if (this.hasAttribute('value')) this.loader.setAttribute('value', this.getAttribute('value'))
-    else if (this.loader.hasAttribute('value')) this.loader.removeAttribute('value')
+        <style>${loaderStyle}</style>
+      </div>
+    `
   }
 }
