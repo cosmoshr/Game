@@ -5,6 +5,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+const WebpackBar = require('webpackbar')
+
 // Import Configuration
 const config = require('../config')
 
@@ -38,6 +40,7 @@ const modules = {
         }
       ]
     },
+    { test: /\.tsx?$/, loader: 'ts-loader' },
     {
       test: /\.css$/,
       exclude: /node_modules/,
@@ -135,7 +138,8 @@ const plugins = [
   }),
   new HtmlWebpackPlugin({
     template: `${config.OUTPUT}/index.html`
-  })
+  }),
+  new WebpackBar()
 ]
 
 if (process.env.WEBPACK_ENV === 'electron-renderer') plugins.push(new CopyWebpackPlugin([{ from: 'electron.js' }]))
