@@ -45,22 +45,8 @@ const modules = {
       test: /\.css$/,
       exclude: /node_modules/,
       use: [
-        {
-          loader: 'css-loader',
-          options: {
-            sourceMap: config.SOURCEMAPS
-          }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            ident: 'postcss',
-            plugins: () => [
-              autoprefixer()
-            ],
-            sourceMap: 'inline'
-          }
-        }
+        'to-string-loader',
+        'css-loader'
       ]
     },
     {

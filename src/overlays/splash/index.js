@@ -1,7 +1,10 @@
 import generateCosmos from '../../generator'
 
+// import splashCSS from './splash.css'
+
 const splashHTML = require('./splash.html').default
-const splashCSS = require('./splash.css')
+const splashCSS = require('./splash.css').toString()
+console.log(splashCSS)
 
 export default class Splash {
   constructor() {

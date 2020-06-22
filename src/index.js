@@ -1,7 +1,10 @@
-import './styles/styles.css'
-import Game from './game'
 import initComponents from './components'
+import style from './styles/styles.css'
+import { headStyle } from './lib'
+import Game from './game'
 import './math'
+
+headStyle(style)
 
 initComponents()
 

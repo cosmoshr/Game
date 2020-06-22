@@ -1,9 +1,11 @@
-import DB from './db'
+import headStyle from './headStyle.ts'
 import Viewport from './viewport'
 import Enum from './enum'
+import DB from './db'
 
 export {
-  DB,
+  headStyle,
   Viewport,
-  Enum
+  Enum,
+  DB
 }
