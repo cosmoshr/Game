@@ -1,0 +1,1903 @@
+yarn run v1.22.4
+$ /Users/main/Documents/GitHub/Game/node_modules/.bin/webpack --json
+{
+  "errors": [
+    "./src/game.js 19:8\nModule parse failed: Unexpected token (19:8)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n| \n| export default class Game extends Application {\n>   ready = false\n| \n|   hasLoaded = false\n @ ./src/index.js 2:0-25 9:17-21",
+    "./src/sass/styles.scss 1:0\nModule parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> * {\n|   padding: 0;\n|   margin: 0;\n @ ./src/index.js 1:0-27",
+    "./src/components/ActionButton/style.css 1:0\nModule parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> .button-container {\n|   width: 50px;\n|   height: 50px;\n @ ./src/components/ActionButton/index.js 1:17-39\n @ ./src/components/index.js\n @ ./src/index.js",
+    "./src/components/LinearLoader/style.css 1:0\nModule parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> .pure-material-progress-linear {\n|   -webkit-appearance: none;\n|   -moz-appearance: none;\n @ ./src/components/LinearLoader/LinearLoader.js 1:20-42\n @ ./src/components/index.js\n @ ./src/index.js",
+    "./src/components/Slider/style.css 1:20\nModule parse failed: Unexpected token (1:20)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> input[type=\"range\"] {\n|   position: relative;\n|   background-color: transparent;\n @ ./src/components/Slider/Slider.js 1:14-36\n @ ./src/components/index.js\n @ ./src/index.js",
+    "./src/components/shared.css 1:4\nModule parse failed: Unexpected token (1:4)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> div {\n|   transition-duration: 0.2s;\n|   display: block;\n @ ./src/components/Button/Button.js 1:18-42\n @ ./src/components/index.js\n @ ./src/index.js",
+    "./src/components/TextInput/style.css 1:6\nModule parse failed: Unexpected token (1:6)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> input {\n|   font-size: 20px;\n|   display: block;\n @ ./src/components/TextInput/TextInput.js 2:17-39\n @ ./src/components/index.js\n @ ./src/index.js",
+    "./src/components/Button/style.css 1:7\nModule parse failed: Unexpected token (1:7)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> button {\n|   font-size: 20px;\n|   display: block;\n @ ./src/components/Button/Button.js 2:17-39\n @ ./src/components/index.js\n @ ./src/index.js"
+  ],
+  "warnings": [
+    "configuration\nThe 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.\nYou can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/"
+  ],
+  "version": "4.39.1",
+  "hash": "ed0a9a7aa6255aec0d18",
+  "time": 628,
+  "builtAt": 1592796486257,
+  "publicPath": "",
+  "outputPath": "/Users/main/Documents/GitHub/Game/dist",
+  "assetsByChunkName": {
+    "main": "main.js"
+  },
+  "assets": [
+    {
+      "name": "main.js",
+      "size": 5742,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "emitted": false
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "main.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "namedChunkGroups": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "main.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "size": 6320,
+      "names": [
+        "main"
+      ],
+      "files": [
+        "main.js"
+      ],
+      "hash": "22ba97b604f0965a5fe2",
+      "siblings": [],
+      "parents": [],
+      "children": [],
+      "childrenByOrder": {},
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/shared.css",
+          "name": "./src/components/shared.css",
+          "index": 5,
+          "index2": 2,
+          "size": 289,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/Button/Button.js",
+          "issuerId": null,
+          "issuerName": "./src/components/Button/Button.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/Button/Button.js",
+              "name": "./src/components/Button/Button.js"
+            }
+          ],
+          "failed": true,
+          "errors": 1,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 7,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+              "module": "./src/index.js + 6 modules",
+              "moduleName": "./src/index.js + 6 modules",
+              "type": "cjs require",
+              "userRequest": "../shared.css",
+              "loc": "1:18-42"
+            },
+            {
+              "moduleId": 7,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+              "module": "./src/index.js + 6 modules",
+              "moduleName": "./src/index.js + 6 modules",
+              "type": "cjs require",
+              "userRequest": "../shared.css",
+              "loc": "1:18-42"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is not an ECMAScript module"
+          ],
+          "depth": 3,
+          "source": "throw new Error(\"Module parse failed: Unexpected token (1:4)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> div {\\n|   transition-duration: 0.2s;\\n|   display: block;\");"
+        },
+        {
+          "id": 1,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/game.js",
+          "name": "./src/game.js",
+          "index": 13,
+          "index2": 12,
+          "size": 329,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "issuerId": null,
+          "issuerName": "./src/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            }
+          ],
+          "failed": true,
+          "errors": 1,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 7,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+              "module": "./src/index.js + 6 modules",
+              "moduleName": "./src/index.js + 6 modules",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./game",
+              "loc": "2:0-25"
+            },
+            {
+              "moduleId": 7,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+              "module": "./src/index.js + 6 modules",
+              "moduleName": "./src/index.js + 6 modules",
+              "type": "harmony import specifier",
+              "userRequest": "./game",
+              "loc": "9:17-21"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": null,
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is not an ECMAScript module"
+          ],
+          "depth": 1,
+          "source": "throw new Error(\"Module parse failed: Unexpected token (19:8)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n| \\n| export default class Game extends Application {\\n>   ready = false\\n| \\n|   hasLoaded = false\");"
+        },
+        {
+          "id": 2,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/LinearLoader/style.css",
+          "name": "./src/components/LinearLoader/style.css",
+          "index": 3,
+          "index2": 0,
+          "size": 322,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/LinearLoader/LinearLoader.js",
+          "issuerId": null,
+          "issuerName": "./src/components/LinearLoader/LinearLoader.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/LinearLoader/LinearLoader.js",
+              "name": "./src/components/LinearLoader/LinearLoader.js"
+            }
+          ],
+          "failed": true,
+          "errors": 1,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 7,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+              "module": "./src/index.js + 6 modules",
+              "moduleName": "./src/index.js + 6 modules",
+              "type": "cjs require",
+              "userRequest": "./style.css",
+              "loc": "1:20-42"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is not an ECMAScript module"
+          ],
+          "depth": 3,
+          "source": "throw new Error(\"Module parse failed: Unexpected token (1:0)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> .pure-material-progress-linear {\\n|   -webkit-appearance: none;\\n|   -moz-appearance: none;\");"
+        },
+        {
+          "id": 3,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/Button/style.css",
+          "name": "./src/components/Button/style.css",
+          "index": 6,
+          "index2": 3,
+          "size": 282,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/Button/Button.js",
+          "issuerId": null,
+          "issuerName": "./src/components/Button/Button.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/Button/Button.js",
+              "name": "./src/components/Button/Button.js"
+            }
+          ],
+          "failed": true,
+          "errors": 1,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 7,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+              "module": "./src/index.js + 6 modules",
+              "moduleName": "./src/index.js + 6 modules",
+              "type": "cjs require",
+              "userRequest": "./style.css",
+              "loc": "2:17-39"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is not an ECMAScript module"
+          ],
+          "depth": 3,
+          "source": "throw new Error(\"Module parse failed: Unexpected token (1:7)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> button {\\n|   font-size: 20px;\\n|   display: block;\");"
+        },
+        {
+          "id": 4,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/TextInput/style.css",
+          "name": "./src/components/TextInput/style.css",
+          "index": 8,
+          "index2": 5,
+          "size": 281,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/TextInput/TextInput.js",
+          "issuerId": null,
+          "issuerName": "./src/components/TextInput/TextInput.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/TextInput/TextInput.js",
+              "name": "./src/components/TextInput/TextInput.js"
+            }
+          ],
+          "failed": true,
+          "errors": 1,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 7,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+              "module": "./src/index.js + 6 modules",
+              "moduleName": "./src/index.js + 6 modules",
+              "type": "cjs require",
+              "userRequest": "./style.css",
+              "loc": "2:17-39"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is not an ECMAScript module"
+          ],
+          "depth": 3,
+          "source": "throw new Error(\"Module parse failed: Unexpected token (1:6)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> input {\\n|   font-size: 20px;\\n|   display: block;\");"
+        },
+        {
+          "id": 5,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/Slider/style.css",
+          "name": "./src/components/Slider/style.css",
+          "index": 10,
+          "index2": 7,
+          "size": 316,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/Slider/Slider.js",
+          "issuerId": null,
+          "issuerName": "./src/components/Slider/Slider.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/Slider/Slider.js",
+              "name": "./src/components/Slider/Slider.js"
+            }
+          ],
+          "failed": true,
+          "errors": 1,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 7,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+              "module": "./src/index.js + 6 modules",
+              "moduleName": "./src/index.js + 6 modules",
+              "type": "cjs require",
+              "userRequest": "./style.css",
+              "loc": "1:14-36"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is not an ECMAScript module"
+          ],
+          "depth": 3,
+          "source": "throw new Error(\"Module parse failed: Unexpected token (1:20)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> input[type=\\\"range\\\"] {\\n|   position: relative;\\n|   background-color: transparent;\");"
+        },
+        {
+          "id": 6,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/ActionButton/style.css",
+          "name": "./src/components/ActionButton/style.css",
+          "index": 12,
+          "index2": 9,
+          "size": 287,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/ActionButton/index.js",
+          "issuerId": null,
+          "issuerName": "./src/components/ActionButton/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/ActionButton/index.js",
+              "name": "./src/components/ActionButton/index.js"
+            }
+          ],
+          "failed": true,
+          "errors": 1,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 7,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+              "module": "./src/index.js + 6 modules",
+              "moduleName": "./src/index.js + 6 modules",
+              "type": "cjs require",
+              "userRequest": "./style.css",
+              "loc": "1:17-39"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is not an ECMAScript module"
+          ],
+          "depth": 3,
+          "source": "throw new Error(\"Module parse failed: Unexpected token (1:0)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> .button-container {\\n|   width: 50px;\\n|   height: 50px;\");"
+        },
+        {
+          "id": 7,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "name": "./src/index.js + 6 modules",
+          "index": 0,
+          "index2": 13,
+          "size": 4214,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src",
+              "loc": "main"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [],
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Cannot concat with ./src/game.js (<- Module is not an ECMAScript module)"
+          ],
+          "depth": 0,
+          "modules": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js",
+              "index": 0,
+              "index2": 13,
+              "size": 198,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": null,
+              "issuerId": null,
+              "issuerName": null,
+              "issuerPath": null,
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": null,
+                  "module": null,
+                  "moduleName": null,
+                  "type": "single entry",
+                  "userRequest": "./src",
+                  "loc": "main"
+                }
+              ],
+              "usedExports": true,
+              "providedExports": [],
+              "optimizationBailout": [
+                "ModuleConcatenation bailout: Module is an entry point"
+              ],
+              "depth": 0,
+              "source": "import './sass/styles.scss'\nimport Game from './game'\nimport initComponents from './components'\nimport './math'\n\ninitComponents()\n\n// eslint-disable-next-line no-unused-vars\nconst game = new Game()\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js",
+              "index": 1,
+              "index2": 11,
+              "size": 513,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "issuerId": null,
+              "issuerName": "./src/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+                  "name": "./src/index.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./components",
+                  "loc": "3:0-41"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./components",
+                  "loc": "6:0-14"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "import LinearLoader from './LinearLoader/LinearLoader'\nimport Button from './Button/Button'\nimport TextInput from './TextInput/TextInput'\nimport Slider from './Slider/Slider'\nimport ActionButton from './ActionButton'\n\nexport default function () {\n  customElements.define('linear-loader', LinearLoader)\n  customElements.define('custom-button', Button)\n  customElements.define('custom-text-input', TextInput)\n  customElements.define('custom-slider', Slider)\n  customElements.define('action-button', ActionButton)\n}\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/LinearLoader/LinearLoader.js",
+              "name": "./src/components/LinearLoader/LinearLoader.js",
+              "index": 2,
+              "index2": 1,
+              "size": 880,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "issuerId": null,
+              "issuerName": "./src/components/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+                  "name": "./src/index.js"
+                },
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "name": "./src/components/index.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "module": "./src/components/index.js",
+                  "moduleName": "./src/components/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./LinearLoader/LinearLoader",
+                  "loc": "1:0-54"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "module": "./src/components/index.js",
+                  "moduleName": "./src/components/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./LinearLoader/LinearLoader",
+                  "loc": "8:41-53"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 2,
+              "source": "const loaderStyle = require('./style.css')\n\nexport default class LinearLoader extends HTMLElement {\n  constructor() {\n    super()\n\n    const shadowDOM = this.attachShadow({ mode: 'closed' })\n\n    this.loader = document.createElement('progress')\n    this.loader.setAttribute('max', 100)\n    this.loader.setAttribute('class', 'pure-material-progress-linear')\n\n    const css = document.createElement('style')\n    css.textContent = loaderStyle\n\n    shadowDOM.appendChild(this.loader)\n    shadowDOM.appendChild(css)\n\n    this.attributeChange()\n\n    const observer = new MutationObserver(this.attributeChange.bind(this))\n    observer.observe(this, { attributes: true })\n  }\n\n  attributeChange() {\n    if (this.hasAttribute('value')) this.loader.setAttribute('value', this.getAttribute('value'))\n    else if (this.loader.hasAttribute('value')) this.loader.removeAttribute('value')\n  }\n}\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/Button/Button.js",
+              "name": "./src/components/Button/Button.js",
+              "index": 4,
+              "index2": 4,
+              "size": 576,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "issuerId": null,
+              "issuerName": "./src/components/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+                  "name": "./src/index.js"
+                },
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "name": "./src/components/index.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "module": "./src/components/index.js",
+                  "moduleName": "./src/components/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./Button/Button",
+                  "loc": "2:0-36"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "module": "./src/components/index.js",
+                  "moduleName": "./src/components/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./Button/Button",
+                  "loc": "9:41-47"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 2,
+              "source": "const sharedCSS = require('../shared.css')\nconst localCSS = require('./style.css')\n\nexport default class Button extends HTMLElement {\n  constructor() {\n    super()\n\n    const shadowDOM = this.attachShadow({ mode: 'closed' })\n\n    const container = document.createElement('div')\n    const button = document.createElement('button')\n    button.append(document.createElement('slot'))\n    container.append(button)\n\n    const css = document.createElement('style')\n    css.textContent = sharedCSS + localCSS\n\n    shadowDOM.appendChild(container)\n    shadowDOM.appendChild(css)\n  }\n}\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/TextInput/TextInput.js",
+              "name": "./src/components/TextInput/TextInput.js",
+              "index": 7,
+              "index2": 6,
+              "size": 714,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "issuerId": null,
+              "issuerName": "./src/components/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+                  "name": "./src/index.js"
+                },
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "name": "./src/components/index.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "module": "./src/components/index.js",
+                  "moduleName": "./src/components/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./TextInput/TextInput",
+                  "loc": "3:0-45"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "module": "./src/components/index.js",
+                  "moduleName": "./src/components/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./TextInput/TextInput",
+                  "loc": "10:45-54"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 2,
+              "source": "const sharedCSS = require('../shared.css')\nconst localCSS = require('./style.css')\n\nconst css = sharedCSS + localCSS\n\nexport default class TextInput extends HTMLElement {\n  constructor() {\n    super()\n\n    this.shadow = this.attachShadow({ mode: 'closed' })\n\n    this.container = document.createElement('div')\n    this.text = document.createElement('input')\n    this.text.setAttribute('type', 'text')\n    this.text.setAttribute('placeholder', 'An Original Name')\n\n    this.container.append(this.text)\n\n    const style = document.createElement('style')\n    style.textContent = css\n\n    this.shadow.appendChild(this.container)\n    this.shadow.appendChild(style)\n  }\n\n  get value() {\n    return this.text.value\n  }\n}\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/Slider/Slider.js",
+              "name": "./src/components/Slider/Slider.js",
+              "index": 9,
+              "index2": 8,
+              "size": 745,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "issuerId": null,
+              "issuerName": "./src/components/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+                  "name": "./src/index.js"
+                },
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "name": "./src/components/index.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "module": "./src/components/index.js",
+                  "moduleName": "./src/components/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./Slider/Slider",
+                  "loc": "4:0-36"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "module": "./src/components/index.js",
+                  "moduleName": "./src/components/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./Slider/Slider",
+                  "loc": "11:41-47"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 2,
+              "source": "const style = require('./style.css')\n\nexport default class Slider extends HTMLElement {\n  constructor() {\n    super()\n\n    const shadowDOM = this.attachShadow({ mode: 'closed' })\n\n    const css = document.createElement('style')\n    css.textContent = style\n    shadowDOM.append(css)\n\n    const form = document.createElement('form')\n\n    this.slider = document.createElement('input')\n    this.slider.setAttribute('type', 'range')\n    this.slider.value = 1\n    this.slider.setAttribute('min', 1)\n    this.slider.setAttribute('max', 10)\n    this.slider.setAttribute('step', 0.1)\n\n    form.append(this.slider)\n    shadowDOM.prepend(form)\n  }\n\n  get value() {\n    return this.slider.value\n  }\n\n  set value(value) {\n    this.slider.value = value\n  }\n}\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/ActionButton/index.js",
+              "name": "./src/components/ActionButton/index.js",
+              "index": 11,
+              "index2": 10,
+              "size": 583,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "issuerId": null,
+              "issuerName": "./src/components/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+                  "name": "./src/index.js"
+                },
+                {
+                  "id": null,
+                  "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "name": "./src/components/index.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "module": "./src/components/index.js",
+                  "moduleName": "./src/components/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./ActionButton",
+                  "loc": "5:0-41"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+                  "module": "./src/components/index.js",
+                  "moduleName": "./src/components/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ActionButton",
+                  "loc": "12:41-53"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 2,
+              "source": "const localCSS = require('./style.css')\n\nexport default class ActionButton extends HTMLElement {\n  constructor() {\n    super()\n\n    const shadowDOM = this.attachShadow({ mode: 'closed' })\n\n    const container = document.createElement('div')\n    container.setAttribute('class', 'button-container')\n    const button = document.createElement('button')\n    button.append(document.createElement('slot'))\n    container.append(button)\n\n    const css = document.createElement('style')\n    css.textContent = localCSS\n\n    shadowDOM.appendChild(container)\n    shadowDOM.appendChild(css)\n  }\n}\n"
+            }
+          ],
+          "filteredModules": 0
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "loc": "main",
+          "request": "./src",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "/Users/main/Documents/GitHub/Game/src/components/shared.css",
+      "name": "./src/components/shared.css",
+      "index": 5,
+      "index2": 2,
+      "size": 289,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": "/Users/main/Documents/GitHub/Game/src/components/Button/Button.js",
+      "issuerId": null,
+      "issuerName": "./src/components/Button/Button.js",
+      "issuerPath": [
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "name": "./src/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "name": "./src/components/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/Button/Button.js",
+          "name": "./src/components/Button/Button.js"
+        }
+      ],
+      "failed": true,
+      "errors": 1,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "cjs require",
+          "userRequest": "../shared.css",
+          "loc": "1:18-42"
+        },
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "cjs require",
+          "userRequest": "../shared.css",
+          "loc": "1:18-42"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 3,
+      "source": "throw new Error(\"Module parse failed: Unexpected token (1:4)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> div {\\n|   transition-duration: 0.2s;\\n|   display: block;\");"
+    },
+    {
+      "id": 1,
+      "identifier": "/Users/main/Documents/GitHub/Game/src/game.js",
+      "name": "./src/game.js",
+      "index": 13,
+      "index2": 12,
+      "size": 329,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": "/Users/main/Documents/GitHub/Game/src/index.js",
+      "issuerId": null,
+      "issuerName": "./src/index.js",
+      "issuerPath": [
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "name": "./src/index.js"
+        }
+      ],
+      "failed": true,
+      "errors": 1,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "harmony side effect evaluation",
+          "userRequest": "./game",
+          "loc": "2:0-25"
+        },
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "harmony import specifier",
+          "userRequest": "./game",
+          "loc": "9:17-21"
+        }
+      ],
+      "usedExports": [
+        "default"
+      ],
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 1,
+      "source": "throw new Error(\"Module parse failed: Unexpected token (19:8)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n| \\n| export default class Game extends Application {\\n>   ready = false\\n| \\n|   hasLoaded = false\");"
+    },
+    {
+      "id": 2,
+      "identifier": "/Users/main/Documents/GitHub/Game/src/components/LinearLoader/style.css",
+      "name": "./src/components/LinearLoader/style.css",
+      "index": 3,
+      "index2": 0,
+      "size": 322,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": "/Users/main/Documents/GitHub/Game/src/components/LinearLoader/LinearLoader.js",
+      "issuerId": null,
+      "issuerName": "./src/components/LinearLoader/LinearLoader.js",
+      "issuerPath": [
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "name": "./src/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "name": "./src/components/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/LinearLoader/LinearLoader.js",
+          "name": "./src/components/LinearLoader/LinearLoader.js"
+        }
+      ],
+      "failed": true,
+      "errors": 1,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "cjs require",
+          "userRequest": "./style.css",
+          "loc": "1:20-42"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 3,
+      "source": "throw new Error(\"Module parse failed: Unexpected token (1:0)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> .pure-material-progress-linear {\\n|   -webkit-appearance: none;\\n|   -moz-appearance: none;\");"
+    },
+    {
+      "id": 3,
+      "identifier": "/Users/main/Documents/GitHub/Game/src/components/Button/style.css",
+      "name": "./src/components/Button/style.css",
+      "index": 6,
+      "index2": 3,
+      "size": 282,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": "/Users/main/Documents/GitHub/Game/src/components/Button/Button.js",
+      "issuerId": null,
+      "issuerName": "./src/components/Button/Button.js",
+      "issuerPath": [
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "name": "./src/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "name": "./src/components/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/Button/Button.js",
+          "name": "./src/components/Button/Button.js"
+        }
+      ],
+      "failed": true,
+      "errors": 1,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "cjs require",
+          "userRequest": "./style.css",
+          "loc": "2:17-39"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 3,
+      "source": "throw new Error(\"Module parse failed: Unexpected token (1:7)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> button {\\n|   font-size: 20px;\\n|   display: block;\");"
+    },
+    {
+      "id": 4,
+      "identifier": "/Users/main/Documents/GitHub/Game/src/components/TextInput/style.css",
+      "name": "./src/components/TextInput/style.css",
+      "index": 8,
+      "index2": 5,
+      "size": 281,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": "/Users/main/Documents/GitHub/Game/src/components/TextInput/TextInput.js",
+      "issuerId": null,
+      "issuerName": "./src/components/TextInput/TextInput.js",
+      "issuerPath": [
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "name": "./src/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "name": "./src/components/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/TextInput/TextInput.js",
+          "name": "./src/components/TextInput/TextInput.js"
+        }
+      ],
+      "failed": true,
+      "errors": 1,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "cjs require",
+          "userRequest": "./style.css",
+          "loc": "2:17-39"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 3,
+      "source": "throw new Error(\"Module parse failed: Unexpected token (1:6)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> input {\\n|   font-size: 20px;\\n|   display: block;\");"
+    },
+    {
+      "id": 5,
+      "identifier": "/Users/main/Documents/GitHub/Game/src/components/Slider/style.css",
+      "name": "./src/components/Slider/style.css",
+      "index": 10,
+      "index2": 7,
+      "size": 316,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": "/Users/main/Documents/GitHub/Game/src/components/Slider/Slider.js",
+      "issuerId": null,
+      "issuerName": "./src/components/Slider/Slider.js",
+      "issuerPath": [
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "name": "./src/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "name": "./src/components/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/Slider/Slider.js",
+          "name": "./src/components/Slider/Slider.js"
+        }
+      ],
+      "failed": true,
+      "errors": 1,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "cjs require",
+          "userRequest": "./style.css",
+          "loc": "1:14-36"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 3,
+      "source": "throw new Error(\"Module parse failed: Unexpected token (1:20)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> input[type=\\\"range\\\"] {\\n|   position: relative;\\n|   background-color: transparent;\");"
+    },
+    {
+      "id": 6,
+      "identifier": "/Users/main/Documents/GitHub/Game/src/components/ActionButton/style.css",
+      "name": "./src/components/ActionButton/style.css",
+      "index": 12,
+      "index2": 9,
+      "size": 287,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": "/Users/main/Documents/GitHub/Game/src/components/ActionButton/index.js",
+      "issuerId": null,
+      "issuerName": "./src/components/ActionButton/index.js",
+      "issuerPath": [
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "name": "./src/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "name": "./src/components/index.js"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/ActionButton/index.js",
+          "name": "./src/components/ActionButton/index.js"
+        }
+      ],
+      "failed": true,
+      "errors": 1,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "cjs require",
+          "userRequest": "./style.css",
+          "loc": "1:17-39"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 3,
+      "source": "throw new Error(\"Module parse failed: Unexpected token (1:0)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> .button-container {\\n|   width: 50px;\\n|   height: 50px;\");"
+    },
+    {
+      "id": 7,
+      "identifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+      "name": "./src/index.js + 6 modules",
+      "index": 0,
+      "index2": 13,
+      "size": 4214,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "issuerPath": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": null,
+          "moduleIdentifier": null,
+          "module": null,
+          "moduleName": null,
+          "type": "single entry",
+          "userRequest": "./src",
+          "loc": "main"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": [],
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Cannot concat with ./src/game.js (<- Module is not an ECMAScript module)"
+      ],
+      "depth": 0,
+      "modules": [
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "name": "./src/index.js",
+          "index": 0,
+          "index2": 13,
+          "size": 198,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src",
+              "loc": "main"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [],
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is an entry point"
+          ],
+          "depth": 0,
+          "source": "import './sass/styles.scss'\nimport Game from './game'\nimport initComponents from './components'\nimport './math'\n\ninitComponents()\n\n// eslint-disable-next-line no-unused-vars\nconst game = new Game()\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "name": "./src/components/index.js",
+          "index": 1,
+          "index2": 11,
+          "size": 513,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "issuerId": null,
+          "issuerName": "./src/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./components",
+              "loc": "3:0-41"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./components",
+              "loc": "6:0-14"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "import LinearLoader from './LinearLoader/LinearLoader'\nimport Button from './Button/Button'\nimport TextInput from './TextInput/TextInput'\nimport Slider from './Slider/Slider'\nimport ActionButton from './ActionButton'\n\nexport default function () {\n  customElements.define('linear-loader', LinearLoader)\n  customElements.define('custom-button', Button)\n  customElements.define('custom-text-input', TextInput)\n  customElements.define('custom-slider', Slider)\n  customElements.define('action-button', ActionButton)\n}\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/LinearLoader/LinearLoader.js",
+          "name": "./src/components/LinearLoader/LinearLoader.js",
+          "index": 2,
+          "index2": 1,
+          "size": 880,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "issuerId": null,
+          "issuerName": "./src/components/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "module": "./src/components/index.js",
+              "moduleName": "./src/components/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./LinearLoader/LinearLoader",
+              "loc": "1:0-54"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "module": "./src/components/index.js",
+              "moduleName": "./src/components/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./LinearLoader/LinearLoader",
+              "loc": "8:41-53"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 2,
+          "source": "const loaderStyle = require('./style.css')\n\nexport default class LinearLoader extends HTMLElement {\n  constructor() {\n    super()\n\n    const shadowDOM = this.attachShadow({ mode: 'closed' })\n\n    this.loader = document.createElement('progress')\n    this.loader.setAttribute('max', 100)\n    this.loader.setAttribute('class', 'pure-material-progress-linear')\n\n    const css = document.createElement('style')\n    css.textContent = loaderStyle\n\n    shadowDOM.appendChild(this.loader)\n    shadowDOM.appendChild(css)\n\n    this.attributeChange()\n\n    const observer = new MutationObserver(this.attributeChange.bind(this))\n    observer.observe(this, { attributes: true })\n  }\n\n  attributeChange() {\n    if (this.hasAttribute('value')) this.loader.setAttribute('value', this.getAttribute('value'))\n    else if (this.loader.hasAttribute('value')) this.loader.removeAttribute('value')\n  }\n}\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/Button/Button.js",
+          "name": "./src/components/Button/Button.js",
+          "index": 4,
+          "index2": 4,
+          "size": 576,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "issuerId": null,
+          "issuerName": "./src/components/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "module": "./src/components/index.js",
+              "moduleName": "./src/components/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./Button/Button",
+              "loc": "2:0-36"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "module": "./src/components/index.js",
+              "moduleName": "./src/components/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./Button/Button",
+              "loc": "9:41-47"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 2,
+          "source": "const sharedCSS = require('../shared.css')\nconst localCSS = require('./style.css')\n\nexport default class Button extends HTMLElement {\n  constructor() {\n    super()\n\n    const shadowDOM = this.attachShadow({ mode: 'closed' })\n\n    const container = document.createElement('div')\n    const button = document.createElement('button')\n    button.append(document.createElement('slot'))\n    container.append(button)\n\n    const css = document.createElement('style')\n    css.textContent = sharedCSS + localCSS\n\n    shadowDOM.appendChild(container)\n    shadowDOM.appendChild(css)\n  }\n}\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/TextInput/TextInput.js",
+          "name": "./src/components/TextInput/TextInput.js",
+          "index": 7,
+          "index2": 6,
+          "size": 714,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "issuerId": null,
+          "issuerName": "./src/components/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "module": "./src/components/index.js",
+              "moduleName": "./src/components/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./TextInput/TextInput",
+              "loc": "3:0-45"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "module": "./src/components/index.js",
+              "moduleName": "./src/components/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./TextInput/TextInput",
+              "loc": "10:45-54"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 2,
+          "source": "const sharedCSS = require('../shared.css')\nconst localCSS = require('./style.css')\n\nconst css = sharedCSS + localCSS\n\nexport default class TextInput extends HTMLElement {\n  constructor() {\n    super()\n\n    this.shadow = this.attachShadow({ mode: 'closed' })\n\n    this.container = document.createElement('div')\n    this.text = document.createElement('input')\n    this.text.setAttribute('type', 'text')\n    this.text.setAttribute('placeholder', 'An Original Name')\n\n    this.container.append(this.text)\n\n    const style = document.createElement('style')\n    style.textContent = css\n\n    this.shadow.appendChild(this.container)\n    this.shadow.appendChild(style)\n  }\n\n  get value() {\n    return this.text.value\n  }\n}\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/Slider/Slider.js",
+          "name": "./src/components/Slider/Slider.js",
+          "index": 9,
+          "index2": 8,
+          "size": 745,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "issuerId": null,
+          "issuerName": "./src/components/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "module": "./src/components/index.js",
+              "moduleName": "./src/components/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./Slider/Slider",
+              "loc": "4:0-36"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "module": "./src/components/index.js",
+              "moduleName": "./src/components/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./Slider/Slider",
+              "loc": "11:41-47"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 2,
+          "source": "const style = require('./style.css')\n\nexport default class Slider extends HTMLElement {\n  constructor() {\n    super()\n\n    const shadowDOM = this.attachShadow({ mode: 'closed' })\n\n    const css = document.createElement('style')\n    css.textContent = style\n    shadowDOM.append(css)\n\n    const form = document.createElement('form')\n\n    this.slider = document.createElement('input')\n    this.slider.setAttribute('type', 'range')\n    this.slider.value = 1\n    this.slider.setAttribute('min', 1)\n    this.slider.setAttribute('max', 10)\n    this.slider.setAttribute('step', 0.1)\n\n    form.append(this.slider)\n    shadowDOM.prepend(form)\n  }\n\n  get value() {\n    return this.slider.value\n  }\n\n  set value(value) {\n    this.slider.value = value\n  }\n}\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/components/ActionButton/index.js",
+          "name": "./src/components/ActionButton/index.js",
+          "index": 11,
+          "index2": 10,
+          "size": 583,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+          "issuerId": null,
+          "issuerName": "./src/components/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "name": "./src/components/index.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "module": "./src/components/index.js",
+              "moduleName": "./src/components/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./ActionButton",
+              "loc": "5:0-41"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/components/index.js",
+              "module": "./src/components/index.js",
+              "moduleName": "./src/components/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./ActionButton",
+              "loc": "12:41-53"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 2,
+          "source": "const localCSS = require('./style.css')\n\nexport default class ActionButton extends HTMLElement {\n  constructor() {\n    super()\n\n    const shadowDOM = this.attachShadow({ mode: 'closed' })\n\n    const container = document.createElement('div')\n    container.setAttribute('class', 'button-container')\n    const button = document.createElement('button')\n    button.append(document.createElement('slot'))\n    container.append(button)\n\n    const css = document.createElement('style')\n    css.textContent = localCSS\n\n    shadowDOM.appendChild(container)\n    shadowDOM.appendChild(css)\n  }\n}\n"
+        }
+      ],
+      "filteredModules": 0
+    },
+    {
+      "id": 8,
+      "identifier": "/Users/main/Documents/GitHub/Game/src/math.js",
+      "name": "./src/math.js",
+      "index": null,
+      "index2": null,
+      "size": 2543,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [],
+      "issuer": "/Users/main/Documents/GitHub/Game/src/index.js",
+      "issuerId": null,
+      "issuerName": "./src/index.js",
+      "issuerPath": [
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "name": "./src/index.js"
+        }
+      ],
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "harmony side effect evaluation",
+          "userRequest": "./math",
+          "loc": "4:0-15"
+        }
+      ],
+      "usedExports": false,
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 1,
+      "source": "/**\n * Converts from degrees to radians\n * @param degrees The degrees that you want converted to radians\n */\nMath.radians = degrees => (degrees * Math.PI) / 180\n\n/**\n * Converts from radians to degrees\n * @param radians The radians that you want converted to degrees\n */\nMath.degrees = radians => (radians * 180) / Math.PI\n\nMath.circleIntersect = (solarSystemPos, solarSystem, solarSystems, solarSystemSpacing) => {\n  const radius1 = solarSystem + solarSystemSpacing,\n    radius2 = solarSystems.r + solarSystemSpacing\n\n  if (\n    solarSystemPos.x - radius1 > solarSystems.x + radius2\n          || solarSystems.x - radius2 > solarSystemPos.x + radius1\n          || solarSystemPos.y + radius1 < solarSystems.y - radius2\n          || solarSystems.y + radius2 < solarSystemPos.y - radius1) return false\n\n\n  return true\n}\n\n/**\n * Converts degrees and radius of a circle to x and y coordernates\n * @param {Number} centerX The x coordernate at the center of the circle\n * @param {Number} centerY The y coordernate at the center of the circle\n * @param {Number} rad The radius of the circle\n * @param {Number} degrees The degrees to the point you are trying to get\n * @returns {Object} The x and y coordernates\n */\nMath.genPosOnCircle = (centerX, centerY, rad, degrees) => {\n  const x = centerX + rad * Math.sin(degrees)\n  const y = centerY + rad * Math.cos(degrees)\n\n  return {\n    x,\n    y\n  }\n}\n\n/**\n * Humanize a number e.g. 10k\n * @param {Number} value The number you want to conbert\n * @returns {String} Humanized number\n * @author mischat\n */\nMath.humanize = value => {\n  const mag = Math.magnitude(value)\n\n  if (mag <= 3) return value\n  if (mag > 3 && mag <= 6) return `${value.toString().substr(0, mag - 3)}K`\n  if (mag > 6 && mag <= 9) return `${value.toString().substr(0, mag - 6)}M`\n  if (mag > 9 && mag <= 12) return `${value.toString().substr(0, mag - 9)}B`\n  if (mag > 12 && mag <= 15) return `${value.toString().substr(0, mag - 12)}T`\n\n  return value\n}\n\nMath.magnitude = value => {\n  let v = value\n  let mag = 0\n\n  while (v > 1) {\n    mag++\n    v /= 10\n  }\n\n  return mag\n}\n\n/**\n * Calculate the length between two points\n */\nMath.lineLength = (xa, ya, xb, yb) => Math.sqrt((xb - xa) ** 2 + (yb + ya) ** 2)\n\nMath.getPosAfterDistanceOnLine = (xa, ya, xb, yb, dt) => {\n  const d = Math.lineLength(xa, ya, xb, yb)\n  const t = dt / d\n\n  if (t < 0) return false\n  if (t > 1) return true\n\n  return {\n    x: ((1 - t) * xa + t * xb),\n    y: ((1 - t) * ya + t * yb)\n  }\n}\n\nMath.getDirectionTo = (xa, ya, xb, yb) => -Math.atan2(xa - xb, ya - yb)\n"
+    },
+    {
+      "id": 9,
+      "identifier": "/Users/main/Documents/GitHub/Game/src/sass/styles.scss",
+      "name": "./src/sass/styles.scss",
+      "index": null,
+      "index2": null,
+      "size": 267,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [],
+      "issuer": "/Users/main/Documents/GitHub/Game/src/index.js",
+      "issuerId": null,
+      "issuerName": "./src/index.js",
+      "issuerPath": [
+        {
+          "id": null,
+          "identifier": "/Users/main/Documents/GitHub/Game/src/index.js",
+          "name": "./src/index.js"
+        }
+      ],
+      "failed": true,
+      "errors": 1,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 7,
+          "moduleIdentifier": "/Users/main/Documents/GitHub/Game/src/index.js 8b4ea8031f41bee5f648fae94fb32b72",
+          "module": "./src/index.js + 6 modules",
+          "moduleName": "./src/index.js + 6 modules",
+          "type": "harmony side effect evaluation",
+          "userRequest": "./sass/styles.scss",
+          "loc": "1:0-27"
+        }
+      ],
+      "usedExports": false,
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 1,
+      "source": "throw new Error(\"Module parse failed: Unexpected token (1:0)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> * {\\n|   padding: 0;\\n|   margin: 0;\");"
+    }
+  ],
+  "filteredModules": 0,
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 2,
+      "debug": false
+    }
+  },
+  "children": []
+}
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

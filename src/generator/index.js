@@ -3,29 +3,6 @@ import cicles from './cicles'
 import { DB } from '../lib'
 
 const db = new DB()
-// [
-//   {
-//     sunSize: 50,
-//     planets: [
-//       {
-//         name: 'Something',
-//         distanceFromSun: 150, // Increments by 100 starts at 150
-//         width: 60, // 40 - 60
-//         posInCycle: 180, // How far on the loop in degrees
-//         type: ['Habitital_Planet', 1],
-//         moons: [
-//           {
-//             width: 17, // 10 - 17
-//             posInCycle: 0,
-//             type: 1
-//           }
-//         ]
-//       }
-//     ],
-//     offsetX: 0,
-//     offsetY: 0
-//   }
-// ]
 
 export default async function generator(height, description) {
   const solarSystem = []

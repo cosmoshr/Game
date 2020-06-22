@@ -53,22 +53,12 @@ export default class Game extends Application {
       this.splashScreen()
     })
 
-    // this.cull = new Cull(this.viewport)
-
     this.keyTarget = x => x
     this.keyDown = key => this.keyTarget(key)
     document.addEventListener('keydown', this.keyDown)
 
     window.onresize = () => this.renderer.resize(innerWidth, innerHeight)
-    // this.ticker.add(this.loop.bind(this))
   }
-
-  // loop() {
-  //   if (this.viewport.dirty) {
-  //     this.cull.cull(this.viewport.getVisibleBounds())
-  //     this.viewport.dirty = false
-  //   }
-  // }
 
   async splashScreen() {
     this.soundManager.trigger('Main Menu')
@@ -126,7 +116,6 @@ export default class Game extends Application {
     for (let i = this.viewport.children.length - 1; i >= 0; i--) this.viewport.removeChild(this.viewport.children[i])
     const background = new Background()
     this.viewport.addChild(background)
-    // this.cull = new Cull(this.viewport)
 
     this.turnOverlay.kill()
     this.turnOverlay = null
