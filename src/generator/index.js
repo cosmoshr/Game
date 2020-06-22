@@ -1,12 +1,12 @@
 import planet from './planet'
-import cicles from './cicles'
+import circles from './circles.ts'
 import { DB } from '../lib'
 
 const db = new DB()
 
 export default async function generator(height, description) {
   const solarSystem = []
-  const galaxys = cicles(height)
+  const galaxys = circles(height)
   galaxys.forEach((_galaxy, index) => {
     const galaxy = {
       offsetX: _galaxy.x,
