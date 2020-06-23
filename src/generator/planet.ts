@@ -1,5 +1,5 @@
 import planetTypes from '../constants/planets/_types'
-import moon from './moon'
+import moon from './moon.ts'
 
 export interface Planet {
   

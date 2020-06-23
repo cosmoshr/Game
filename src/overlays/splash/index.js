@@ -1,4 +1,4 @@
-import generateCosmos from '../../generator'
+import generateCosmos from '../../generator/index.ts'
 
 const splashHTML = require('./splash.html').default
 const splashCSS = require('./splash.css').toString()
