@@ -21,7 +21,7 @@ export interface CosmosList {
 
 export default async function generator(height: number, description: string){
   const solarSystems: SolarSystem[] | CirclePos[] = circles(height)
-  solarSystems.map((_ss, index) => ({
+  solarSystems.map((_ss: CirclePos, index: number) => ({
       offsetX: _ss.x,
       offsetY: _ss.y,
       radius: _ss.r,
