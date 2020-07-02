@@ -8,9 +8,8 @@
   "main": "dist/electron-renderer/electron.js",
   "scripts": {
     "eslint": "eslint src",
-    "stylelint": "stylelint src/sass/**/*.scss",
-    "lint": "yarn eslint && yarn stylelint",
-    "lint:fix": "yarn eslint --fix && yarn stylelint --fix",
+    "lint": "yarn eslint",
+    "lint:fix": "yarn eslint --fix",
     "build": "webpack -p --progress --config config/webpack.prod.js",
     "build:electron": "cross-env WEBPACK_ENV=electron-renderer yarn build && electron-builder",
     "serve": "webpack-dev-server -d --progress --color --config config/webpack.dev.js --host 0.0.0.0",
@@ -53,8 +52,6 @@
     "ghooks": "^2.0.4",
     "global": "^4.4.0",
     "prettier-eslint": "^9.0.0",
-    "stylelint": "^10.1.0",
-    "stylelint-config-standard": "^18.3.0",
     "wait-on": "^3.3.0"
   },
   "config": {
