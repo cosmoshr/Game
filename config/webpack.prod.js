@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WebpackCommon = require('./webpack.common')
+
 // Import Configuration
 const config = require('../config')
 
@@ -37,16 +38,21 @@ const plugins = [
       to: `${config.DIST}/assets/`
     }
   ]),
-  new TerserPlugin(),
   new webpack.LoaderOptionsPlugin({
     minimize: true
   })
 ]
 
+const optimization = {
+  minimize: true,
+  minimizer: [new TerserPlugin()],
+}
+
 /**
  * Webpack configuration.
  */
 const WebpackConfig = {
+  optimization,
   output,
   plugins
 }

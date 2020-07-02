@@ -29,6 +29,7 @@ const devServer = {
 const WebpackConfig = {
   output,
   devServer,
+  stats: 'errors-only',
   watch: true
 }
 
