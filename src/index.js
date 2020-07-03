@@ -1,7 +1,12 @@
-import './index.gcss'
+import insertCSS from 'insert-css'
+
+import globalCSS from './index.css'
 import Game from './game'
 import initComponents from './components'
+
 import './math'
+
+insertCSS(globalCSS)
 
 initComponents()
 

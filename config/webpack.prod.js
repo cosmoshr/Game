@@ -2,7 +2,7 @@
 const TerserPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 const WebpackCommon = require('./webpack.common')
 
 // Import Configuration
@@ -13,7 +13,8 @@ const config = require('../config')
  */
 const output = {
   path: config.DIST,
-  filename: config.JSFILENAME
+  filename: config.JSFILENAME,
+  publicPath: './'
 }
 
 /**
@@ -29,23 +30,26 @@ const output = {
  * A webpack plugin to edit loader options.
  */
 const plugins = [
-  new CopyWebpackPlugin([
-    {
-      from: `${config.OUTPUT}/favicon.ico`
-    },
-    {
-      from: `${config.OUTPUT}/assets/`,
-      to: `${config.DIST}/assets/`
-    }
-  ]),
-  new webpack.LoaderOptionsPlugin({
-    minimize: true
-  })
+  // new CopyPlugin({
+  //   patterns: [
+  //     {
+  //       from: `${config.OUTPUT}/favicon.ico`
+  //     },
+  //     {
+  //       from: `${config.OUTPUT}/assets/`,
+  //       to: `${config.DIST}/assets/`
+  //     }
+  //   ]
+  // })
+  // ,
+  // new webpack.LoaderOptionsPlugin({
+  //   minimize: true
+  // })
 ]
 
 const optimization = {
   minimize: true,
-  minimizer: [new TerserPlugin()],
+  minimizer: [new TerserPlugin()]
 }
 
 /**

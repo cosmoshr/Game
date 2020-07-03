@@ -1,5 +1,5 @@
 // Import dependencies
-const path = require('path')
+const { join } = require('path')
 
 /**
  * Configuration variables for Webpack.
@@ -17,9 +17,9 @@ const devtool = 'inline-source-map' // Source map type. Refer to: https://webpac
  * These don't need to change, but feel free to change to your needs.
  */
 const config = {}
-config.ENTRY = path.join(__dirname, '/src')
-config.OUTPUT = path.join(__dirname, '/public')
-config.DIST = path.join(__dirname, `/dist/${process.env.WEBPACK_ENV || 'web'}`)
+config.ENTRY = join(__dirname, 'src')
+config.OUTPUT = join(__dirname, '/public')
+config.DIST = join(__dirname, `/dist/${process.env.WEBPACK_ENV || 'web'}`)
 config.HOST = hostName
 config.PORT = portNumber
 config.JSFILENAME = jsFileName

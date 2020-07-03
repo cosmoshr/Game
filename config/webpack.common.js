@@ -41,10 +41,6 @@ const modules = {
       use: ['to-string-loader', 'css-loader']
     },
     {
-      test: /\.gcss$/,
-      use: ['style-loader', 'css-loader']
-    },
-    {
       test: /\.(woff|woff2|eot|ttf|svg|ico|jpg|jpeg|png)$/,
       loader: 'url-loader',
       options: {
@@ -72,9 +68,9 @@ const modules = {
  * A webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
  */
 const plugins = [
-  // new CleanWebpackPlugin({
-  //   cleanOnceBeforeBuildPatterns: ['!public']
-  // }),
+  new CleanWebpackPlugin({
+    cleanOnceBeforeBuildPatterns: ['!public*']
+  }),
   new CssExtractPlugin({
     filename: config.CSSFILENAME,
     chunkFilename: '[id].css'
